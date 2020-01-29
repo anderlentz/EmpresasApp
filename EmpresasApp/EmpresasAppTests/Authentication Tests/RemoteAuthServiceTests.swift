@@ -69,7 +69,7 @@ class RemoteAuthServiceTests: XCTestCase {
         XCTAssertEqual(capturedError, .unauthorized)
     }
     
-    func test_authentication_deliversBadRequestOn400HttpResponse() {
+    func test_authentication_deliversBadRequestErrorOn400HttpResponse() {
         let email = "email@email.com"
         let password = "123123"
         let (sut,client) = makeSUT()
