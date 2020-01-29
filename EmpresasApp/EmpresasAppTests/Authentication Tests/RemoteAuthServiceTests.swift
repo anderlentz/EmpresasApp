@@ -27,35 +27,38 @@ protocol HTTPClient {
     func post(to url: URL)
 }
 
-class HTTPClientSpy: HTTPClient {
-    
-    var endpointURL: URL?
-    
-    func post(to url: URL) {
-        self.endpointURL = url
-    }
-}
-
 class RemoteAuthServiceTests: XCTestCase {
     
     func test_init_doesNotRequestAuthenticationDataFromEndpoint() {
-        let endpointURL = URL(string: "https://test-authentication.com")!
-        let client = HTTPClientSpy()
-        _ = RemoteAuthService(endpointURL: endpointURL,client: client)
+        let (_,client) = makeSUT()
         
         XCTAssertNil(client.endpointURL)
     }
     
     func test_authenticate_requestDataFromEndpointURL() {
         let endpointURL = URL(string: "https://test-authentication.com")!
-        let client = HTTPClientSpy()
-        let sut = RemoteAuthService(endpointURL: endpointURL,client: client)
+        let (sut,client) = makeSUT(endpointURL: endpointURL)
 
         sut.authenticate()
 
         XCTAssertEqual(client.endpointURL,endpointURL)
     }
    
+    
+    // MARK: - Helpers
+    private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = RemoteAuthService(endpointURL: endpointURL,client: client)
+        return (sut,client)
+    }
+    
+    class HTTPClientSpy: HTTPClient {
+        var endpointURL: URL?
+        
+        func post(to url: URL) {
+            self.endpointURL = url
+        }
+    }
     
 }
 
