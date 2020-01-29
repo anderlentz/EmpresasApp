@@ -106,24 +106,31 @@ class RemoteAuthServiceTests: XCTestCase {
     }
     
     class HTTPClientSpy: HTTPClient {
-        var endpointURL: URL?
-        var message: ((Error?,HTTPURLResponse?) -> Void) = { _,_  in}
         
-        func post(to url: URL,completion: @escaping (Error?,HTTPURLResponse?) -> Void) {
+        var endpointURL: URL?
+        var message: ((Result<HTTPURLResponse, Error>) -> Void) = { _ in}
+        
+        func post(to url: URL,
+                  completion: @escaping (Result<HTTPURLResponse, Error>) -> Void){
             self.endpointURL = url
             self.message = completion
         }
         
         func complete(whith error: Error) {
-            message(error, nil)
+            let result: Result<HTTPURLResponse, Error> = .failure(error)
+            message(result)
         }
         
         func complete(whithStatusCode code: Int) {
+            var result: Result<HTTPURLResponse, Error>
+            
             let response = HTTPURLResponse(url: endpointURL!,
                                            statusCode: code,
                                            httpVersion: nil,
-                                           headerFields: nil)
-            message(nil,response)
+                                           headerFields: nil)!
+            result = .success(response)
+            
+            message(result)
         }
     }
     
