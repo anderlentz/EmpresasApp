@@ -20,6 +20,7 @@
 		A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF323E1ED000001FA34 /* Portfolio.swift */; };
 		A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */; };
 		A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */; };
+		F118D37623E214DB00DFE7D4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		A7B19AF323E1ED000001FA34 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthServiceTests.swift; sourceTree = "<group>"; };
+		F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 		A7B19AF823E1EE660001FA34 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */,
+				F118D37623E214DB00DFE7D4 /* AuthenticationManager.swift in Sources */,
 				A7B19AF223E1ECBD0001FA34 /* InvestorResult.swift in Sources */,
 				A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */,
 				A7B19AC323E1DDC40001FA34 /* ViewController.swift in Sources */,

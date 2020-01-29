@@ -18,7 +18,7 @@ class RemoteAuthService {
         self.endpointURL = endpointURL
     }
     
-    func authenticate() {
+    func authenticate(email: String, password: String) {
         client.post(to: endpointURL)
     }
 }
@@ -37,12 +37,16 @@ class RemoteAuthServiceTests: XCTestCase {
     
     func test_authenticate_requestDataFromEndpointURL() {
         let endpointURL = URL(string: "https://test-authentication.com")!
+        let email = "email@email.com"
+        let password = "123123"
         let (sut,client) = makeSUT(endpointURL: endpointURL)
 
-        sut.authenticate()
+        sut.authenticate(email: email, password: password)
 
         XCTAssertEqual(client.endpointURL,endpointURL)
     }
+    
+    
    
     
     // MARK: - Helpers
