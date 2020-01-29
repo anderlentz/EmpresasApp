@@ -20,6 +20,7 @@
 		A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF323E1ED000001FA34 /* Portfolio.swift */; };
 		A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */; };
 		A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */; };
+		A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */; };
 		F118D37623E214DB00DFE7D4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		A7B19AF323E1ED000001FA34 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthServiceTests.swift; sourceTree = "<group>"; };
+		A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthService.swift; sourceTree = "<group>"; };
 		F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 		A7B19ABD23E1DDC40001FA34 /* EmpresasApp */ = {
 			isa = PBXGroup;
 			children = (
+				A7EEBAC523E2285300673B1C /* Authentication API */,
 				A7B19AF823E1EE660001FA34 /* Authentication */,
 				A7B19AEE23E1EACB0001FA34 /* Models */,
 				A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */,
@@ -176,6 +179,14 @@
 				A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */,
 			);
 			path = "Authentication Tests";
+			sourceTree = "<group>";
+		};
+		A7EEBAC523E2285300673B1C /* Authentication API */ = {
+			isa = PBXGroup;
+			children = (
+				A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */,
+			);
+			path = "Authentication API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +325,7 @@
 				A7B19AF223E1ECBD0001FA34 /* InvestorResult.swift in Sources */,
 				A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */,
 				A7B19AC323E1DDC40001FA34 /* ViewController.swift in Sources */,
+				A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */,
 				A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */,
 				A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */,
 				A7B19AF023E1EAEC0001FA34 /* Investor.swift in Sources */,
