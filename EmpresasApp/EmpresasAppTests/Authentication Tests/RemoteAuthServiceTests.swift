@@ -11,13 +11,15 @@ import XCTest
 class RemoteAuthService {
 
     let client: HTTPClient
+    let endpointURL: URL
     
     func authenticate() {
-        client.post(to: URL(string: "https://test-authentication.com")!)
+        client.post(to: endpointURL)
     }
     
-    init(client: HTTPClient) {
+    init(endpointURL: URL, client: HTTPClient) {
         self.client = client
+        self.endpointURL = endpointURL
     }
 }
 
@@ -37,15 +39,17 @@ class HTTPClientSpy: HTTPClient {
 class RemoteAuthServiceTests: XCTestCase {
     
     func test_init_doesNotRequestAuthenticationDataFromEndpoint() {
+        let endpointURL = URL(string: "https://test-authentication.com")!
         let client = HTTPClientSpy()
-        _ = RemoteAuthService(client: client)
+        _ = RemoteAuthService(endpointURL: endpointURL,client: client)
         
         XCTAssertNil(client.endpointURL)
     }
     
     func test_authenticate_requestDataFromEndpointURL() {
+        let endpointURL = URL(string: "https://test-authentication.com")!
         let client = HTTPClientSpy()
-        let sut = RemoteAuthService(client: client)
+        let sut = RemoteAuthService(endpointURL: endpointURL,client: client)
 
         sut.authenticate()
 
