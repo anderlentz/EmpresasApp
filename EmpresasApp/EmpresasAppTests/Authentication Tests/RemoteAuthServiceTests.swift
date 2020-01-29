@@ -39,7 +39,19 @@ class RemoteAuthServiceTests: XCTestCase {
         XCTAssertEqual(sut.body,["email": email,"password":password])
         
     }
-   
+    
+    func test_authenticate_deliversErrorOnClientConnectivityError() {
+        let email = "email@email.com"
+        let password = "123123"
+        let (sut,client) = makeSUT()
+        client.error = NSError(domain:"Test",code:0)
+        
+        var capturedError: RemoteAuthService.Error?
+        sut.authenticate(email: email, password: password) { error in capturedError = error
+        }
+        
+        XCTAssertEqual(capturedError,.connectivity)
+    }
     
     // MARK: - Helpers
     private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {
@@ -50,9 +62,14 @@ class RemoteAuthServiceTests: XCTestCase {
     
     class HTTPClientSpy: HTTPClient {
         var endpointURL: URL?
+        var error: Error?
         
-        func post(to url: URL) {
+        func post(to url: URL,completion: @escaping (Error) -> Void) {
             self.endpointURL = url
+            
+            if let error = error {
+                completion(error)
+            }
         }
     }
     
