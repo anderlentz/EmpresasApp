@@ -97,6 +97,21 @@ class RemoteAuthServiceTests: XCTestCase {
         XCTAssertEqual(capturedError, .forbidden)
     }
     
+    func test_authentication_deliversErrorOn200HttpResponseWithInvalidData() {
+        let email = "email@email.com"
+        let password = "123123"
+        let (sut,client) = makeSUT()
+        
+        var capturedError: RemoteAuthService.Error?
+        sut.authenticate(email: email, password: password) { error in capturedError = error
+        }
+        
+        let invalidJSON = Data(bytes: "Invalid json".utf8)
+        client.complete(whithStatusCode: 200,data: invalidJSON)
+        
+        XCTAssertEqual(capturedError, .invalidData)
+    }
+    
     
     // MARK: - Helpers
     private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {
@@ -108,29 +123,29 @@ class RemoteAuthServiceTests: XCTestCase {
     class HTTPClientSpy: HTTPClient {
         
         var endpointURL: URL?
-        var message: ((Result<HTTPURLResponse, Error>) -> Void) = { _ in}
+        var message: ((Result<(Data,HTTPURLResponse), Error>) -> Void) = { _ in}
         
         func post(to url: URL,
-                  completion: @escaping (Result<HTTPURLResponse, Error>) -> Void){
+                  completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void){
             self.endpointURL = url
             self.message = completion
         }
         
         func complete(whith error: Error) {
-            let result: Result<HTTPURLResponse, Error> = .failure(error)
+            let result: Result<(Data,HTTPURLResponse), Error> = .failure(error)
             message(result)
         }
         
-        func complete(whithStatusCode code: Int) {
-            var result: Result<HTTPURLResponse, Error>
+        func complete(whithStatusCode code: Int, data: Data = Data()) {
+            var sucessResult: (Result<(Data,HTTPURLResponse), Error>)
             
             let response = HTTPURLResponse(url: endpointURL!,
                                            statusCode: code,
                                            httpVersion: nil,
                                            headerFields: nil)!
-            result = .success(response)
+            sucessResult = .success((data, response))
             
-            message(result)
+            message(sucessResult)
         }
     }
     

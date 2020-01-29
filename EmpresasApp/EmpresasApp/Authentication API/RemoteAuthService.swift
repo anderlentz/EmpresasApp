@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol HTTPClient {
-    func post(to url: URL,completion: @escaping (Result<HTTPURLResponse,Error>) -> Void)
+    func post(to url: URL,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
 }
 
 public class RemoteAuthService {
@@ -26,6 +26,7 @@ public class RemoteAuthService {
         case unauthorized
         case badRequest
         case forbidden
+        case invalidData
     }
     
     public init(endpointURL: URL, client: HTTPClient) {
@@ -42,14 +43,16 @@ public class RemoteAuthService {
         client.post(to: endpointURL) { result in
             
             switch result {
-            case .success(let response):
-                switch response.statusCode {
+            case .success(let (data,response)):
+                switch response.statusCode{
                 case 400:
                    completion(.badRequest)
                 case 401:
                    completion(.unauthorized)
                 case 403:
                    completion(.forbidden)
+                case 200:
+                    completion(.invalidData)
                 default:
                    completion(.unauthorized)
                 }
