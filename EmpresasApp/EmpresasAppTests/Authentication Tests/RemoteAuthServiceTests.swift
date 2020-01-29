@@ -50,10 +50,26 @@ class RemoteAuthServiceTests: XCTestCase {
         }
         
         let clientError = NSError(domain:"Test",code:0)
-        client.complete(whith: clientError)
+         client.complete(whith: clientError)
         
         XCTAssertEqual(capturedError,.connectivity)
     }
+    
+    func test_authentication_deliversUnauthorizedErrorOn401HttpResponse() {
+        let email = "email@email.com"
+        let password = "123123"
+        let (sut,client) = makeSUT()
+        
+        var capturedError: RemoteAuthService.Error?
+        sut.authenticate(email: email, password: password) { error in capturedError = error
+        }
+        
+        client.complete(whithStatusCode: 401)
+        
+        XCTAssertEqual(capturedError, .unauthorized)
+    }
+    
+    
     
     // MARK: - Helpers
     private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {
@@ -64,15 +80,23 @@ class RemoteAuthServiceTests: XCTestCase {
     
     class HTTPClientSpy: HTTPClient {
         var endpointURL: URL?
-        var errorCompletion: ((Error) -> Void) = { _ in}
+        var message: ((Error?,HTTPURLResponse?) -> Void) = { _,_  in}
         
-        func post(to url: URL,completion: @escaping (Error) -> Void) {
+        func post(to url: URL,completion: @escaping (Error?,HTTPURLResponse?) -> Void) {
             self.endpointURL = url
-            self.errorCompletion = completion
+            self.message = completion
         }
         
         func complete(whith error: Error) {
-            errorCompletion(error)
+            message(error, nil)
+        }
+        
+        func complete(whithStatusCode code: Int) {
+            let response = HTTPURLResponse(url: endpointURL!,
+                                           statusCode: code,
+                                           httpVersion: nil,
+                                           headerFields: nil)
+            message(nil,response)
         }
     }
     
