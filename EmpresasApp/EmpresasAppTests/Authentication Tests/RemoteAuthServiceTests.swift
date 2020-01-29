@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import EmpresasApp
+import EmpresasApp
 
 
 class RemoteAuthServiceTests: XCTestCase {
@@ -29,7 +29,7 @@ class RemoteAuthServiceTests: XCTestCase {
         XCTAssertEqual(client.endpointURL,endpointURL)
     }
     
-    func test_authenticate_withEmailPasswordIntoBody() {
+    func test_authenticate_resquestwithEmailPasswordIntoBody() {
         let (sut,_) = makeSUT()
         let email = "email@email.com"
         let password = "123123"
@@ -37,7 +37,6 @@ class RemoteAuthServiceTests: XCTestCase {
         sut.authenticate(email: email, password: password)
         
         XCTAssertEqual(sut.body,["email": email,"password":password])
-        
         
     }
    
