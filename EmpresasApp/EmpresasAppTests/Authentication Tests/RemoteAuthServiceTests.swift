@@ -83,6 +83,20 @@ class RemoteAuthServiceTests: XCTestCase {
         XCTAssertEqual(capturedError, .badRequest)
     }
     
+    func test_authentication_deliversForbiddenErrorOn403HttpResponse() {
+        let email = "email@email.com"
+        let password = "123123"
+        let (sut,client) = makeSUT()
+        
+        var capturedError: RemoteAuthService.Error?
+        sut.authenticate(email: email, password: password) { error in capturedError = error
+        }
+        
+        client.complete(whithStatusCode: 403)
+        
+        XCTAssertEqual(capturedError, .forbidden)
+    }
+    
     
     // MARK: - Helpers
     private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {

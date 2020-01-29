@@ -25,6 +25,7 @@ public class RemoteAuthService {
         case connectivity
         case unauthorized
         case badRequest
+        case forbidden
     }
     
     public init(endpointURL: URL, client: HTTPClient) {
@@ -44,10 +45,12 @@ public class RemoteAuthService {
             if let response = response {
                 
                 switch response.statusCode {
-                case 401:
-                    completion(.unauthorized)
                 case 400:
                     completion(.badRequest)
+                case 401:
+                    completion(.unauthorized)
+                case 403:
+                    completion(.forbidden)
                 default:
                     completion(.unauthorized)
                 }
