@@ -50,7 +50,7 @@ class RemoteAuthServiceTests: XCTestCase {
         }
         
         let clientError = NSError(domain:"Test",code:0)
-        client.errorCompletion(clientError)
+        client.complete(whith: clientError)
         
         XCTAssertEqual(capturedError,.connectivity)
     }
@@ -68,11 +68,12 @@ class RemoteAuthServiceTests: XCTestCase {
         
         func post(to url: URL,completion: @escaping (Error) -> Void) {
             self.endpointURL = url
-
             self.errorCompletion = completion
         }
         
-        
+        func complete(whith error: Error) {
+            errorCompletion(error)
+        }
     }
     
 }

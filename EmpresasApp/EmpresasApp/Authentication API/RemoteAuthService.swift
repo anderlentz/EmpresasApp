@@ -36,7 +36,7 @@ public class RemoteAuthService {
         
         self.setupHeaders(email: email, password: password)
         
-        client.post(to: endpointURL) { error in
+         client.post(to: endpointURL) { error in
             completion(.connectivity)
         }
     }
