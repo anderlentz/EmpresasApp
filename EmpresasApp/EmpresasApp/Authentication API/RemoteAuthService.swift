@@ -33,7 +33,9 @@ public class RemoteAuthService {
     public func authenticate(email: String,
                              password: String,
                              completion: @escaping (Error) -> Void) {
+        
         self.setupHeaders(email: email, password: password)
+        
         client.post(to: endpointURL) { error in
             completion(.connectivity)
         }

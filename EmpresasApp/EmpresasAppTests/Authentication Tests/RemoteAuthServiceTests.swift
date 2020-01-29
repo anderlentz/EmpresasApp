@@ -44,11 +44,13 @@ class RemoteAuthServiceTests: XCTestCase {
         let email = "email@email.com"
         let password = "123123"
         let (sut,client) = makeSUT()
-        client.error = NSError(domain:"Test",code:0)
         
         var capturedError: RemoteAuthService.Error?
         sut.authenticate(email: email, password: password) { error in capturedError = error
         }
+        
+        let clientError = NSError(domain:"Test",code:0)
+        client.errorCompletion(clientError)
         
         XCTAssertEqual(capturedError,.connectivity)
     }
@@ -62,15 +64,15 @@ class RemoteAuthServiceTests: XCTestCase {
     
     class HTTPClientSpy: HTTPClient {
         var endpointURL: URL?
-        var error: Error?
+        var errorCompletion: ((Error) -> Void) = { _ in}
         
         func post(to url: URL,completion: @escaping (Error) -> Void) {
             self.endpointURL = url
-            
-            if let error = error {
-                completion(error)
-            }
+
+            self.errorCompletion = completion
         }
+        
+        
     }
     
 }
