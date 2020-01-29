@@ -24,7 +24,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT(endpointURL: endpointURL)
 
-        sut.authenticate(email: email, password: password)
+        sut.authenticate(email: email, password: password){ _ in }
 
         XCTAssertEqual(client.endpointURL,endpointURL)
     }
@@ -34,7 +34,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let email = "email@email.com"
         let password = "123123"
         
-        sut.authenticate(email: email, password: password)
+        sut.authenticate(email: email, password: password){ _ in }
         
         XCTAssertEqual(sut.body,["email": email,"password":password])
         
