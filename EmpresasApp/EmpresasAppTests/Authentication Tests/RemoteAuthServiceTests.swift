@@ -13,13 +13,13 @@ class RemoteAuthService {
     let client: HTTPClient
     let endpointURL: URL
     
-    func authenticate() {
-        client.post(to: endpointURL)
-    }
-    
     init(endpointURL: URL, client: HTTPClient) {
         self.client = client
         self.endpointURL = endpointURL
+    }
+    
+    func authenticate() {
+        client.post(to: endpointURL)
     }
 }
 
@@ -53,7 +53,7 @@ class RemoteAuthServiceTests: XCTestCase {
 
         sut.authenticate()
 
-        XCTAssertNotNil(client.endpointURL)
+        XCTAssertEqual(client.endpointURL,endpointURL)
     }
    
     
