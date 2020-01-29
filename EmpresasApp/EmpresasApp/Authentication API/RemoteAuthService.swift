@@ -24,6 +24,7 @@ public class RemoteAuthService {
     public enum Error: Swift.Error {
         case connectivity
         case unauthorized
+        case badRequest
     }
     
     public init(endpointURL: URL, client: HTTPClient) {
@@ -39,10 +40,21 @@ public class RemoteAuthService {
         
         client.post(to: endpointURL) { (error,response) in
             
-            if response != nil {
-                completion(.unauthorized)
+            
+            if let response = response {
+                
+                switch response.statusCode {
+                case 401:
+                    completion(.unauthorized)
+                case 400:
+                    completion(.badRequest)
+                default:
+                    completion(.unauthorized)
+                }
             } else {
-                completion(.connectivity)
+                if error != nil {
+                     completion(.connectivity)
+                }
             }
         }
     }
