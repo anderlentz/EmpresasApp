@@ -9,7 +9,9 @@
 import Foundation
 
 // MARK: - Investor
-struct Investor: Codable {
+public struct Investor: Codable,Equatable {
+    
+    
     let id: Int
     let investorName, email, city, country: String
     let balance: Int
@@ -25,5 +27,9 @@ struct Investor: Codable {
         case portfolioValue = "portfolio_value"
         case firstAccess = "first_access"
         case superAngel = "super_angel"
+    }
+    
+    public static func == (lhs: Investor, rhs: Investor) -> Bool {
+        return lhs.id == rhs.id
     }
 }

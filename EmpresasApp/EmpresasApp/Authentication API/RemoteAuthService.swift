@@ -27,6 +27,7 @@ public class RemoteAuthService {
         case badRequest
         case forbidden
         case invalidData
+        case generic
     }
     
     public init(endpointURL: URL, client: HTTPClient) {
@@ -36,28 +37,28 @@ public class RemoteAuthService {
     
     public func authenticate(email: String,
                              password: String,
-                             completion: @escaping (Error) -> Void) {
+                             completion: @escaping (Result<Investor,Error>) -> Void) {
         
         self.setupHeaders(email: email, password: password)
         
         client.post(to: endpointURL) { result in
             
             switch result {
-            case .success(let (data,response)):
+            case .success(let (_,response)):
                 switch response.statusCode{
                 case 400:
-                   completion(.badRequest)
+                    completion(.failure(.badRequest))
                 case 401:
-                   completion(.unauthorized)
+                   completion(.failure(.unauthorized))
                 case 403:
-                   completion(.forbidden)
+                   completion(.failure(.forbidden))
                 case 200:
-                    completion(.invalidData)
+                    completion(.failure(.invalidData))
                 default:
-                   completion(.unauthorized)
+                   completion(.failure(.unauthorized))
                 }
             case .failure(_):
-                completion(.connectivity)
+                completion(.failure(.connectivity))
             }
         }
     }
