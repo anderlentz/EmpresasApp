@@ -53,14 +53,32 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-Ad-prK">
+                                <rect key="frame" x="29" y="784" width="356" height="54"/>
+                                <color key="backgroundColor" red="0.3411764705882353" green="0.73333333333333328" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="ENTRAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.9137254901960784" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="38K-AY-1zF"/>
+                            <constraint firstItem="fEC-Ad-prK" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.86" id="3G6-C4-NAT"/>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.44" id="6zq-Yg-pd7"/>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="8ed-ir-gkA"/>
+                            <constraint firstItem="Ytr-TK-n4j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4LS-kW-yiz" secondAttribute="bottom" priority="999" constant="10" id="CJm-av-UNv"/>
+                            <constraint firstItem="fEC-Ad-prK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-24" id="EJg-fR-m5m"/>
                             <constraint firstItem="Ytr-TK-n4j" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="FJN-DW-6hE"/>
                             <constraint firstItem="4LS-kW-yiz" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.7" id="OJf-hx-D09"/>
+                            <constraint firstItem="fEC-Ad-prK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OXB-Y7-lWL"/>
+                            <constraint firstItem="fEC-Ad-prK" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.13" id="XCh-hu-BDd"/>
                             <constraint firstItem="4LS-kW-yiz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHK-HL-ix9"/>
                             <constraint firstItem="Ytr-TK-n4j" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eT7-Ad-0lH"/>
                             <constraint firstItem="Ytr-TK-n4j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fsR-02-msl"/>
