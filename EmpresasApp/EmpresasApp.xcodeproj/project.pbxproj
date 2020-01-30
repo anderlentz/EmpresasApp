@@ -20,6 +20,7 @@
 		A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */; };
 		A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */; };
 		A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */; };
+		A7EEBACB23E2650D00673B1C /* validJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A7EEBACA23E2650D00673B1C /* validJSON.json */; };
 		F118D37623E214DB00DFE7D4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthServiceTests.swift; sourceTree = "<group>"; };
 		A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthService.swift; sourceTree = "<group>"; };
+		A7EEBACA23E2650D00673B1C /* validJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = validJSON.json; sourceTree = "<group>"; };
 		F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */,
+				A7EEBACA23E2650D00673B1C /* validJSON.json */,
 			);
 			path = "Authentication Tests";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7EEBACB23E2650D00673B1C /* validJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import EmpresasApp
+@testable import EmpresasApp
 
 
 class RemoteAuthServiceTests: XCTestCase {
@@ -113,12 +113,62 @@ class RemoteAuthServiceTests: XCTestCase {
         XCTAssertEqual(capturedResult, .failure(.invalidData))
     }
     
+    func test_authentication_deliversInvestorOn200HttpResponseWithValidJSON() {
+        let email = "email@email.com"
+        let password = "123123"
+        let (sut,client) = makeSUT()
+        
+        var capturedResults = [Result<Investor,RemoteAuthService.Error>]()
+        
+        sut.authenticate(email: email, password: password) { result in capturedResults.append(result)
+        }
+        
+        client.complete(whithStatusCode: 200, data: makeValidJSONData())
+        
+        
+        XCTAssertEqual(capturedResults, [.success(makeValidInvestor())])
+        
+    }
     
     // MARK: - Helpers
     private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteAuthService(endpointURL: endpointURL,client: client)
         return (sut,client)
+    }
+    
+    private func makeValidInvestor() -> Investor {
+        let portfolio = Portfolio(enterprisesNumber: 0, enterprises: [])
+        return Investor(id: 1,
+                        investorName: "Test Apple",
+                        email: "testeapple@ioasys.com.br",
+                        city: "BH",
+                        country: "Brasil",
+                        balance: 350000.0,
+                        photo: "/uploads/investor/photo/1/cropped4991818370070749122.jpg",
+                        portfolio: portfolio,
+                        portfolioValue: 350000.0,
+                        firstAccess: false,
+                        superAngel: false)
+    }
+    
+    private func makeValidJSONData() -> Data {
+        print("entrou")
+        
+        let bundle = Bundle(for: type(of: self))
+        
+        guard let url = bundle.url(forResource: "validJSON", withExtension: ".json") else {
+            XCTFail("Missing file: validJSON.json")
+            return Data()
+        }
+        
+        do {
+            let data = try Data(contentsOf: url, options: .mappedIfSafe)
+            return data
+        } catch let error{
+            XCTFail(error.localizedDescription)
+        }
+        return Data()
     }
     
     class HTTPClientSpy: HTTPClient {

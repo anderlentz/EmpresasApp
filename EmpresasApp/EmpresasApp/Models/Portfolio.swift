@@ -17,4 +17,9 @@ struct Portfolio: Codable {
         case enterprisesNumber = "enterprises_number"
         case enterprises
     }
+    
+    init(enterprisesNumber: Int, enterprises: [JSONAny]) {
+        self.enterprisesNumber = enterprisesNumber
+        self.enterprises = enterprises
+    }
 }

@@ -8,11 +8,11 @@
 
 import Foundation
 
-public protocol HTTPClient {
+protocol HTTPClient {
     func post(to url: URL,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
 }
 
-public class RemoteAuthService {
+class RemoteAuthService {
 
     private let endpointURL: URL
     private let client: HTTPClient
@@ -35,7 +35,7 @@ public class RemoteAuthService {
         self.endpointURL = endpointURL
     }
     
-    public func authenticate(email: String,
+    func authenticate(email: String,
                              password: String,
                              completion: @escaping (Result<Investor,Error>) -> Void) {
         
@@ -44,7 +44,7 @@ public class RemoteAuthService {
         client.post(to: endpointURL) { result in
             
             switch result {
-            case .success(let (_,response)):
+            case .success(let (data,response)):
                 switch response.statusCode{
                 case 400:
                     completion(.failure(.badRequest))
@@ -53,7 +53,11 @@ public class RemoteAuthService {
                 case 403:
                    completion(.failure(.forbidden))
                 case 200:
-                    completion(.failure(.invalidData))
+                    if let investorResult = try? JSONDecoder().decode(InvestorResult.self, from: data) {
+                        completion(.success(investorResult.investor))
+                    } else {
+                        completion(.failure(.invalidData))
+                    }
                 default:
                    completion(.failure(.unauthorized))
                 }
