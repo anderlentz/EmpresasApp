@@ -49,9 +49,28 @@ class HomeViewController: UIViewController {
         // White background
         searchController.searchBar.searchTextField.backgroundColor = .white
         
+        // Cursor color to brown grey
+        searchController.searchBar.searchTextField.tintColor = UIColor(named: "brownGrey")
+        
         // Set Cancel button color to white
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white], for: .normal)
-
+        
+        changeClearIconColor()
+    }
+    
+    private func changeClearIconColor() {
+        
+        let clearImage = UIImage(systemName: "xmark.circle.fill")
+        searchController.searchBar.setImage(clearImage, for: .clear, state: .normal)
+        
+        if let searchTextField = searchController.searchBar.value(forKey: "searchField") as? UITextField, let clearButton = searchTextField.value(forKey: "clearButton") as? UIButton {
+           // Create a template copy of the original button image
+            let templateImage =  clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+           // Set the template image copy as the button image
+            clearButton.setImage(templateImage, for: .normal)
+           // Finally, set the image color
+           clearButton.tintColor = UIColor(named: "darkishPink")
+        }
     }
 }
 
