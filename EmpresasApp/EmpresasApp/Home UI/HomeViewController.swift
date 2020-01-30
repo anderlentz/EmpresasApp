@@ -20,6 +20,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - Helpers
     private func setupNavigationLayout() {
+        
+        // Color and appearence
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(named:"darkishPink")
@@ -27,6 +29,15 @@ class HomeViewController: UIViewController {
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
+        
+        // Title image
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
+        imageView.contentMode = .scaleAspectFit
+
+        let image = UIImage(named: "logoNav")
+        imageView.image = image
+
+        navigationItem.titleView = imageView
     }
 
 }
