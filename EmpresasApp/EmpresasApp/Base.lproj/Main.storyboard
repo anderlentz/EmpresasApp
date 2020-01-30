@@ -38,14 +38,32 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ytr-TK-n4j">
+                                <rect key="frame" x="20.5" y="410" width="373" height="76"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TA0-0V-5RM">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kbZ-E5-hGy">
+                                        <rect key="frame" x="0.0" y="42" width="373" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.9137254901960784" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="38K-AY-1zF"/>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.44" id="6zq-Yg-pd7"/>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="8ed-ir-gkA"/>
+                            <constraint firstItem="Ytr-TK-n4j" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="FJN-DW-6hE"/>
                             <constraint firstItem="4LS-kW-yiz" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.7" id="OJf-hx-D09"/>
                             <constraint firstItem="4LS-kW-yiz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHK-HL-ix9"/>
+                            <constraint firstItem="Ytr-TK-n4j" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eT7-Ad-0lH"/>
+                            <constraint firstItem="Ytr-TK-n4j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fsR-02-msl"/>
                             <constraint firstItem="4LS-kW-yiz" firstAttribute="top" secondItem="eIZ-f0-8f6" secondAttribute="bottom" constant="41" id="nK9-EG-umZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
