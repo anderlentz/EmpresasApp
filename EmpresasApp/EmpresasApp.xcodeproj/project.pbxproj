@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A753F30123E35E7700266A3B /* InvestorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A753F30023E35E7700266A3B /* InvestorMapper.swift */; };
+		A753F30423E372F200266A3B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A753F30323E372F200266A3B /* Home.storyboard */; };
+		A753F30623E3736300266A3B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A753F30523E3736300266A3B /* HomeViewController.swift */; };
 		A79C11FE23E3262F005F55A7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C11FD23E3262F005F55A7 /* LoginViewController.swift */; };
 		A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A62D9023E3579700690893 /* AuthenticationService.swift */; };
 		A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		A753F30023E35E7700266A3B /* InvestorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorMapper.swift; sourceTree = "<group>"; };
+		A753F30323E372F200266A3B /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		A753F30523E3736300266A3B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A79C11FD23E3262F005F55A7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A7A62D9023E3579700690893 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A7B19ABB23E1DDC40001FA34 /* EmpresasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmpresasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A753F30223E372DC00266A3B /* Home UI */ = {
+			isa = PBXGroup;
+			children = (
+				A753F30323E372F200266A3B /* Home.storyboard */,
+				A753F30523E3736300266A3B /* HomeViewController.swift */,
+			);
+			path = "Home UI";
+			sourceTree = "<group>";
+		};
 		A79C11FC23E325AB005F55A7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,12 +120,13 @@
 		A7B19ABD23E1DDC40001FA34 /* EmpresasApp */ = {
 			isa = PBXGroup;
 			children = (
+				A753F30223E372DC00266A3B /* Home UI */,
 				A79C11FC23E325AB005F55A7 /* Login */,
 				A7EEBAC523E2285300673B1C /* Authentication API */,
 				A7B19AEE23E1EACB0001FA34 /* Models */,
+				A7B19AC423E1DDC40001FA34 /* Main.storyboard */,
 				A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */,
 				A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */,
-				A7B19AC423E1DDC40001FA34 /* Main.storyboard */,
 				A7B19AC723E1DDC80001FA34 /* Assets.xcassets */,
 				A7B19AC923E1DDC80001FA34 /* LaunchScreen.storyboard */,
 				A7B19ACC23E1DDC80001FA34 /* Info.plist */,
@@ -260,6 +274,7 @@
 				A7B19ACB23E1DDC80001FA34 /* LaunchScreen.storyboard in Resources */,
 				A7B19AC823E1DDC80001FA34 /* Assets.xcassets in Resources */,
 				A7B19AC623E1DDC40001FA34 /* Main.storyboard in Resources */,
+				A753F30423E372F200266A3B /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +300,7 @@
 				A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */,
 				A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */,
 				A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */,
+				A753F30623E3736300266A3B /* HomeViewController.swift in Sources */,
 				A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */,
 				A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */,
 				A7B19AF023E1EAEC0001FA34 /* Investor.swift in Sources */,
