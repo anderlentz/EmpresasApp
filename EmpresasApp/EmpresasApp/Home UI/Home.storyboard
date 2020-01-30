@@ -17,7 +17,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="O3I-Nj-Y2R"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9qQ-by-n7g"/>
+                    <navigationItem key="navigationItem" id="9qQ-by-n7g">
+                        <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="EIY-GC-wGq">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="searchButtonAction:" destination="vdI-H9-hXj" id="PMt-aF-ors"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hja-Qm-5IL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,4 +49,7 @@
             <point key="canvasLocation" x="-217.39130434782609" y="-170.08928571428569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
+    </resources>
 </document>
