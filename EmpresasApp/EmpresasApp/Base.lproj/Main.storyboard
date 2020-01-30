@@ -21,24 +21,36 @@
                                     <constraint firstAttribute="height" constant="44" id="LXH-N9-qEh"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="4LS-kW-yiz" userLabel="Welcome Container">
-                                <rect key="frame" x="62" y="178" width="290" height="74.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tp0-Ii-BsR" userLabel="MessageViewContainer">
+                                <rect key="frame" x="0.0" y="145" width="414" height="259"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEM-VINDO AO EMPRESAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSr-FJ-zQC">
-                                        <rect key="frame" x="39" y="0.0" width="212" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <color key="textColor" red="0.2196078431372549" green="0.21568627450980393" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, contetur adipiscing elit. Nunc accumsan." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLS-7A-nM0">
-                                        <rect key="frame" x="17" y="38.5" width="256.5" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.21960784310000001" green="0.2156862745" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="4LS-kW-yiz" userLabel="Welcome Container">
+                                        <rect key="frame" x="60" y="92.5" width="294" height="74.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEM-VINDO AO EMPRESAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSr-FJ-zQC">
+                                                <rect key="frame" x="41" y="0.0" width="212" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <color key="textColor" red="0.2196078431372549" green="0.21568627450980393" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, contetur adipiscing elit. Nunc accumsan." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLS-7A-nM0">
+                                                <rect key="frame" x="19" y="38.5" width="256.5" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.21960784310000001" green="0.2156862745" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ytr-TK-n4j">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="4LS-kW-yiz" firstAttribute="centerX" secondItem="Tp0-Ii-BsR" secondAttribute="centerX" id="CRy-1E-PTn"/>
+                                    <constraint firstItem="4LS-kW-yiz" firstAttribute="centerX" secondItem="Tp0-Ii-BsR" secondAttribute="centerX" id="DYl-3h-0Ga"/>
+                                    <constraint firstItem="4LS-kW-yiz" firstAttribute="centerY" secondItem="Tp0-Ii-BsR" secondAttribute="centerY" id="H37-s9-aUJ"/>
+                                    <constraint firstItem="4LS-kW-yiz" firstAttribute="width" secondItem="Tp0-Ii-BsR" secondAttribute="width" multiplier="0.71" id="rZy-ho-z4M"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ytr-TK-n4j" userLabel="Login Form Stack">
                                 <rect key="frame" x="20.5" y="404" width="373" height="88"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TA0-0V-5RM">
@@ -83,17 +95,17 @@
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="38K-AY-1zF"/>
                             <constraint firstItem="fEC-Ad-prK" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.86" id="3G6-C4-NAT"/>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.44" id="6zq-Yg-pd7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tp0-Ii-BsR" secondAttribute="trailing" id="7iz-qD-gpC"/>
                             <constraint firstItem="eIZ-f0-8f6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="8ed-ir-gkA"/>
-                            <constraint firstItem="Ytr-TK-n4j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4LS-kW-yiz" secondAttribute="bottom" priority="999" constant="10" id="CJm-av-UNv"/>
+                            <constraint firstItem="Ytr-TK-n4j" firstAttribute="top" secondItem="Tp0-Ii-BsR" secondAttribute="bottom" id="AMc-vp-XAe"/>
                             <constraint firstItem="fEC-Ad-prK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-24" id="EJg-fR-m5m"/>
                             <constraint firstItem="Ytr-TK-n4j" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="FJN-DW-6hE"/>
-                            <constraint firstItem="4LS-kW-yiz" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.7" id="OJf-hx-D09"/>
+                            <constraint firstItem="Tp0-Ii-BsR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FtM-Vv-y93"/>
                             <constraint firstItem="fEC-Ad-prK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OXB-Y7-lWL"/>
                             <constraint firstItem="fEC-Ad-prK" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.13" id="XCh-hu-BDd"/>
-                            <constraint firstItem="4LS-kW-yiz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHK-HL-ix9"/>
+                            <constraint firstItem="Tp0-Ii-BsR" firstAttribute="top" secondItem="eIZ-f0-8f6" secondAttribute="bottom" constant="8" symbolic="YES" id="bdw-IR-TJq"/>
                             <constraint firstItem="Ytr-TK-n4j" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eT7-Ad-0lH"/>
                             <constraint firstItem="Ytr-TK-n4j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fsR-02-msl"/>
-                            <constraint firstItem="4LS-kW-yiz" firstAttribute="top" secondItem="eIZ-f0-8f6" secondAttribute="bottom" constant="41" id="nK9-EG-umZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
