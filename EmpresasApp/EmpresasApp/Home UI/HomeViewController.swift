@@ -45,6 +45,13 @@ class HomeViewController: UIViewController {
     private func setupSearchController() {
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
+        
+        // White background
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        
+        // Set Cancel button color to white
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white], for: .normal)
+
     }
 }
 
