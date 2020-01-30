@@ -9,13 +9,15 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupNavigationLayout()
-       
-  
+        setupSearchController()
+        
     }
     
     // MARK: - Helpers
@@ -33,11 +35,19 @@ class HomeViewController: UIViewController {
         // Title image
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
         imageView.contentMode = .scaleAspectFit
-
+        
         let image = UIImage(named: "logoNav")
         imageView.image = image
-
+        
         navigationItem.titleView = imageView
     }
+    
+    private func setupSearchController() {
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+    }
+}
 
+extension HomeViewController: UISearchBarDelegate {
+    
 }
