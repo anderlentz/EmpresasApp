@@ -15,12 +15,12 @@
 		A7B19ACB23E1DDC80001FA34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B19AC923E1DDC80001FA34 /* LaunchScreen.storyboard */; };
 		A7B19AD623E1DDC80001FA34 /* EmpresasAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AD523E1DDC80001FA34 /* EmpresasAppTests.swift */; };
 		A7B19AF023E1EAEC0001FA34 /* Investor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AEF23E1EAEC0001FA34 /* Investor.swift */; };
-		A7B19AF223E1ECBD0001FA34 /* InvestorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF123E1ECBD0001FA34 /* InvestorResult.swift */; };
 		A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF323E1ED000001FA34 /* Portfolio.swift */; };
 		A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */; };
 		A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */; };
 		A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */; };
 		A7EEBACB23E2650D00673B1C /* validJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A7EEBACA23E2650D00673B1C /* validJSON.json */; };
+		A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEBACC23E2796900673B1C /* Enterprise.swift */; };
 		F118D37623E214DB00DFE7D4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,12 +48,12 @@
 		A7B19AD723E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AE223E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AEF23E1EAEC0001FA34 /* Investor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investor.swift; sourceTree = "<group>"; };
-		A7B19AF123E1ECBD0001FA34 /* InvestorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorResult.swift; sourceTree = "<group>"; };
 		A7B19AF323E1ED000001FA34 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthServiceTests.swift; sourceTree = "<group>"; };
 		A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthService.swift; sourceTree = "<group>"; };
 		A7EEBACA23E2650D00673B1C /* validJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = validJSON.json; sourceTree = "<group>"; };
+		A7EEBACC23E2796900673B1C /* Enterprise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enterprise.swift; sourceTree = "<group>"; };
 		F118D37523E214DB00DFE7D4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,10 +132,9 @@
 		A7B19AEE23E1EACB0001FA34 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A7B19AF523E1ED2D0001FA34 /* Helpers */,
 				A7B19AEF23E1EAEC0001FA34 /* Investor.swift */,
-				A7B19AF123E1ECBD0001FA34 /* InvestorResult.swift */,
 				A7B19AF323E1ED000001FA34 /* Portfolio.swift */,
+				A7EEBACC23E2796900673B1C /* Enterprise.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +167,7 @@
 		A7EEBAC523E2285300673B1C /* Authentication API */ = {
 			isa = PBXGroup;
 			children = (
+				A7B19AF523E1ED2D0001FA34 /* Helpers */,
 				A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */,
 			);
 			path = "Authentication API";
@@ -277,9 +277,9 @@
 			files = (
 				A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */,
 				F118D37623E214DB00DFE7D4 /* AuthenticationManager.swift in Sources */,
-				A7B19AF223E1ECBD0001FA34 /* InvestorResult.swift in Sources */,
 				A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */,
 				A7B19AC323E1DDC40001FA34 /* ViewController.swift in Sources */,
+				A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */,
 				A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */,
 				A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */,
 				A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */,

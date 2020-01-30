@@ -9,16 +9,11 @@
 import Foundation
 
 // MARK: - Portfolio
-struct Portfolio: Codable {
+struct Portfolio {
     let enterprisesNumber: Int
-    let enterprises: [JSONAny]
+    let enterprises: [Enterprise?]
 
-    enum CodingKeys: String, CodingKey {
-        case enterprisesNumber = "enterprises_number"
-        case enterprises
-    }
-    
-    init(enterprisesNumber: Int, enterprises: [JSONAny]) {
+    init(enterprisesNumber: Int, enterprises: [Enterprise]) {
         self.enterprisesNumber = enterprisesNumber
         self.enterprises = enterprises
     }
