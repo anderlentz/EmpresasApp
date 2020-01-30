@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         setupTextFieldLayout()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         self.view.endEditing(true)
+    }
+    
     // MARK: - Helpers
     
     private func addOnLeft(of textField: UITextField,anImage img: UIImage) {
