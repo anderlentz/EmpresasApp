@@ -45,7 +45,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        var capturedResult: Result<Investor,RemoteAuthService.AuthenticationError> = .failure(.generic)
         
         sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
@@ -61,7 +61,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        var capturedResult: Result<Investor,RemoteAuthService.AuthenticationError> = .failure(.generic)
         sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
@@ -75,7 +75,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        var capturedResult: Result<Investor,RemoteAuthService.AuthenticationError> = .failure(.generic)
         sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
@@ -89,7 +89,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        var capturedResult: Result<Investor,RemoteAuthService.AuthenticationError> = .failure(.generic)
         sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
@@ -103,7 +103,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        var capturedResult: Result<Investor,RemoteAuthService.AuthenticationError> = .failure(.generic)
         sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
@@ -118,7 +118,7 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedResults = [Result<Investor,RemoteAuthService.Error>]()
+        var capturedResults = [Result<Investor,RemoteAuthService.AuthenticationError>]()
         
         sut.authenticate(email: email, password: password) { result in capturedResults.append(result)
         }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+final class LoginViewModel {
+    
+}
+
 class LoginViewController: UIViewController {
     
     // MARK: - Outlets
