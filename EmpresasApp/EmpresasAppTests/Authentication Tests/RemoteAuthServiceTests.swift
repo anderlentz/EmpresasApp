@@ -45,15 +45,15 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedError: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
         
-        sut.authenticate(email: email, password: password) { error in capturedError = error
+        sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
         let clientError = NSError(domain:"Test",code:0)
         client.complete(whith: clientError)
         
-        XCTAssertEqual(capturedError,.failure(.connectivity))
+        XCTAssertEqual(capturedResult,.failure(.connectivity))
     }
     
     func test_authentication_deliversUnauthorizedErrorOn401HttpResponse() {
@@ -61,13 +61,13 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedError: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
-        sut.authenticate(email: email, password: password) { error in capturedError = error
+        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
         client.complete(whithStatusCode: 401)
         
-        XCTAssertEqual(capturedError, .failure(.unauthorized))
+        XCTAssertEqual(capturedResult, .failure(.unauthorized))
     }
     
     func test_authentication_deliversBadRequestErrorOn400HttpResponse() {
@@ -75,13 +75,13 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedError: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
-        sut.authenticate(email: email, password: password) { error in capturedError = error
+        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
         client.complete(whithStatusCode: 400)
         
-        XCTAssertEqual(capturedError, .failure(.badRequest))
+        XCTAssertEqual(capturedResult, .failure(.badRequest))
     }
     
     func test_authentication_deliversForbiddenErrorOn403HttpResponse() {
@@ -89,13 +89,13 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedError: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
-        sut.authenticate(email: email, password: password) { error in capturedError = error
+        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
         client.complete(whithStatusCode: 403)
         
-        XCTAssertEqual(capturedError, .failure(.forbidden))
+        XCTAssertEqual(capturedResult, .failure(.forbidden))
     }
     
     func test_authentication_deliversErrorOn200HttpResponseWithInvalidData() {
@@ -103,14 +103,14 @@ class RemoteAuthServiceTests: XCTestCase {
         let password = "123123"
         let (sut,client) = makeSUT()
         
-        var capturedError: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
-        sut.authenticate(email: email, password: password) { error in capturedError = error
+        var capturedResult: Result<Investor,RemoteAuthService.Error> = .failure(.generic)
+        sut.authenticate(email: email, password: password) { result in capturedResult = result
         }
         
         let invalidJSON = Data("Invalid json".utf8)
         client.complete(whithStatusCode: 200,data: invalidJSON)
         
-        XCTAssertEqual(capturedError, .failure(.invalidData))
+        XCTAssertEqual(capturedResult, .failure(.invalidData))
     }
     
     
