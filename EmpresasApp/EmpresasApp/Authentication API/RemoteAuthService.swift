@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol HTTPClient {
+public protocol HTTPClient {
     func post(to url: URL,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
 }
 
-class RemoteAuthService: AuthenticationService {
+public class RemoteAuthService: AuthenticationService {
 
     private let endpointURL: URL
     private let client: HTTPClient
@@ -35,7 +35,7 @@ class RemoteAuthService: AuthenticationService {
         self.endpointURL = endpointURL
     }
     
-    func authenticate(email: String,
+    public func authenticate(email: String,
                              password: String,
                              completion: @escaping (Result<Investor,AuthenticationError>) -> Void) {
         

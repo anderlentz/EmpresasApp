@@ -15,10 +15,16 @@ final class LoginViewModel {
         self.authenticationService = authenticationService
     }
     
-    var onAuthenticatingInvestor: ((Bool) -> Void)?
+    var onLogginStateChange: ((Bool) -> Void)?
     var onInvestorLogin: ((Investor) -> Void)?
+    var onChange: ((LoginViewModel) -> Void)?
+    
+    private(set) var isLogging: Bool = false {
+        didSet {onChange?(self)}
+    }
     
     func doLogin(email: String, password: String) {
+        onLogginStateChange?(true)
         authenticationService.authenticate(email: email,password: password) { [weak self] result in
             switch result {
             case .success(let investor):
@@ -27,6 +33,7 @@ final class LoginViewModel {
             case .failure(let error):
                 print("Inform view that an error has occuried, \(error)")
             }
+            self?.onLogginStateChange?(false)
         }
     }
     
@@ -35,7 +42,7 @@ final class LoginViewModel {
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
-    //var viewModel: LoginViewModel
+    public var viewModel: LoginViewModel?
     
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -44,11 +51,6 @@ class LoginViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func loginButtonAction(_ sender: UIButton) {
     }
-    
-//    convenience init() {
-//
-//    viewModel = LoginViewModel(authenticationService: RemoteAuthService(endpointURL: URL(string: "https://empresas.ioasys.com.br")!, client: <#T##HTTPClient#>))
-//    }
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {

@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - Investor
-struct Investor: Equatable {
+public struct Investor: Equatable {
     let id: Int
     let investorName, email, city, country: String
     let balance: Double
