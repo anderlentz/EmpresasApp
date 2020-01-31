@@ -152,9 +152,7 @@ class RemoteAuthServiceTests: XCTestCase {
                         superAngel: false)
     }
     
-    private func makeValidJSONData() -> Data {
-        print("entrou")
-        
+    private func makeValidJSONData() -> Data {        
         let bundle = Bundle(for: type(of: self))
         
         guard let url = bundle.url(forResource: "validJSON", withExtension: ".json") else {
