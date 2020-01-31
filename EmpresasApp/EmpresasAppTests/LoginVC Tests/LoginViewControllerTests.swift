@@ -12,7 +12,12 @@ import XCTest
 class LoginViewControllerTests: XCTestCase {
     
     func test_init_doesNotAtemptToLogin() {
+        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
+        let viewModel = LoginViewModelSpy()
         
+        _ = LoginUIComposer.loginComposedWith(viewModel: viewModel, authenticationService: remoteAuthService)
+        
+        XCTAssertEqual(viewModel.logginCount, 0)
     }
     
     // MARK: - Helpers
@@ -23,12 +28,12 @@ class LoginViewControllerTests: XCTestCase {
         
     }
     
-    
     // MARK: - LoginViewModelSpy class
     private class LoginViewModelSpy: LoginViewModelProtocol {
 
+        var logginCount = 0
         func doLogin(email: String, password: String) {
-            
+            logginCount += 1
         }
     }
     
