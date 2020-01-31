@@ -27,8 +27,8 @@ class LoginViewControllerTests: XCTestCase {
         sut.viewModel = viewModel
         
         sut.loadViewIfNeeded()
-        
-        //XCTAssertEqual(viewModelSpy.logginCount, 0)
+
+        XCTAssertEqual(viewModel.isLogging, false)
     }
     
     func test_userInitiateLogin_showsLogginIndicator() {
