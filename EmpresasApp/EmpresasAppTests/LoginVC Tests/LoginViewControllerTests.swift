@@ -20,6 +20,16 @@ class LoginViewControllerTests: XCTestCase {
         XCTAssertEqual(viewModel.logginCount, 0)
     }
     
+    func test_viewDidLoad_doesNotAttemptToLogin() {
+        let sut = LoginViewController()
+        let viewModelSpy = LoginViewModelSpy()
+        sut.viewModel = viewModelSpy
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(viewModelSpy.logginCount, 0)
+    }
+    
     // MARK: - Helpers
     private func makeSUT() -> LoginViewController {
         
