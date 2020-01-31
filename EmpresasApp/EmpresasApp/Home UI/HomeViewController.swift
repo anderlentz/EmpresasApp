@@ -13,6 +13,9 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     let searchController = UISearchController(searchResultsController: nil)
     
+    // MARK: - IBOutles
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: - IBActions
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
         
@@ -27,6 +30,8 @@ class HomeViewController: UIViewController {
         setupNavigationLayout()
         setupSearchController()
         
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     // MARK: - Helpers
@@ -92,5 +97,20 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UISearchBarDelegate {
+    
+}
+
+extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "enterpriseCell", for: indexPath)
+            as! EnterpriseTableViewCell
+        return cell
+    }
+    
+    
     
 }
