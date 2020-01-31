@@ -14,7 +14,7 @@
 		A7A3BD1723E3AB240056F352 /* EnterpriseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */; };
 		A7A3BD1A23E3AE5E0056F352 /* Enterprise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7A3BD1923E3AE5E0056F352 /* Enterprise.storyboard */; };
 		A7A3BD1C23E3AE800056F352 /* EnterpriseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1B23E3AE800056F352 /* EnterpriseViewController.swift */; };
-		A7A3BD1E23E3C3570056F352 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1D23E3C3570056F352 /* URLSessionHTTPClient.swift */; };
+		A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */; };
 		A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A62D9023E3579700690893 /* AuthenticationService.swift */; };
 		A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */; };
 		A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */; };
@@ -49,7 +49,7 @@
 		A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseTableViewCell.swift; sourceTree = "<group>"; };
 		A7A3BD1923E3AE5E0056F352 /* Enterprise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Enterprise.storyboard; sourceTree = "<group>"; };
 		A7A3BD1B23E3AE800056F352 /* EnterpriseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseViewController.swift; sourceTree = "<group>"; };
-		A7A3BD1D23E3C3570056F352 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		A7A62D9023E3579700690893 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A7B19ABB23E1DDC40001FA34 /* EmpresasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmpresasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +194,7 @@
 			children = (
 				A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */,
 				A7EEBACA23E2650D00673B1C /* validJSON.json */,
+				A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "Authentication Tests";
 			sourceTree = "<group>";
@@ -205,7 +206,6 @@
 				A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */,
 				A7A62D9023E3579700690893 /* AuthenticationService.swift */,
 				A753F30023E35E7700266A3B /* InvestorMapper.swift */,
-				A7A3BD1D23E3C3570056F352 /* URLSessionHTTPClient.swift */,
 			);
 			path = "Authentication API";
 			sourceTree = "<group>";
@@ -321,7 +321,6 @@
 				A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */,
 				A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */,
 				A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */,
-				A7A3BD1E23E3C3570056F352 /* URLSessionHTTPClient.swift in Sources */,
 				A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */,
 				A753F30623E3736300266A3B /* HomeViewController.swift in Sources */,
 				A7A3BD1723E3AB240056F352 /* EnterpriseTableViewCell.swift in Sources */,
@@ -336,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7B19AD623E1DDC80001FA34 /* EmpresasAppTests.swift in Sources */,
+				A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */,
 				A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
