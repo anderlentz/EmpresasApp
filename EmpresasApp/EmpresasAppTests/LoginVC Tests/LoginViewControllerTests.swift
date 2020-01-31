@@ -30,6 +30,9 @@ class LoginViewControllerTests: XCTestCase {
     
     // MARK: - LoginViewModelSpy class
     private class LoginViewModelSpy: LoginViewModelProtocol {
+        var onLogginStateChange: ((Bool) -> Void)?
+        var onInvestorLogin: ((Investor) -> Void)?
+        var onChange: ((LoginViewModel) -> Void)?
 
         var logginCount = 0
         func doLogin(email: String, password: String) {

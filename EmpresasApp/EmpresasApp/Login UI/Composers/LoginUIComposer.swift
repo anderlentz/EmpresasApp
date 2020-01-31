@@ -12,7 +12,7 @@ public final class LoginUIComposer {
     static func loginComposedWith(viewModel: LoginViewModelProtocol, authenticationService: AuthenticationService) -> LoginViewController {
         
         let loginVC = LoginViewController()
-        loginVC.viewModel = LoginViewModel(authenticationService: authenticationService)
+        loginVC.viewModel = viewModel
         return loginVC
     }
 }

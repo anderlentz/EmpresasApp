@@ -8,20 +8,24 @@
 
 import UIKit
 
-public protocol LoginViewModelProtocol {
+protocol LoginViewModelProtocol {
+    var onLogginStateChange: ((Bool) -> Void)? { get set }
+    var onInvestorLogin: ((Investor) -> Void)? { get set }
+    var onChange: ((LoginViewModel) -> Void)? { get set }
+    
     func doLogin(email: String, password: String)
 }
 
 final class LoginViewModel: LoginViewModelProtocol {
+    var onLogginStateChange: ((Bool) -> Void)?
+    var onInvestorLogin: ((Investor) -> Void)?
+    var onChange: ((LoginViewModel) -> Void)?
+    
     private let authenticationService: AuthenticationService
     
     init (authenticationService: AuthenticationService) {
         self.authenticationService = authenticationService
     }
-    
-    var onLogginStateChange: ((Bool) -> Void)?
-    var onInvestorLogin: ((Investor) -> Void)?
-    var onChange: ((LoginViewModel) -> Void)?
     
     private(set) var isLogging: Bool = false {
         didSet {onChange?(self)}
@@ -46,7 +50,7 @@ final class LoginViewModel: LoginViewModelProtocol {
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
-    public var viewModel: LoginViewModel?
+    public var viewModel: LoginViewModelProtocol?
     
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
