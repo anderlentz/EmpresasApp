@@ -30,6 +30,24 @@ class LoginViewControllerTests: XCTestCase {
         XCTAssertEqual(viewModelSpy.logginCount, 0)
     }
     
+    func test_userInitiateLogin_showsLogginIndicator() {
+        let sut = LoginViewController()
+        let viewModelSpy = LoginViewModelSpy()
+        sut.viewModel = viewModelSpy
+        
+        let exp = expectation(description: "Waits for initiate login")
+        viewModelSpy.onLogginStateChange = {isLogging in
+            XCTAssertEqual(isLogging, true)
+            exp.fulfill()
+        }
+        
+        sut.simulateUserInitiateLogin()
+        
+        wait(for: [exp], timeout: 1.0)
+        
+    
+    }
+    
     // MARK: - Helpers
     private func makeSUT() -> LoginViewController {
         
@@ -46,13 +64,19 @@ class LoginViewControllerTests: XCTestCase {
 
         var logginCount = 0
         func doLogin(email: String, password: String) {
+            onLogginStateChange?(true)
             logginCount += 1
+            print("Do login")
         }
     }
     
 }
 
-
+private extension LoginViewController {
+    func simulateUserInitiateLogin() {
+        viewModel?.doLogin(email: "email", password: "senha")
+    }
+}
 
 
 
