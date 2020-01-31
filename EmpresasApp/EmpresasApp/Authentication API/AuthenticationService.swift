@@ -9,5 +9,6 @@
 import Foundation
 
 protocol AuthenticationService {
+    
     func authenticate(email: String, password: String, completion: @escaping (Result<Investor,RemoteAuthService.AuthenticationError>) -> Void)
 }

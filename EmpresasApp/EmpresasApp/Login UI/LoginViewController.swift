@@ -9,10 +9,33 @@
 import UIKit
 
 final class LoginViewModel {
+    private let authenticationService: AuthenticationService
+    
+    init (authenticationService: AuthenticationService) {
+        self.authenticationService = authenticationService
+    }
+    
+    var onAuthenticatingInvestor: ((Bool) -> Void)?
+    var onInvestorLogin: ((Investor) -> Void)?
+    
+    func doLogin(email: String, password: String) {
+        authenticationService.authenticate(email: email,password: password) { [weak self] result in
+            switch result {
+            case .success(let investor):
+                print("Do something, \(investor)")
+                self?.onInvestorLogin?(investor)
+            case .failure(let error):
+                print("Inform view that an error has occuried, \(error)")
+            }
+        }
+    }
     
 }
 
 class LoginViewController: UIViewController {
+    
+    // MARK: - Properties
+    //var viewModel: LoginViewModel
     
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -22,11 +45,14 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonAction(_ sender: UIButton) {
     }
     
+//    convenience init() {
+//
+//    viewModel = LoginViewModel(authenticationService: RemoteAuthService(endpointURL: URL(string: "https://empresas.ioasys.com.br")!, client: <#T##HTTPClient#>))
+//    }
+    
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
