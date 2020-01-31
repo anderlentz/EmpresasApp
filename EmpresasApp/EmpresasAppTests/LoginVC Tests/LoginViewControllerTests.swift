@@ -15,7 +15,28 @@ class LoginViewControllerTests: XCTestCase {
         
     }
     
+    // MARK: - Helpers
+    private func makeSUT() -> LoginViewController {
+        
+        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
+        return LoginUIComposer.loginComposedWith(viewModel: LoginViewModelSpy(), authenticationService: remoteAuthService)
+        
+    }
+    
+    
+    // MARK: - LoginViewModelSpy class
+    private class LoginViewModelSpy: LoginViewModelProtocol {
+
+        func doLogin(email: String, password: String) {
+            
+        }
+    }
+    
 }
+
+
+
+
 
 
 

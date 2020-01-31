@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class LoginViewModel {
+public protocol LoginViewModelProtocol {
+    func doLogin(email: String, password: String)
+}
+
+final class LoginViewModel: LoginViewModelProtocol {
     private let authenticationService: AuthenticationService
     
     init (authenticationService: AuthenticationService) {

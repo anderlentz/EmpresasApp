@@ -17,6 +17,7 @@
 		A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */; };
 		A7A3BD2323E456CE0056F352 /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2223E456CE0056F352 /* LoginViewControllerTests.swift */; };
 		A7A3BD2623E46B9E0056F352 /* LoginUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2523E46B9E0056F352 /* LoginUIComposer.swift */; };
+		A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */; };
 		A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A62D9023E3579700690893 /* AuthenticationService.swift */; };
 		A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */; };
 		A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */; };
@@ -54,6 +55,7 @@
 		A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		A7A3BD2223E456CE0056F352 /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 		A7A3BD2523E46B9E0056F352 /* LoginUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUIComposer.swift; sourceTree = "<group>"; };
+		A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
 		A7A62D9023E3579700690893 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A7B19ABB23E1DDC40001FA34 /* EmpresasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmpresasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 			path = Composers;
 			sourceTree = "<group>";
 		};
+		A7A3BD2723E470C70056F352 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A7B19AB223E1DDC40001FA34 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +187,7 @@
 		A7B19AD423E1DDC80001FA34 /* EmpresasAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				A7A3BD2723E470C70056F352 /* Helpers */,
 				A7A3BD2123E456A40056F352 /* LoginVC Tests */,
 				A7B19AF923E1F2DF0001FA34 /* Authentication Tests */,
 				A7B19AD523E1DDC80001FA34 /* EmpresasAppTests.swift */,
@@ -361,6 +372,7 @@
 				A7B19AD623E1DDC80001FA34 /* EmpresasAppTests.swift in Sources */,
 				A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */,
 				A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */,
+				A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
