@@ -16,10 +16,10 @@ class HomeViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
         
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.present(strongSelf.searchController, animated: true, completion: nil)
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let strongSelf = self else { return }
+//            strongSelf.present(strongSelf.searchController, animated: true, completion: nil)
+//        }
     }
     
     override func viewDidLoad() {
@@ -54,10 +54,10 @@ class HomeViewController: UIViewController {
     private func setupSearchController() {
         
         // Set any properties (in this case, don't hide the nav bar and don't show the emoji keyboard option)
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.keyboardType = UIKeyboardType.asciiCapable
+        //searchController.hidesNavigationBarDuringPresentation = false
+        //searchController.searchBar.keyboardType = UIKeyboardType.asciiCapable
         
-        //navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
         
         // Pink color search bar background
