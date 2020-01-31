@@ -28,6 +28,24 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
     
+    func test_postToURL_performsPOSTRequestWithURL() {
+        URLProtocolStub.startInterceptingRequests()
+        
+        let endpointURL = URL(string: "https://auth.test.com")!
+        let exp = expectation(description: "Wait for request")
+        
+        URLProtocolStub.observeRquests { request in
+            XCTAssertEqual(request.url, endpointURL)
+            XCTAssertEqual(request.httpMethod, "POST")
+            exp.fulfill()
+        }
+        
+        URLSessionHTTPClient().post(to: endpointURL) { _ in }
+        
+        wait(for: [exp], timeout: 1.0)
+        URLProtocolStub.stopInterceptingRequests()
+    }
+    
     func test_postUrlRequest_failsOnRequestError() {
         URLProtocolStub.startInterceptingRequests()
         let endpointURL = URL(string: "https://auth.test.com")!
