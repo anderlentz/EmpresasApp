@@ -8,45 +8,6 @@
 
 import UIKit
 
-protocol LoginViewModelProtocol {
-    var onLogginStateChange: ((Bool) -> Void)? { get set }
-    var onInvestorLogin: ((Investor) -> Void)? { get set }
-    var onChange: ((LoginViewModel) -> Void)? { get set }
-    
-    func doLogin(email: String, password: String)
-}
-
-final class LoginViewModel: LoginViewModelProtocol {
-    var onLogginStateChange: ((Bool) -> Void)?
-    var onInvestorLogin: ((Investor) -> Void)?
-    var onChange: ((LoginViewModel) -> Void)?
-    
-    private let authenticationService: AuthenticationService
-    
-    init (authenticationService: AuthenticationService) {
-        self.authenticationService = authenticationService
-    }
-    
-    private(set) var isLogging: Bool = false {
-        didSet {onChange?(self)}
-    }
-    
-    func doLogin(email: String, password: String) {
-        onLogginStateChange?(true)
-        authenticationService.authenticate(email: email,password: password) { [weak self] result in
-            switch result {
-            case .success(let investor):
-                print("Do something, \(investor)")
-                self?.onInvestorLogin?(investor)
-            case .failure(let error):
-                print("Inform view that an error has occuried, \(error)")
-            }
-            self?.onLogginStateChange?(false)
-        }
-    }
-    
-}
-
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
@@ -58,11 +19,21 @@ class LoginViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func loginButtonAction(_ sender: UIButton) {
+        if let email = emailTextField.text, let password = emailTextField.text {
+            viewModel?.doLogin(email: email, password: password)
+        }
     }
     
-    // MARK: - Lifecycle methods
+    // MARK: - Overriden methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.onLogginStateChange = { isLoading in
+            if isLoading {
+                print("isLoading")
+            } else {
+                print("is not loading")
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,6 +43,15 @@ class LoginViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
          self.view.endEditing(true)
+    }
+    
+    // MARKK: - Login method
+    private func login() {
+        
+        if let email = emailTextField.text, let password = emailTextField.text {
+            viewModel?.doLogin(email: email, password: password)
+        }
+        
     }
     
     // MARK: - Helpers

@@ -18,6 +18,7 @@
 		A7A3BD2323E456CE0056F352 /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2223E456CE0056F352 /* LoginViewControllerTests.swift */; };
 		A7A3BD2623E46B9E0056F352 /* LoginUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2523E46B9E0056F352 /* LoginUIComposer.swift */; };
 		A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */; };
+		A7A3BD2B23E486E90056F352 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2A23E486E90056F352 /* LoginViewModel.swift */; };
 		A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A62D9023E3579700690893 /* AuthenticationService.swift */; };
 		A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */; };
 		A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */; };
@@ -56,6 +57,7 @@
 		A7A3BD2223E456CE0056F352 /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 		A7A3BD2523E46B9E0056F352 /* LoginUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUIComposer.swift; sourceTree = "<group>"; };
 		A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
+		A7A3BD2A23E486E90056F352 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A7A62D9023E3579700690893 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A7B19ABB23E1DDC40001FA34 /* EmpresasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmpresasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				A7A3BD2423E46B880056F352 /* Composers */,
 				A79C11FD23E3262F005F55A7 /* LoginViewController.swift */,
+				A7A3BD2A23E486E90056F352 /* LoginViewModel.swift */,
 			);
 			path = "Login UI";
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */,
 				A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */,
 				A7A3BD2623E46B9E0056F352 /* LoginUIComposer.swift in Sources */,
+				A7A3BD2B23E486E90056F352 /* LoginViewModel.swift in Sources */,
 				A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */,
 				A753F30623E3736300266A3B /* HomeViewController.swift in Sources */,
 				A7A3BD1723E3AB240056F352 /* EnterpriseTableViewCell.swift in Sources */,
