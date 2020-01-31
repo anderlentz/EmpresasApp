@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     // MARK: - Helpers
@@ -112,7 +113,6 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected ")
         performSegue(withIdentifier: "showEnterpriseSegue", sender: nil)
     }
     
