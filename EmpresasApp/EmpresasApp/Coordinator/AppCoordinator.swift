@@ -15,21 +15,30 @@ class AppCoordinator: Coordinator {
     
     init(uiViewController: UIViewController? = nil, navigationController: UINavigationController? = nil) {
         self.uiViewController = uiViewController
+        self.navigationController = navigationController
     }
     
     func start() {
         
-        // Probably we dont instantiate here when we have a composer available
-        let bundle = Bundle(for: LoginViewController.self)
-        let storyboard = UIStoryboard(name: "Main",bundle: bundle)
-        let loginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
+        let viewModel = LoginViewModel(authenticationService: RemoteAuthService(endpointURL: URL(string: "https://empresas.ioasys.com.br/api")!, client: URLSessionHTTPClient()))
         
+        let loginViewController = LoginUIComposer.loginComposedWith(viewModel: viewModel)
+        
+        loginViewController.navigationCoordinator = self
         loginViewController.modalPresentationStyle = .fullScreen
-        uiViewController?.show(loginViewController, sender: nil)
         
-        
-        
+        navigationController?.show(loginViewController, sender: nil)
+  
     }
-    func performTransition(transition: Transition) {}
+    func performTransition(transition: Transition) {
+        switch transition {
+        case .showHomeView:
+            let homeCoordinator = HomeCoordinator(navigationController: navigationController)
+            homeCoordinator.start()
+               
+        case .showEnterpriseDetails(_):
+            break
+        }
+    }
     
 }

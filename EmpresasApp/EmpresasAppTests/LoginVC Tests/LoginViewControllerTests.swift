@@ -15,7 +15,7 @@ class LoginViewControllerTests: XCTestCase {
         let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
         let viewModel = LoginViewModel(authenticationService: remoteAuthService)
         
-        _ = LoginUIComposer.loginComposedWith(viewModel: viewModel, authenticationService: remoteAuthService)
+        _ = LoginUIComposer.loginComposedWith(viewModel: viewModel)
         
         XCTAssertEqual(viewModel.isLogging, false)
     }

@@ -7,24 +7,7 @@
 //
 
 import XCTest
-
-class URLSessionHTTPClient {
-    private let session: URLSession
-    
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    
-    func post(to url: URL, completion: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void) {
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        session.dataTask(with: urlRequest) { (_, _, error) in
-            if let error = error {
-                completion(.failure(error))
-            }
-        }.resume()
-    }
-}
+@testable import EmpresasApp
 
 class URLSessionHTTPClientTests: XCTestCase {
     

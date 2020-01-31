@@ -16,14 +16,11 @@ class HomeCoordinator {
     }
         
     func start() {
+        let viewController = HomeUIComposer.loginComposedWith(viewModel: HomeViewModel())
         
-        // Probably we dont instantiate here when we have a composer available
-//        let bundle = Bundle(for: LoginViewController.self)
-//        let storyboard = UIStoryboard(name: "Main",bundle: bundle)
-//        let loginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
-//        
-//        navigationController?.pushViewController(loginViewController, animated: true)
-        
+        navigationController?.viewControllers.remove(at: 0)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.viewControllers.insert(viewController, at: 0)
     }
     
 }

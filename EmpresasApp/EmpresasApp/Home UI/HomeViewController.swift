@@ -19,11 +19,14 @@ class HomeViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
         
+        
 //        DispatchQueue.main.async { [weak self] in
 //            guard let strongSelf = self else { return }
 //            strongSelf.present(strongSelf.searchController, animated: true, completion: nil)
 //        }
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

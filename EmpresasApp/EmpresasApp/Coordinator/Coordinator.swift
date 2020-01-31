@@ -13,6 +13,7 @@ import UIKit
 
 enum Transition {
     case showEnterpriseDetails(Enterprise)
+    case showHomeView
 }
 
 protocol Coordinator: class {
