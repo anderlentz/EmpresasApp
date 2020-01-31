@@ -28,8 +28,17 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
     
-    func test_postToURL_performsPOSTRequestWithURL() {
+    override func setUp() {
+        super.setUp()
         URLProtocolStub.startInterceptingRequests()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        URLProtocolStub.stopInterceptingRequests()
+    }
+    
+    func test_postToURL_performsPOSTRequestWithURL() {
         
         let endpointURL = URL(string: "https://auth.test.com")!
         let exp = expectation(description: "Wait for request")
@@ -43,11 +52,9 @@ class URLSessionHTTPClientTests: XCTestCase {
         URLSessionHTTPClient().post(to: endpointURL) { _ in }
         
         wait(for: [exp], timeout: 1.0)
-        URLProtocolStub.stopInterceptingRequests()
     }
     
     func test_postUrlRequest_failsOnRequestError() {
-        URLProtocolStub.startInterceptingRequests()
         let endpointURL = URL(string: "https://auth.test.com")!
         let error = NSError(domain: "ANY ERROR", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
@@ -67,11 +74,9 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
-        URLProtocolStub.stopInterceptingRequests()
     }
     
     // MARK: - URLProtocolStub class
-    
     private class URLProtocolStub: URLProtocol {
         private static var stub: Stub?
         private static var requestObserver: ( (URLRequest) -> Void)?
