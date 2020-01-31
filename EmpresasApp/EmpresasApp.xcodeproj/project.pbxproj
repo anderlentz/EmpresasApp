@@ -19,6 +19,9 @@
 		A7A3BD2623E46B9E0056F352 /* LoginUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2523E46B9E0056F352 /* LoginUIComposer.swift */; };
 		A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */; };
 		A7A3BD2B23E486E90056F352 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2A23E486E90056F352 /* LoginViewModel.swift */; };
+		A7A3BD2E23E4AD6B0056F352 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD2D23E4AD6B0056F352 /* AppCoordinator.swift */; };
+		A7A3BD3123E4ADBD0056F352 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD3023E4ADBD0056F352 /* Coordinator.swift */; };
+		A7A3BD3323E4B16F0056F352 /* HomeCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD3223E4B16F0056F352 /* HomeCoodinator.swift */; };
 		A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A62D9023E3579700690893 /* AuthenticationService.swift */; };
 		A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */; };
 		A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */; };
@@ -58,6 +61,9 @@
 		A7A3BD2523E46B9E0056F352 /* LoginUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUIComposer.swift; sourceTree = "<group>"; };
 		A7A3BD2823E470DB0056F352 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
 		A7A3BD2A23E486E90056F352 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A7A3BD2D23E4AD6B0056F352 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		A7A3BD3023E4ADBD0056F352 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		A7A3BD3223E4B16F0056F352 /* HomeCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoodinator.swift; sourceTree = "<group>"; };
 		A7A62D9023E3579700690893 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A7B19ABB23E1DDC40001FA34 /* EmpresasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmpresasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +156,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		A7A3BD2C23E4ACAE0056F352 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				A7A3BD2D23E4AD6B0056F352 /* AppCoordinator.swift */,
+				A7A3BD3023E4ADBD0056F352 /* Coordinator.swift */,
+				A7A3BD3223E4B16F0056F352 /* HomeCoodinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		A7B19AB223E1DDC40001FA34 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +188,7 @@
 		A7B19ABD23E1DDC40001FA34 /* EmpresasApp */ = {
 			isa = PBXGroup;
 			children = (
+				A7A3BD2C23E4ACAE0056F352 /* Coordinator */,
 				A79C11FC23E325AB005F55A7 /* Login UI */,
 				A753F30223E372DC00266A3B /* Home UI */,
 				A7A3BD1823E3AE280056F352 /* Enterprise UI */,
@@ -352,13 +369,16 @@
 			files = (
 				A753F30123E35E7700266A3B /* InvestorMapper.swift in Sources */,
 				A7A3BD1C23E3AE800056F352 /* EnterpriseViewController.swift in Sources */,
+				A7A3BD3323E4B16F0056F352 /* HomeCoodinator.swift in Sources */,
 				A79C11FE23E3262F005F55A7 /* LoginViewController.swift in Sources */,
 				A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */,
+				A7A3BD2E23E4AD6B0056F352 /* AppCoordinator.swift in Sources */,
 				A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */,
 				A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */,
 				A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */,
 				A7A3BD2623E46B9E0056F352 /* LoginUIComposer.swift in Sources */,
 				A7A3BD2B23E486E90056F352 /* LoginViewModel.swift in Sources */,
+				A7A3BD3123E4ADBD0056F352 /* Coordinator.swift in Sources */,
 				A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */,
 				A753F30623E3736300266A3B /* HomeViewController.swift in Sources */,
 				A7A3BD1723E3AB240056F352 /* EnterpriseTableViewCell.swift in Sources */,
