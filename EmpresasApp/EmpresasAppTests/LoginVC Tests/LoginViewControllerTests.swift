@@ -17,7 +17,7 @@ class LoginViewControllerTests: XCTestCase {
         
         _ = LoginUIComposer.loginComposedWith(viewModel: viewModel, authenticationService: remoteAuthService)
         
-        //XCTAssertEqual(viewModel.logginCount, 0)
+        XCTAssertEqual(viewModel.isLogging, false)
     }
     
     func test_viewDidLoad_doesNotAttemptToLogin() {
