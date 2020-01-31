@@ -119,7 +119,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ZiW-Mz-EKA" id="lr5-u8-fhu"/>
-                        <segue destination="8ID-bc-nt1" kind="push" identifier="showEnterpriseSegue" id="7Y6-N2-JPr"/>
+                        <segue destination="8ID-bc-nt1" kind="show" identifier="showEnterpriseSegue" id="7Y6-N2-JPr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hja-Qm-5IL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
