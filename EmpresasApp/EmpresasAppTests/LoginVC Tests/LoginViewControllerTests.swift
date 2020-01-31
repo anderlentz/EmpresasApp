@@ -13,30 +13,32 @@ class LoginViewControllerTests: XCTestCase {
     
     func test_init_doesNotAtemptToLogin() {
         let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
-        let viewModel = LoginViewModelSpy()
+        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
         
         _ = LoginUIComposer.loginComposedWith(viewModel: viewModel, authenticationService: remoteAuthService)
         
-        XCTAssertEqual(viewModel.logginCount, 0)
+        //XCTAssertEqual(viewModel.logginCount, 0)
     }
     
     func test_viewDidLoad_doesNotAttemptToLogin() {
         let sut = LoginViewController()
-        let viewModelSpy = LoginViewModelSpy()
-        sut.viewModel = viewModelSpy
+        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
+        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
+        sut.viewModel = viewModel
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(viewModelSpy.logginCount, 0)
+        //XCTAssertEqual(viewModelSpy.logginCount, 0)
     }
     
     func test_userInitiateLogin_showsLogginIndicator() {
         let sut = LoginViewController()
-        let viewModelSpy = LoginViewModelSpy()
-        sut.viewModel = viewModelSpy
+        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
+        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
+        sut.viewModel = viewModel
         
         let exp = expectation(description: "Waits for initiate login")
-        viewModelSpy.onLogginStateChange = {isLogging in
+        viewModel.onLogginStateChange = {isLogging in
             XCTAssertEqual(isLogging, true)
             exp.fulfill()
         }
@@ -45,29 +47,52 @@ class LoginViewControllerTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
         
+    }
     
+    func test_userInitiateLogin_startsToLoggingAndStopLoggingAffterHTTPClientError() {
+        let sut = LoginViewController()
+        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpyWithError())
+        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
+        sut.viewModel = viewModel
+        var receivedLoginStatus: [Bool] = [Bool]()
+        
+        let exp = expectation(description: "Waits for initiate login and terminate on an http client error")
+        exp.expectedFulfillmentCount = 2
+        viewModel.onLogginStateChange = {isLogging in
+            print("isLogging: \(isLogging)")
+            receivedLoginStatus.append(isLogging)
+            exp.fulfill()
+        }
+        
+        sut.simulateUserInitiateLogin()
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(receivedLoginStatus, [true,false])
     }
     
     // MARK: - Helpers
-    private func makeSUT() -> LoginViewController {
-        
-        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
-        return LoginUIComposer.loginComposedWith(viewModel: LoginViewModelSpy(), authenticationService: remoteAuthService)
-        
-    }
+//    private func makeSUT() -> LoginViewController {
+//
+//        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
+//        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
+//        return LoginUIComposer.loginComposedWith(viewModel: viewModel, authenticationService: remoteAuthService)
+//
+//    }
     
-    // MARK: - LoginViewModelSpy class
-    private class LoginViewModelSpy: LoginViewModelProtocol {
-        var onLogginStateChange: ((Bool) -> Void)?
-        var onInvestorLogin: ((Investor) -> Void)?
-        var onChange: ((LoginViewModel) -> Void)?
-
-        var logginCount = 0
-        func doLogin(email: String, password: String) {
-            onLogginStateChange?(true)
-            logginCount += 1
-            print("Do login")
+    class HTTPClientSpyWithError: HTTPClient {
+        
+        var message: ((Result<(Data,HTTPURLResponse), Error>) -> Void) = { _ in}
+        
+        func post(to url: URL,
+                  completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void){
+            let errorResult: Result<(Data,HTTPURLResponse), Error> = .failure(NSError(domain:"Test",code:0))
+            completion(errorResult)
         }
+        
+//        func complete(whith error: Error) {
+//            let result: Result<(Data,HTTPURLResponse), Error> = .failure(error)
+//            message(result)
+//        }
     }
     
 }
@@ -77,6 +102,7 @@ private extension LoginViewController {
         viewModel?.doLogin(email: "email", password: "senha")
     }
 }
+
 
 
 
