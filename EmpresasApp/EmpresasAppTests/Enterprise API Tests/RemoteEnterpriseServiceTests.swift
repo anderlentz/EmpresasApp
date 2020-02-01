@@ -19,12 +19,15 @@ protocol EnterpriseHTTPClient {
 
 class RemoteEnterpriseService: EnterpriseService {
     
-    var requestURL: URLRequest
+    let authState: AuthState
     let client: EnterpriseHTTPClient
+    var requestURL: URLRequest
     
-    init(endpointURL: URL,client: EnterpriseHTTPClient) {
+    
+    init(endpointURL: URL,client: EnterpriseHTTPClient, authState: AuthState) {
         self.requestURL = URLRequest(url: endpointURL)
         self.client = client
+        self.authState = authState
     }
     
     func getAllEnterprises() {
@@ -33,9 +36,18 @@ class RemoteEnterpriseService: EnterpriseService {
     }
     
     private func makeHeader() -> [String: String] {
-        return ["access-token":"",
-                "client": "",
-                "uid":""]
+        
+        if let accessToken = authState.accessToken,
+            let client = authState.client,
+            let uid = authState.uid {
+            return ["access-token": accessToken,
+                    "client": client,
+                    "uid": uid]
+        } else {
+            return ["access-token":"",
+                    "client": "",
+                    "uid":""]
+        }
     }
 }
 
@@ -79,18 +91,32 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         
     }
     
+    func test_getAllEnterprises_requestWithAuthStateValuesAtAuthenticationKeysIntoHTTPRequestHeader() {
+        let authenticateState = makeAuthState()
+        let (sut,client) = makeSUT(endpointURL: makeEndpointURL(), authState: authenticateState)
+        
+        sut.getAllEnterprises()
+        
+        XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "access-token"), authenticateState.accessToken)
+    }
     
     
     // MARK: - Helpers
     
-    private func makeSUT(endpointURL: URL) -> (sut: RemoteEnterpriseService, client: EnterpriseHTTPClientSpy) {
+    private func makeSUT(endpointURL: URL, authState: AuthState = AuthState(accessToken: nil, client: nil, uid: nil))
+        -> (sut: RemoteEnterpriseService, client: EnterpriseHTTPClientSpy) {
+            
         let client = EnterpriseHTTPClientSpy()
-        let sut = RemoteEnterpriseService(endpointURL: endpointURL,client: client)
+        let sut = RemoteEnterpriseService(endpointURL: endpointURL,client: client, authState: authState)
         return (sut,client)
     }
     
     private func makeEndpointURL() -> URL {
         return URL(string: "https://any-url.com")!
+    }
+    
+    private func makeAuthState() -> AuthState {
+        return AuthState(accessToken: "access_token_test", client: "client_test", uid: "uid")
     }
     private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
         var urlRequest: URLRequest?
