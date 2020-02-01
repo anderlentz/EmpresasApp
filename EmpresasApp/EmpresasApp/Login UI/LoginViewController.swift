@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
    
     // MARK: - IBActions
     @IBAction func loginButtonAction(_ sender: UIButton) {
-        if let email = emailTextField.text, let password = emailTextField.text {
+        if let email = emailTextField.text, let password = passwordTextField.text {
             viewModel?.doLogin(email: email, password: password)
         }
     }
