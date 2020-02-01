@@ -15,7 +15,7 @@ class RemoteAuthServiceTests: XCTestCase {
     func test_init_doesNotRequestAuthenticationDataFromEndpoint() {
         let (_,client) = makeSUT()
         
-        XCTAssertNil(client.endpointURL)
+        XCTAssertNil(client.postRequest)
     }
     
     func test_authenticate_requestDataFromEndpointURL() {
@@ -26,7 +26,7 @@ class RemoteAuthServiceTests: XCTestCase {
 
         sut.authenticate(email: email, password: password){ _ in }
 
-        XCTAssertEqual(client.endpointURL,endpointURL)
+        XCTAssertEqual(client.postRequest?.url,endpointURL)
     }
     
     func test_authenticate_resquestwithEmailPasswordIntoBody() {

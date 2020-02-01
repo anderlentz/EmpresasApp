@@ -83,7 +83,7 @@ class LoginViewControllerTests: XCTestCase {
         
         var message: ((Result<(Data,HTTPURLResponse), Error>) -> Void) = { _ in}
         
-        func post(to url: URL,
+        func post(to postRequest: URLRequest,
                   completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void){
             let errorResult: Result<(Data,HTTPURLResponse), Error> = .failure(NSError(domain:"Test",code:0))
             completion(errorResult)

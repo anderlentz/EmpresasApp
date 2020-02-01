@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol HTTPClient {
-    func post(to url: URL,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
+    func post(to postRequest: URLRequest,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
 }
 
 public class RemoteAuthService: AuthenticationService {
@@ -41,7 +41,10 @@ public class RemoteAuthService: AuthenticationService {
         
         self.setupHeaders(email: email, password: password)
         
-        client.post(to: endpointURL) { result in
+        var urlRequest = URLRequest(url: endpointURL)
+        urlRequest.httpMethod = "POST"
+        
+        client.post(to: urlRequest) { result in
             
             switch result {
             case .success(let (data,response)):

@@ -23,16 +23,15 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     func test_postToURL_performsPOSTRequestWithURL() {
         
-        let endpointURL = anyURL()
         let exp = expectation(description: "Wait for request")
         
-        URLProtocolStub.observeRquests { request in
-            XCTAssertEqual(request.url, endpointURL)
+        URLProtocolStub.observeRquests { [weak self] request in
+            XCTAssertEqual(request.url, self?.anyEndpointURL())
             XCTAssertEqual(request.httpMethod, "POST")
             exp.fulfill()
         }
         
-        makeSUT().post(to: endpointURL) { _ in }
+        makeSUT().post(to: makePostURLRequest()) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }
@@ -43,7 +42,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         let exp = expectation(description: "Wait for completion")
         
-        makeSUT().post(to: anyURL()) { result in
+        makeSUT().post(to: makePostURLRequest()) { result in
             switch result {
             case let .failure(receivedError as NSError):
                 XCTAssertEqual(receivedError, error)
@@ -61,7 +60,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         let exp = expectation(description: "Wait for completion")
         
-        makeSUT().post(to: anyURL()) { result in
+        makeSUT().post(to: makePostURLRequest()) { result in
             switch result {
             case .failure:
                break
@@ -78,10 +77,15 @@ class URLSessionHTTPClientTests: XCTestCase {
         return URLSessionHTTPClient()
     }
     
-    private func anyURL() -> URL {
+    private func anyEndpointURL() -> URL {
         return URL(string: "http://any-url.com")!
     }
     
+    private func makePostURLRequest() -> URLRequest {
+        var urlRequest = URLRequest(url: anyEndpointURL())
+        urlRequest.httpMethod = "POST"
+        return urlRequest
+    }
     // MARK: - URLProtocolStub class
     private class URLProtocolStub: URLProtocol {
         private static var stub: Stub?
