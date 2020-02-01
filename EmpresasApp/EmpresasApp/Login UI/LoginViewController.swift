@@ -45,6 +45,13 @@ class LoginViewController: UIViewController {
                 }
             }
         }
+        
+        viewModel?.onInvestorLogin = { [weak self] loggedInvestor in
+            print("Logged investor = \(loggedInvestor)")
+            DispatchQueue.main.async {
+                self?.navigationCoordinator?.performTransition(transition: .showHomeView)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
