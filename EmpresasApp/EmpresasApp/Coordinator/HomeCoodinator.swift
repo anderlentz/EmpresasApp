@@ -16,7 +16,14 @@ class HomeCoordinator {
     }
         
     func start() {
-        let viewController = HomeUIComposer.loginComposedWith(viewModel: HomeViewModel())
+        let endpointURL = URL(string: "https://empresas.ioasys.com.br/api/v1/enterprises?enterprises")!
+        
+        let authState = AuthState(accessToken: "", client: "", uid: "")
+        
+        let viewModel = HomeViewModel(enterpriseService: RemoteEnterpriseService(endpointURL: endpointURL,
+                                                                                 client: URLSessionEnterpriseHTTPCLient(),
+                                                                                 authState: authState))
+        let viewController = HomeUIComposer.loginComposedWith(viewModel: viewModel)
         
         navigationController?.viewControllers.remove(at: 0)
         navigationController?.setNavigationBarHidden(false, animated: false)

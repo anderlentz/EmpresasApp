@@ -15,6 +15,8 @@ public final class HomeUIComposer {
         let storyboard = UIStoryboard(name: "Home",bundle: bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         
+        viewController.viewModel = viewModel
+        
         return viewController
     }
 }

@@ -9,5 +9,9 @@
 import Foundation
 
 final class HomeViewModel {
+    let enterpriseService: EnterpriseService
     
+    init(enterpriseService: EnterpriseService) {
+        self.enterpriseService = enterpriseService
+    }
 }

@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     let searchController = UISearchController(searchResultsController: nil)
+    var viewModel: HomeViewModel?
     
     // MARK: - IBOutles
     @IBOutlet weak var tableView: UITableView!
