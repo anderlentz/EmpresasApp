@@ -19,7 +19,7 @@ protocol EnterpriseHTTPClient {
 
 class RemoteEnterpriseService: EnterpriseService {
     
-    let requestURL: URLRequest
+    var requestURL: URLRequest
     let client: EnterpriseHTTPClient
     
     init(endpointURL: URL,client: EnterpriseHTTPClient) {
@@ -28,7 +28,14 @@ class RemoteEnterpriseService: EnterpriseService {
     }
     
     func getAllEnterprises() {
+        requestURL.allHTTPHeaderFields = makeHeader()
         client.get(from: requestURL) { _ in}
+    }
+    
+    private func makeHeader() -> [String: String] {
+        return ["access-token":"",
+                "client": "",
+                "uid":""]
     }
 }
 
@@ -55,6 +62,24 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         XCTAssertEqual(client.urlRequest?.httpMethod, "GET")
     }
     
+    func test_getAllEnterprises_requestWithAllRequideAuthenticationKeysIntoHTTPResquestHeader() {
+        
+        var requestURL = URLRequest(url: makeEndpointURL())
+        requestURL.httpMethod = "GET"
+        requestURL.allHTTPHeaderFields = ["access-token":"",
+                                          "client":"",
+                                          "uid":""]
+        let (sut,client) = makeSUT(endpointURL: makeEndpointURL())
+       
+        sut.getAllEnterprises()
+                
+        XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "access-token"),"Must have an access-token property at header")
+        XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "client"),"Must have a client property at header")
+        XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "uid"),"Must have an uid property at header")
+        
+    }
+    
+    
     
     // MARK: - Helpers
     
@@ -73,5 +98,16 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         func get(from urlRequest: URLRequest,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void) {
             self.urlRequest = urlRequest
         }
+    }
+    
+    private func makeGetEnterprisesURLRequest() -> URLRequest {
+        
+        var urlRequest = URLRequest(url: makeEndpointURL())
+        let headers = ["access-token":"",
+        "client":"",
+        "uid":""]
+        urlRequest.httpMethod = "GET"
+        urlRequest.allHTTPHeaderFields = headers
+        return urlRequest
     }
 }
