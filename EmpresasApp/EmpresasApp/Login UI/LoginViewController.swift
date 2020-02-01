@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginIndicatorView: UIView!
     
    
     // MARK: - IBActions
@@ -27,18 +28,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
-        navigationCoordinator?.performTransition(transition: .showHomeView)
+        //navigationCoordinator?.performTransition(transition: .showHomeView)
        }
     
     // MARK: - Overriden methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.onLogginStateChange = { isLoading in
-//            if isLoading {
-//                print("isLoading")
-//            } else {
-//                print("is not loading")
-//            }
+        loginIndicatorView.isHidden = true
+        
+        viewModel?.onLogginStateChange = {[weak self] isLoading in
+            if isLoading {
+                self?.loginIndicatorView.isHidden = false
+            } else {
+                self?.loginIndicatorView.isHidden = true
+            }
         }
     }
     
