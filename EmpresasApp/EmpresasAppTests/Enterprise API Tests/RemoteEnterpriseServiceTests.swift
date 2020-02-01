@@ -10,7 +10,7 @@ import XCTest
 @testable import EmpresasApp
 
 protocol EnterpriseService {
-    func getAllEnterprises()
+    func getAllEnterprises(completion: @escaping (Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>) -> Void)
 }
 
 protocol EnterpriseHTTPClient {
@@ -18,11 +18,19 @@ protocol EnterpriseHTTPClient {
 }
 
 class RemoteEnterpriseService: EnterpriseService {
-    
+   
     let authState: AuthState
     let client: EnterpriseHTTPClient
     var requestURL: URLRequest
     
+    public enum EnterpriseServiceError: Swift.Error {
+        case connectivity
+        case unauthorized
+        case badRequest
+        case forbidden
+        case invalidData
+        case generic
+    }
     
     init(endpointURL: URL,client: EnterpriseHTTPClient, authState: AuthState) {
         self.requestURL = URLRequest(url: endpointURL)
@@ -30,11 +38,19 @@ class RemoteEnterpriseService: EnterpriseService {
         self.authState = authState
     }
     
-    func getAllEnterprises() {
+    func getAllEnterprises(completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
         requestURL.allHTTPHeaderFields = makeHeader()
-        client.get(from: requestURL) { _ in}
+        client.get(from: requestURL) { result in
+            switch result {
+            case .failure:
+                completion(.failure(.connectivity))
+            case .success:
+                completion(.failure(.generic))
+            }
+        }
     }
     
+    // MARK: - Helpers
     private func makeHeader() -> [String: String] {
         
         if let accessToken = authState.accessToken,
@@ -68,7 +84,7 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         requestURL.httpMethod = "GET"
         let (sut,client) = makeSUT(endpointURL: makeEndpointURL())
         
-        sut.getAllEnterprises()
+        sut.getAllEnterprises(){ _ in }
         
         XCTAssertEqual(client.urlRequest?.url, makeEndpointURL())
         XCTAssertEqual(client.urlRequest?.httpMethod, "GET")
@@ -83,7 +99,7 @@ class RemoteEnterpriseServiceTests: XCTestCase {
                                           "uid":""]
         let (sut,client) = makeSUT(endpointURL: makeEndpointURL())
        
-        sut.getAllEnterprises()
+        sut.getAllEnterprises(){ _ in }
                 
         XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "access-token"),"Must have an access-token property at header")
         XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "client"),"Must have a client property at header")
@@ -95,13 +111,26 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         let authenticateState = makeAuthState()
         let (sut,client) = makeSUT(endpointURL: makeEndpointURL(), authState: authenticateState)
         
-        sut.getAllEnterprises()
+        sut.getAllEnterprises(){ _ in }
         
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "access-token"), authenticateState.accessToken)
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "client"), authenticateState.client)
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "uid"), authenticateState.uid)
     }
     
+    func test_getAllEnterprises_deliversErrorOnConnectivityError() {
+        let (sut, client) = makeSUT(endpointURL: makeEndpointURL())
+        var capturedResult: Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>?
+        
+        sut.getAllEnterprises() { result in
+            capturedResult = result
+        }
+        
+        let clientError = NSError(domain: "test", code: 0)
+        client.complete(whith: clientError)
+        
+        XCTAssertEqual(capturedResult, .failure(.connectivity))
+    }
     
     // MARK: - Helpers
     
@@ -120,13 +149,6 @@ class RemoteEnterpriseServiceTests: XCTestCase {
     private func makeAuthState() -> AuthState {
         return AuthState(accessToken: "access_token_test", client: "client_test", uid: "uid")
     }
-    private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
-        var urlRequest: URLRequest?
-        
-        func get(from urlRequest: URLRequest,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void) {
-            self.urlRequest = urlRequest
-        }
-    }
     
     private func makeGetEnterprisesURLRequest() -> URLRequest {
         
@@ -137,5 +159,20 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         urlRequest.httpMethod = "GET"
         urlRequest.allHTTPHeaderFields = headers
         return urlRequest
+    }
+}
+
+private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
+    var message: ((Result<(Data,HTTPURLResponse), Error>) -> Void) = { _ in}
+    var urlRequest: URLRequest?
+    
+    func get(from urlRequest: URLRequest,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void) {
+        self.urlRequest = urlRequest
+        self.message = completion
+    }
+    
+    func complete(whith error: Error) {
+        let result: Result<(Data,HTTPURLResponse), Error> = .failure(error)
+        message(result)
     }
 }
