@@ -12,6 +12,12 @@ public protocol HTTPClient {
     func post(to postRequest: URLRequest,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
 }
 
+public struct AuthState {
+    let accessToken: String?
+    let client: String?
+    let uid: String?
+}
+
 public class RemoteAuthService: AuthenticationService {
 
     private let endpointURL: URL
@@ -53,7 +59,8 @@ public class RemoteAuthService: AuthenticationService {
                 case 403:
                    completion(.failure(.forbidden))
                 case 200:
-
+                    print(response.allHeaderFields)
+                    
                     do {
                         let investor = try InvestorMapper.map(data)
                         completion(.success(investor))
@@ -70,6 +77,14 @@ public class RemoteAuthService: AuthenticationService {
         }
     }
     
+    func extractAuthState(from httpURLResponse: HTTPURLResponse) -> AuthState {
+        
+        let accessToken = httpURLResponse.value(forHTTPHeaderField: "access-token")
+        let client = httpURLResponse.value(forHTTPHeaderField: "client")
+        let uid = httpURLResponse.value(forHTTPHeaderField: "uid")
+        
+        return AuthState(accessToken: accessToken, client: client, uid: uid)
+    }
     
     private func setupHeaders(email: String, password: String) {
         self.body["email"] = email

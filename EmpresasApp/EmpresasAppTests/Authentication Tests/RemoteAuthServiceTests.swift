@@ -130,6 +130,39 @@ class RemoteAuthServiceTests: XCTestCase {
         
     }
     
+    func test_authorizationState_deliversAuthStateWithAccessTokenClientAndUIDAfterSuccessAuthorizationURLResponse() {
+        let (sut,_) = makeSUT()
+        let accessToken = "fqnQtzqRNfDlDdo05IWfpQ"
+        let client = "9RMMRW0AGQlY2LSlMom5IQ"
+        let uid = "testeapple@ioasys.com.br"
+        let url = URL(string: "https://any-url.com")!
+        let successHeader = ["x-content-type-options": "nosniff",
+                             "access-token": "fqnQtzqRNfDlDdo05IWfpQ",
+                             "Vary": "Accept-Encoding",
+                             "Etag": "W/\"ec6476a676156a668bdfbe403e4af5dd\"",
+                             "client": "9RMMRW0AGQlY2LSlMom5IQ",
+                             "expiry": "1581782592",
+                             "Content-Type": "application/json; charset=utf-8",
+                             "Content-Encoding": "gzip",
+                             "Server": "nginx/1.13.12",
+                             "token-type": "Bearer",
+                             "Date": "Sat, 01 Feb 2020 16:03:13 GMT",
+                             "uid": "testeapple@ioasys.com.br",
+                             "x-frame-options": "SAMEORIGIN",
+                             "x-request-id": "4b884ec56d6b0d07af418874d41effa0",
+                             "x-xss-protection": "1; mode=block",
+                             "x-runtime": "0.521951",
+                             "Cache-Control": "max-age=0, private, must-revalidate"]
+        let successHTTPURLResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: successHeader)!
+                
+        
+        let authState = sut.extractAuthState(from: successHTTPURLResponse)
+        
+        XCTAssertEqual(authState.accessToken, accessToken)
+        XCTAssertEqual(authState.client, client)
+        XCTAssertEqual(authState.uid, uid)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(endpointURL: URL = URL(string: "https://test-authentication.com")! ) -> (sut: RemoteAuthService, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
@@ -168,7 +201,6 @@ class RemoteAuthServiceTests: XCTestCase {
         }
         return Data()
     }
-    
     
 }
 
