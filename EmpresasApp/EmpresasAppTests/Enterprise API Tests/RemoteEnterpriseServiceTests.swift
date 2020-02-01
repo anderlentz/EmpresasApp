@@ -14,7 +14,7 @@ protocol EnterpriseService {
 }
 
 protocol EnterpriseHTTPClient {
-    
+    func get(from urlRequest: URLRequest, completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void)
 }
 
 class RemoteEnterpriseService: EnterpriseService {
@@ -28,30 +28,50 @@ class RemoteEnterpriseService: EnterpriseService {
     }
     
     func getAllEnterprises() {
-        
+        client.get(from: requestURL) { _ in}
     }
 }
 
 class RemoteEnterpriseServiceTests: XCTestCase {
 
     func test_init_constructsGetRequestToEndpointURL() {
-        let endpointURL = URL(string: "https://any-url.com")!
+        let endpointURL = makeEndpointURL()
         
-        let (sut,_) = makeSUT()
+        let (sut,_) = makeSUT(endpointURL: endpointURL)
         
         XCTAssertEqual(sut.requestURL.url, endpointURL)
         XCTAssertEqual(sut.requestURL.httpMethod, "GET")
     }
     
+    func test_getAllEnterprise_performGETrequestToEndpointURL() {
+        
+        var requestURL = URLRequest(url: makeEndpointURL())
+        requestURL.httpMethod = "GET"
+        let (sut,client) = makeSUT(endpointURL: makeEndpointURL())
+        
+        sut.getAllEnterprises()
+        
+        XCTAssertEqual(client.urlRequest?.url, makeEndpointURL())
+        XCTAssertEqual(client.urlRequest?.httpMethod, "GET")
+    }
+    
+    
     // MARK: - Helpers
     
-    private func makeSUT(endpointURL: URL = URL(string: "https://any-url.com")!) -> (sut: RemoteEnterpriseService, client: EnterpriseHTTPClient) {
+    private func makeSUT(endpointURL: URL) -> (sut: RemoteEnterpriseService, client: EnterpriseHTTPClientSpy) {
         let client = EnterpriseHTTPClientSpy()
         let sut = RemoteEnterpriseService(endpointURL: endpointURL,client: client)
         return (sut,client)
     }
     
+    private func makeEndpointURL() -> URL {
+        return URL(string: "https://any-url.com")!
+    }
     private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
-       
+        var urlRequest: URLRequest?
+        
+        func get(from urlRequest: URLRequest,completion: @escaping (Result<(Data,HTTPURLResponse),Error>) -> Void) {
+            self.urlRequest = urlRequest
+        }
     }
 }
