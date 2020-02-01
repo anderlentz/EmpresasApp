@@ -44,8 +44,13 @@ class RemoteEnterpriseService: EnterpriseService {
             switch result {
             case .failure:
                 completion(.failure(.connectivity))
-            case .success:
-                completion(.failure(.generic))
+            case .success(let (_,response)):
+                switch response.statusCode {
+                case 401:
+                    completion(.failure(.unauthorized))
+                default:
+                    completion(.failure(.generic))
+                }
             }
         }
     }
@@ -132,6 +137,20 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         XCTAssertEqual(capturedResult, .failure(.connectivity))
     }
     
+    func test_authentication_deliversUnauthorizedErrorOn401HttpResponse() {
+        let (sut, client) = makeSUT(endpointURL: makeEndpointURL())
+        var capturedResult: Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>?
+        
+        sut.getAllEnterprises() { result in
+            capturedResult = result
+        }
+        
+        client.complete(withStatusCode: 401)
+        
+        XCTAssertEqual(capturedResult, .failure(.unauthorized))
+        
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(endpointURL: URL, authState: AuthState = AuthState(accessToken: nil, client: nil, uid: nil))
@@ -172,7 +191,16 @@ private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
     }
     
     func complete(whith error: Error) {
-        let result: Result<(Data,HTTPURLResponse), Error> = .failure(error)
-        message(result)
+        message(.failure(error))
+    }
+    
+    func complete(withStatusCode: Int) {
+        let anyURL = URL(string:"https://any-url.com")!
+        let response = HTTPURLResponse(url: anyURL,
+        statusCode: withStatusCode,
+        httpVersion: nil,
+        headerFields: nil)!
+        
+        message(.success((Data(), response)))
     }
 }
