@@ -168,7 +168,7 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         client.complete(withStatusCode: 200,data: makeValidEnterprisesJSONData())
         
         
-        XCTAssertEqual(capturedResult, .success(try! EnterpriseMapper.map(data: makeValidEnterprisesJSONData())))
+        XCTAssertEqual(capturedResult, .success(makeEnterpriseArryFromValidJSONData()))
         
     }
     
@@ -217,7 +217,10 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         }
         
         return Data()
-
+    }
+    
+    private func makeEnterpriseArryFromValidJSONData() -> [Enterprise]{
+        return try! EnterpriseMapper.map(data: makeValidEnterprisesJSONData())
     }
 }
 
