@@ -20,7 +20,7 @@ class AppCoordinator: Coordinator {
     
     func start() {
         
-        let viewModel = LoginViewModel(authenticationService: RemoteAuthService(endpointURL: URL(string: "https://empresas.ioasys.com.br/api")!, client: URLSessionHTTPClient()))
+        let viewModel = LoginViewModel(authenticationService: RemoteAuthService(endpointURL: URL(string: "https://empresas.ioasys.com.br/api/v1/users/auth/sign_in")!, client: URLSessionHTTPClient()))
         
         let loginViewController = LoginUIComposer.loginComposedWith(viewModel: viewModel)
         

@@ -34,13 +34,15 @@ class LoginViewController: UIViewController {
     // MARK: - Overriden methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginIndicatorView.isHidden = true
+        loginIndicatorView?.isHidden = true
         
         viewModel?.onLogginStateChange = {[weak self] isLoading in
-            if isLoading {
-                self?.loginIndicatorView.isHidden = false
-            } else {
-                self?.loginIndicatorView.isHidden = true
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.loginIndicatorView.isHidden = false
+                } else {
+                    self?.loginIndicatorView.isHidden = true
+                }
             }
         }
     }

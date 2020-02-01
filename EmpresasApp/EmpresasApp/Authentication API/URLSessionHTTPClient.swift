@@ -15,12 +15,21 @@ class URLSessionHTTPClient: HTTPClient {
         self.session = session
     }
     
+    private struct UnexpectedValues: Error {}
+    
     func post(to url: URL, completion: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void) {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
-        session.dataTask(with: urlRequest) { (_, _, error) in
+        
+        session.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
+            } else if let data = data, let response = response as? HTTPURLResponse {
+                completion(.success((data, response)))
+            }
+            else {
+                completion(.failure(UnexpectedValues()))
+                //completion(.failure(s))
             }
         }.resume()
     }
