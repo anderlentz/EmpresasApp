@@ -31,7 +31,6 @@
 		A7B19AC623E1DDC40001FA34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B19AC423E1DDC40001FA34 /* Main.storyboard */; };
 		A7B19AC823E1DDC80001FA34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B19AC723E1DDC80001FA34 /* Assets.xcassets */; };
 		A7B19ACB23E1DDC80001FA34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B19AC923E1DDC80001FA34 /* LaunchScreen.storyboard */; };
-		A7B19AD623E1DDC80001FA34 /* EmpresasAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AD523E1DDC80001FA34 /* EmpresasAppTests.swift */; };
 		A7B19AF023E1EAEC0001FA34 /* Investor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AEF23E1EAEC0001FA34 /* Investor.swift */; };
 		A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF323E1ED000001FA34 /* Portfolio.swift */; };
 		A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */; };
@@ -79,7 +78,6 @@
 		A7B19ACA23E1DDC80001FA34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7B19ACC23E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AD123E1DDC80001FA34 /* EmpresasAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmpresasAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7B19AD523E1DDC80001FA34 /* EmpresasAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpresasAppTests.swift; sourceTree = "<group>"; };
 		A7B19AD723E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AE223E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AEF23E1EAEC0001FA34 /* Investor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investor.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 				A7A3BD2723E470C70056F352 /* Helpers */,
 				A7A3BD2123E456A40056F352 /* LoginVC Tests */,
 				A7B19AF923E1F2DF0001FA34 /* Authentication Tests */,
-				A7B19AD523E1DDC80001FA34 /* EmpresasAppTests.swift */,
 				A7B19AD723E1DDC80001FA34 /* Info.plist */,
 			);
 			path = EmpresasAppTests;
@@ -413,7 +410,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7A3BD2323E456CE0056F352 /* LoginViewControllerTests.swift in Sources */,
-				A7B19AD623E1DDC80001FA34 /* EmpresasAppTests.swift in Sources */,
 				A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */,
 				A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */,
 				A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */,
