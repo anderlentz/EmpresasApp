@@ -98,6 +98,8 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         sut.getAllEnterprises()
         
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "access-token"), authenticateState.accessToken)
+        XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "client"), authenticateState.client)
+        XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "uid"), authenticateState.uid)
     }
     
     
