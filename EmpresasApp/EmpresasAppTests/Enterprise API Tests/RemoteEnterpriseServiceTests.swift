@@ -7,17 +7,24 @@
 //
 
 import XCTest
+@testable import EmpresasApp
 
 protocol EnterpriseService {
     func getAllEnterprises()
 }
 
+protocol EnterpriseHTTPClient {
+    
+}
+
 class RemoteEnterpriseService: EnterpriseService {
     
-    var requestURL: URLRequest?
+    let requestURL: URLRequest
+    let client: EnterpriseHTTPClient
     
-    init(endpointURL: URL) {
-        requestURL = URLRequest(url: endpointURL)
+    init(endpointURL: URL,client: EnterpriseHTTPClient) {
+        self.requestURL = URLRequest(url: endpointURL)
+        self.client = client
     }
     
     func getAllEnterprises() {
@@ -30,11 +37,21 @@ class RemoteEnterpriseServiceTests: XCTestCase {
     func test_init_constructsGetRequestToEndpointURL() {
         let endpointURL = URL(string: "https://any-url.com")!
         
-        let sut = RemoteEnterpriseService(endpointURL: endpointURL)
+        let (sut,_) = makeSUT()
         
-        XCTAssertEqual(sut.requestURL?.url, endpointURL)
-        XCTAssertEqual(sut.requestURL?.httpMethod, "GET")
+        XCTAssertEqual(sut.requestURL.url, endpointURL)
+        XCTAssertEqual(sut.requestURL.httpMethod, "GET")
     }
     
+    // MARK: - Helpers
     
+    private func makeSUT(endpointURL: URL = URL(string: "https://any-url.com")!) -> (sut: RemoteEnterpriseService, client: EnterpriseHTTPClient) {
+        let client = EnterpriseHTTPClientSpy()
+        let sut = RemoteEnterpriseService(endpointURL: endpointURL,client: client)
+        return (sut,client)
+    }
+    
+    private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
+       
+    }
 }
