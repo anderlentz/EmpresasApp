@@ -27,12 +27,15 @@ class RemoteEnterpriseService: EnterpriseService {
 
 class RemoteEnterpriseServiceTests: XCTestCase {
 
-    func test_getAllEnterprises_makeURLRequestToEndpointURL() {
+    func test_getAllEnterprises_makeGetRequestToEndpointURL() {
         let endpointURL = URL(string: "https://any-url.com")!
         let sut = RemoteEnterpriseService(endpointURL: endpointURL)
     
         sut.getAllEnterprises()
         
         XCTAssertEqual(sut.requestURL?.url, endpointURL)
+        XCTAssertEqual(sut.requestURL?.httpMethod, "GET")
     }
+    
+    
 }
