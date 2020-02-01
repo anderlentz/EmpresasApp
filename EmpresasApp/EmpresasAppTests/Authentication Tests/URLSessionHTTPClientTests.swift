@@ -38,7 +38,6 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_postUrlRequest_failsOnRequestError() {
-        let endpointURL = anyURL()
         let error = NSError(domain: "ANY ERROR", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
         
@@ -57,7 +56,22 @@ class URLSessionHTTPClientTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
-    
+    func test_post_failsOnAllNilValues() {
+        URLProtocolStub.stub(data: nil, response: nil, error: nil)
+        
+        let exp = expectation(description: "Wait for completion")
+        
+        makeSUT().post(to: anyURL()) { result in
+            switch result {
+            case .failure:
+               break
+            default:
+                XCTFail("Expected failure, got \(result) instead")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
     
     // MARK: - Helpers
     private func makeSUT() -> URLSessionHTTPClient {
