@@ -41,10 +41,7 @@ public class RemoteAuthService: AuthenticationService {
         
         self.setupHeaders(email: email, password: password)
         
-        var urlRequest = URLRequest(url: endpointURL)
-        urlRequest.httpMethod = "POST"
-        
-        client.post(to: urlRequest) { result in
+        client.post(to: makePostAuthenticationURLRequest() ) { result in
             
             switch result {
             case .success(let (data,response)):
@@ -77,6 +74,15 @@ public class RemoteAuthService: AuthenticationService {
     private func setupHeaders(email: String, password: String) {
         self.body["email"] = email
         self.body["password"] = password
+    }
+    
+    private func makePostAuthenticationURLRequest() -> URLRequest {
+        var urlRequest = URLRequest(url: endpointURL)
+        urlRequest.httpMethod = "POST"
+        let jsonBodyData = try! JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
+        urlRequest.httpBody = jsonBodyData
+        urlRequest.allHTTPHeaderFields = headers
+        return urlRequest
     }
 }
 
