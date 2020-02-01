@@ -23,7 +23,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     func test_postToURL_performsPOSTRequestWithURL() {
         
-        let endpointURL = URL(string: "https://auth.test.com")!
+        let endpointURL = anyURL()
         let exp = expectation(description: "Wait for request")
         
         URLProtocolStub.observeRquests { request in
@@ -32,21 +32,19 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        URLSessionHTTPClient().post(to: endpointURL) { _ in }
+        makeSUT().post(to: endpointURL) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }
     
     func test_postUrlRequest_failsOnRequestError() {
-        let endpointURL = URL(string: "https://auth.test.com")!
+        let endpointURL = anyURL()
         let error = NSError(domain: "ANY ERROR", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
         
-        let sut = URLSessionHTTPClient()
-        
         let exp = expectation(description: "Wait for completion")
         
-        sut.post(to: endpointURL) { result in
+        makeSUT().post(to: anyURL()) { result in
             switch result {
             case let .failure(receivedError as NSError):
                 XCTAssertEqual(receivedError, error)
@@ -57,6 +55,17 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    
+    
+    // MARK: - Helpers
+    private func makeSUT() -> URLSessionHTTPClient {
+        return URLSessionHTTPClient()
+    }
+    
+    private func anyURL() -> URL {
+        return URL(string: "http://any-url.com")!
     }
     
     // MARK: - URLProtocolStub class
