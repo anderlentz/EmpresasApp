@@ -1,0 +1,104 @@
+{
+"enterprises": [
+    {
+        "id": 1,
+        "email_enterprise": "",
+        "facebook": "",
+        "twitter": "",
+        "linkedin": "",
+        "phone": "",
+        "own_enterprise": false,
+        "enterprise_name": "AllRide",
+        "photo": "/uploads/enterprise/photo/1/wood_trees_gloomy_fog_haze_darkness_50175_1920x1080.jpg",
+        "description": "Urbanatika is a socio-environmental company with economic impact, creator of the agro-urban industry. We want to involve people in the processes of healthy eating, recycling and reuse of organic waste and the creation of citizen green areas. With this we are creating smarter cities from the people and at the same time the forest city.  Urbanatika, Agro-Urban Industry",
+        "city": "Santiago",
+        "country": "Chile",
+        "value": 0,
+        "share_price": 5000.0,
+        "enterprise_type": {
+            "id": 21,
+            "enterprise_type_name": "Software"
+        }
+    },
+    {
+        "id": 2,
+        "email_enterprise": "",
+        "facebook": "",
+        "twitter": "",
+        "linkedin": "",
+        "phone": "",
+        "own_enterprise": false,
+        "enterprise_name": "Alpaca Samka SpA",
+        "photo": "/uploads/enterprise/photo/2/WhatsApp_Image_2017-10-31_at_13.47.22.jpeg",
+        "description": "Alpaca Samka uses alpaca fibres for our “Slow Fashion Project” in association with the Aymaras of the Chilean Andes, producing sustainable luxury accessories and garments using traditional Andean methods and British weaving patterns. We are part of the Inward Investment Program and have been recognised by international organisations. ",
+        "city": "Viña del Mar",
+        "country": "Chile",
+        "value": 0,
+        "share_price": 5000.0,
+        "enterprise_type": {
+            "id": 7,
+            "enterprise_type_name": "Fashion"
+        }
+    },
+    {
+        "id": 3,
+        "email_enterprise": "",
+        "facebook": "",
+        "twitter": "",
+        "linkedin": "",
+        "phone": "",
+        "own_enterprise": false,
+        "enterprise_name": "AnewLytics SpA",
+        "photo": "/uploads/enterprise/photo/3/thumb_8016a7d8a952351f3cb4d5f485f43ea1.octet-stream",
+        "description": " We have one passion: to create value for our customers by analyzing the conversations their customers have with the Contact Center in order to extract valuable and timely information to understand and meet their needs. That´s how AnewLytics was born: a cloud-based analytics service platform that performs 100% automated analysis.",
+        "city": "Santiago",
+        "country": "Chile",
+        "value": 0,
+        "share_price": 5000.0,
+        "enterprise_type": {
+            "id": 18,
+            "enterprise_type_name": "Service"
+        }
+    },
+    {
+        "id": 4,
+        "email_enterprise": null,
+        "facebook": null,
+        "twitter": null,
+        "linkedin": null,
+        "phone": null,
+        "own_enterprise": false,
+        "enterprise_name": "AQM S.A.",
+        "photo": null,
+        "description": "Cold Killer was discovered by chance in the ´90 s and developed by Mrs. Inés Artozon Sylvester while she was 70 years old. Ending in a U.S. patent granted and a new company, AQM S.A. Diluted in water and applied to any vegetable leaves, stimulate increase glucose (sugar) up to 30% therefore help plants resists cold weather. ",
+        "city": "Maule",
+        "country": "Chile",
+        "value": 0,
+        "share_price": 5000.0,
+        "enterprise_type": {
+            "id": 1,
+            "enterprise_type_name": "Agro"
+        }
+    },
+    {
+        "id": 5,
+        "email_enterprise": null,
+        "facebook": null,
+        "twitter": null,
+        "linkedin": null,
+        "phone": null,
+        "own_enterprise": false,
+        "enterprise_name": "Árbol Sabores",
+        "photo": null,
+        "description": "We are Arbol Sabores, a new generation of healthy food that has a positive impact in the environment and society. We want to change the world through the feeding behaviors of the society, giving seeds of urban orchards in ours products and by innovating with biodegradable packing.",
+        "city": "Santiago",
+        "country": "Chile",
+        "value": 0,
+        "share_price": 5000.0,
+        "enterprise_type": {
+            "id": 11,
+            "enterprise_type_name": "Health"
+        }
+    }
+  ]
+}

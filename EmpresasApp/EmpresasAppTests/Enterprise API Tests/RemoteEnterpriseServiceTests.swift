@@ -44,10 +44,17 @@ class RemoteEnterpriseService: EnterpriseService {
             switch result {
             case .failure:
                 completion(.failure(.connectivity))
-            case .success(let (_,response)):
+            case .success(let (data,response)):
                 switch response.statusCode {
                 case 401:
                     completion(.failure(.unauthorized))
+                case 200:
+                    do {
+                        let enterprises = try EnterpriseMapper.map(data: data)
+                        completion(.success(enterprises))
+                    } catch {
+                        completion(.failure(.invalidData))
+                    }
                 default:
                     completion(.failure(.generic))
                 }
@@ -148,6 +155,20 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         client.complete(withStatusCode: 401)
         
         XCTAssertEqual(capturedResult, .failure(.unauthorized))
+    }
+    
+    func test_getAllEnterprises_deliversEnterprisesOn200HTTPResponseWithValidJSON() {
+        let (sut, client) = makeSUT(endpointURL: makeEndpointURL())
+        var capturedResult: Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>?
+        
+        sut.getAllEnterprises() { result in
+            capturedResult = result
+        }
+        
+        client.complete(withStatusCode: 200,data: makeValidEnterprisesJSONData())
+        
+        
+        XCTAssertEqual(capturedResult, .success(try! EnterpriseMapper.map(data: makeValidEnterprisesJSONData())))
         
     }
     
@@ -179,6 +200,25 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         urlRequest.allHTTPHeaderFields = headers
         return urlRequest
     }
+    
+    private func makeValidEnterprisesJSONData() -> Data {
+        let bundle = Bundle(for: type(of: self))
+        
+        guard let url = bundle.url(forResource: "validEnterprisesJSON", withExtension: ".json") else {
+            XCTFail("Missing file: validJSON.json")
+            return Data()
+        }
+        
+        do {
+            let data = try Data(contentsOf: url, options: .mappedIfSafe)
+            return data
+        } catch let error{
+            XCTFail(error.localizedDescription)
+        }
+        
+        return Data()
+
+    }
 }
 
 private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
@@ -194,13 +234,13 @@ private class EnterpriseHTTPClientSpy: EnterpriseHTTPClient {
         message(.failure(error))
     }
     
-    func complete(withStatusCode: Int) {
+    func complete(withStatusCode: Int, data: Data = Data()) {
         let anyURL = URL(string:"https://any-url.com")!
         let response = HTTPURLResponse(url: anyURL,
         statusCode: withStatusCode,
         httpVersion: nil,
         headerFields: nil)!
         
-        message(.success((Data(), response)))
+        message(.success((data, response)))
     }
 }

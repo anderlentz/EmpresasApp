@@ -27,6 +27,9 @@
 		A7A3BD3B23E4D68F0056F352 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD3A23E4D68F0056F352 /* HomeViewModel.swift */; };
 		A7A3BD3E23E5F4370056F352 /* RemoteEnterpriseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD3D23E5F4360056F352 /* RemoteEnterpriseService.swift */; };
 		A7A3BD4123E5F4D50056F352 /* RemoteEnterpriseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD4023E5F4D50056F352 /* RemoteEnterpriseServiceTests.swift */; };
+		A7A3BD4623E62B8F0056F352 /* validEnterprisesJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A7A3BD4523E62B8F0056F352 /* validEnterprisesJSON.json */; };
+		A7A3BD4823E62D740056F352 /* EnterpriseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD4723E62D740056F352 /* EnterpriseMapper.swift */; };
+		A7A3BD4A23E632FA0056F352 /* EnterpriseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD4923E632FA0056F352 /* EnterpriseType.swift */; };
 		A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A62D9023E3579700690893 /* AuthenticationService.swift */; };
 		A7B19ABF23E1DDC40001FA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */; };
 		A7B19AC123E1DDC40001FA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */; };
@@ -73,6 +76,9 @@
 		A7A3BD3A23E4D68F0056F352 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A7A3BD3D23E5F4360056F352 /* RemoteEnterpriseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteEnterpriseService.swift; sourceTree = "<group>"; };
 		A7A3BD4023E5F4D50056F352 /* RemoteEnterpriseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteEnterpriseServiceTests.swift; sourceTree = "<group>"; };
+		A7A3BD4523E62B8F0056F352 /* validEnterprisesJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = validEnterprisesJSON.json; sourceTree = "<group>"; };
+		A7A3BD4723E62D740056F352 /* EnterpriseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseMapper.swift; sourceTree = "<group>"; };
+		A7A3BD4923E632FA0056F352 /* EnterpriseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseType.swift; sourceTree = "<group>"; };
 		A7A62D9023E3579700690893 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A7B19ABB23E1DDC40001FA34 /* EmpresasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmpresasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				A7A3BD3D23E5F4360056F352 /* RemoteEnterpriseService.swift */,
+				A7A3BD4723E62D740056F352 /* EnterpriseMapper.swift */,
 			);
 			path = "Enterprise API";
 			sourceTree = "<group>";
@@ -195,9 +202,18 @@
 		A7A3BD3F23E5F4470056F352 /* Enterprise API Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A7A3BD4423E62B6D0056F352 /* Helpers */,
 				A7A3BD4023E5F4D50056F352 /* RemoteEnterpriseServiceTests.swift */,
 			);
 			path = "Enterprise API Tests";
+			sourceTree = "<group>";
+		};
+		A7A3BD4423E62B6D0056F352 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A7A3BD4523E62B8F0056F352 /* validEnterprisesJSON.json */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		A7B19AB223E1DDC40001FA34 = {
@@ -265,6 +281,7 @@
 				A7B19AEF23E1EAEC0001FA34 /* Investor.swift */,
 				A7B19AF323E1ED000001FA34 /* Portfolio.swift */,
 				A7EEBACC23E2796900673B1C /* Enterprise.swift */,
+				A7A3BD4923E632FA0056F352 /* EnterpriseType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -393,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7EEBACB23E2650D00673B1C /* validJSON.json in Resources */,
+				A7A3BD4623E62B8F0056F352 /* validEnterprisesJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,12 +424,14 @@
 				A753F30123E35E7700266A3B /* InvestorMapper.swift in Sources */,
 				A7A3BD1C23E3AE800056F352 /* EnterpriseViewController.swift in Sources */,
 				A7A3BD3923E4D6090056F352 /* HomeUIComposer.swift in Sources */,
+				A7A3BD4823E62D740056F352 /* EnterpriseMapper.swift in Sources */,
 				A7A3BD3323E4B16F0056F352 /* HomeCoodinator.swift in Sources */,
 				A79C11FE23E3262F005F55A7 /* LoginViewController.swift in Sources */,
 				A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */,
 				A7A3BD2E23E4AD6B0056F352 /* AppCoordinator.swift in Sources */,
 				A7B19AF723E1ED4D0001FA34 /* JSONNull.swift in Sources */,
 				A7A62D9123E3579700690893 /* AuthenticationService.swift in Sources */,
+				A7A3BD4A23E632FA0056F352 /* EnterpriseType.swift in Sources */,
 				A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */,
 				A7A3BD3523E4D1970056F352 /* URLSessionHTTPClient.swift in Sources */,
 				A7A3BD2623E46B9E0056F352 /* LoginUIComposer.swift in Sources */,
