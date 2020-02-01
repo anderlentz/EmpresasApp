@@ -97,7 +97,7 @@
                                         <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="0.52871919014084512" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="gFK-PY-yZa" firstAttribute="centerX" secondItem="74k-ie-uWj" secondAttribute="centerX" id="KDk-xn-lES"/>
                                     <constraint firstItem="gFK-PY-yZa" firstAttribute="centerY" secondItem="74k-ie-uWj" secondAttribute="centerY" id="NaG-fd-qBS"/>
