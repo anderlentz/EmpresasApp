@@ -35,7 +35,6 @@ final class LoginViewModel: LoginViewModelProtocol {
     func doLogin(email: String, password: String) {
         onLogginStateChange?(true)
         authenticationService.authenticate(email: email,password: password) { [weak self] result in
-            print("authenticationService result \(result)")
             switch result {
             case .success(let investor):
                 self?.onInvestorLogin?(investor)

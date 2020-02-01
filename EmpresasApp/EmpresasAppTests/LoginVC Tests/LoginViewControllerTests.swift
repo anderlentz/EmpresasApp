@@ -59,7 +59,6 @@ class LoginViewControllerTests: XCTestCase {
         let exp = expectation(description: "Waits for initiate login and terminate on an http client error")
         exp.expectedFulfillmentCount = 2
         viewModel.onLogginStateChange = {isLogging in
-            print("isLogging: \(isLogging)")
             receivedLoginStatus.append(isLogging)
             exp.fulfill()
         }
