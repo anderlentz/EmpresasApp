@@ -111,10 +111,29 @@
                     </view>
                     <navigationItem key="navigationItem" id="9qQ-by-n7g"/>
                     <connections>
+                        <outlet property="initialBackgroundView" destination="gNs-RA-Ddv" id="4YG-5W-gwq"/>
                         <outlet property="tableView" destination="ZiW-Mz-EKA" id="lr5-u8-fhu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hja-Qm-5IL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="gNs-RA-Ddv">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clique na busca para iniciar." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4f-AJ-5ez">
+                            <rect key="frame" x="19" y="140.5" width="202.5" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" name="CharcoalGrey"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="background"/>
+                    <constraints>
+                        <constraint firstItem="V4f-AJ-5ez" firstAttribute="centerX" secondItem="gNs-RA-Ddv" secondAttribute="centerX" id="3mj-xX-uo2"/>
+                        <constraint firstItem="V4f-AJ-5ez" firstAttribute="centerY" secondItem="gNs-RA-Ddv" secondAttribute="centerY" id="YNJ-K4-p95"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="U8T-Ma-wMO"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="692.75362318840587" y="-170.08928571428569"/>
         </scene>
@@ -139,6 +158,9 @@
     </scenes>
     <resources>
         <image name="imgE1Lista" width="90" height="69"/>
+        <namedColor name="CharcoalGrey">
+            <color red="0.2199999988079071" green="0.21600000560283661" blue="0.2630000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="background">
             <color red="0.92199999094009399" green="0.91399997472763062" blue="0.84299999475479126" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -23,7 +23,8 @@ class HomeViewController: UIViewController {
     }
     // MARK: - IBOutles
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet var initialBackgroundView: UIView!
+    
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundView = initialBackgroundView
         
         viewModel?.onEnterprisesLoad = { [weak self] enterprises in
             self?.enterprises = enterprises

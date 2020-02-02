@@ -126,7 +126,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A753F30223E372DC00266A3B /* Home UI */ = {
+		A753F30223E372DC00266A3B /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				A7A3BD3723E4D5320056F352 /* Composers */,
@@ -134,17 +134,17 @@
 				A7A3BD3A23E4D68F0056F352 /* HomeViewModel.swift */,
 				A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */,
 			);
-			path = "Home UI";
+			path = Home;
 			sourceTree = "<group>";
 		};
-		A79C11FC23E325AB005F55A7 /* Login UI */ = {
+		A79C11FC23E325AB005F55A7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				A7A3BD2423E46B880056F352 /* Composers */,
 				A79C11FD23E3262F005F55A7 /* LoginViewController.swift */,
 				A7A3BD2A23E486E90056F352 /* LoginViewModel.swift */,
 			);
-			path = "Login UI";
+			path = Login;
 			sourceTree = "<group>";
 		};
 		A7A3BD2123E456A40056F352 /* LoginVC Tests */ = {
@@ -218,13 +218,13 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		A7A3BD5823E686FF0056F352 /* Detail UI */ = {
+		A7A3BD5823E686FF0056F352 /* Enterpise Details */ = {
 			isa = PBXGroup;
 			children = (
 				A7A3BD5923E6881B0056F352 /* Composers */,
 				A7A3BD6023E68CA10056F352 /* EnterpriseViewController.swift */,
 			);
-			path = "Detail UI";
+			path = "Enterpise Details";
 			sourceTree = "<group>";
 		};
 		A7A3BD5923E6881B0056F352 /* Composers */ = {
@@ -257,9 +257,9 @@
 			isa = PBXGroup;
 			children = (
 				A7A3BD2C23E4ACAE0056F352 /* Coordinator */,
-				A79C11FC23E325AB005F55A7 /* Login UI */,
-				A753F30223E372DC00266A3B /* Home UI */,
-				A7A3BD5823E686FF0056F352 /* Detail UI */,
+				A79C11FC23E325AB005F55A7 /* Login */,
+				A753F30223E372DC00266A3B /* Home */,
+				A7A3BD5823E686FF0056F352 /* Enterpise Details */,
 				A7B19AEE23E1EACB0001FA34 /* Models */,
 				A7E6251323E69668006089E7 /* APIs */,
 				A7E6251223E69584006089E7 /* Storyboards */,
