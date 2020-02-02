@@ -13,7 +13,13 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     let searchController = UISearchController(searchResultsController: nil)
     var viewModel: HomeViewModel?
-    
+    private var enterprises: [Enterprise]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     // MARK: - IBOutles
     @IBOutlet weak var tableView: UITableView!
     
@@ -36,6 +42,10 @@ class HomeViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        viewModel?.onGetEnterprises = { [weak self] enterprises in
+            self?.enterprises = enterprises
+        }
         
     }
     
@@ -112,12 +122,15 @@ extension HomeViewController: UISearchBarDelegate {
 
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return enterprises?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "enterpriseCell", for: indexPath)
             as! EnterpriseTableViewCell
+        cell.enterpriseName.text = enterprises?[indexPath.row].enterpriseName
+        cell.businessLabel.text = enterprises?[indexPath.row].enterpriseType.enterpriseTypeName
+        cell.countryLabel.text = enterprises?[indexPath.row].country
         return cell
     }
     
