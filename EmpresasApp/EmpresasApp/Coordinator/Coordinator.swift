@@ -12,13 +12,13 @@ import Foundation
 import UIKit
 
 enum Transition {
-    case showEnterpriseDetails(Enterprise)
     case showHomeView
 }
 
 protocol Coordinator: class {
+    associatedtype T
+    
     var navigationController: UINavigationController? { get set }
-    var uiViewController: UIViewController? { get set}
     func start()
-    func performTransition(transition: Transition)
+    func performTransition(transition: T)
 }

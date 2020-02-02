@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     // MARK: - Properties
+    public var navigationCoordinator: HomeCoordinator?
     let searchController = UISearchController(searchResultsController: nil)
     var viewModel: HomeViewModel?
     private var enterprises: [Enterprise]? {
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        viewModel?.onGetEnterprises = { [weak self] enterprises in
+        viewModel?.onEnterprisesLoad = { [weak self] enterprises in
             self?.enterprises = enterprises
         }
         
@@ -61,10 +62,6 @@ class HomeViewController: UIViewController {
     }
     
     private func setupSearchController() {
-        
-        // Set any properties (in this case, don't hide the nav bar and don't show the emoji keyboard option)
-        //searchController.hidesNavigationBarDuringPresentation = false
-        //searchController.searchBar.keyboardType = UIKeyboardType.asciiCapable
         
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
@@ -124,8 +121,11 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showEnterpriseSegue", sender: nil)
+        //performSegue(withIdentifier: "showEnterpriseSegue", sender: nil)
+        print("Clicou")
+        if let enterprise = enterprises?[indexPath.row] {
+            print("at: \(enterprise)")
+            navigationCoordinator?.performTransition(transition: HomeCoordinatorTransition.showEnterpriseDetails(enterprise))
+        }
     }
-    
-    
 }

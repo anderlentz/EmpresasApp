@@ -1,8 +1,8 @@
 //
-//  AppCoordinator.swift
+//  LoginCoordinator.swift
 //  EmpresasApp
 //
-//  Created by Anderson on 31/01/20.
+//  Created by Anderson on 02/02/20.
 //  Copyright © 2020 Anderson. All rights reserved.
 //
 

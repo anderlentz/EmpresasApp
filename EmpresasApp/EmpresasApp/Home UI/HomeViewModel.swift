@@ -12,9 +12,11 @@ final class HomeViewModel {
     
     typealias Observer<T> = (T) -> Void
     
-    var onGetEnterprises: Observer<[Enterprise]>?
     
-    let enterpriseService: EnterpriseService
+    var onEnterprisesLoad: Observer<[Enterprise]>?
+    var onChange: Observer<HomeViewModel>?
+    
+    private let enterpriseService: EnterpriseService
     
     // We keep track of the pending work item as a property
     private var pendingRequestWorkItem: DispatchWorkItem?
@@ -34,7 +36,7 @@ final class HomeViewModel {
                     //print(result)
                     switch result {
                     case .success(let enterprises):
-                        self?.onGetEnterprises?(enterprises)
+                        self?.onEnterprisesLoad?(enterprises)
                     case .failure(let error):
                         print("Inform view that an error has occuried, \(error)")
                     }

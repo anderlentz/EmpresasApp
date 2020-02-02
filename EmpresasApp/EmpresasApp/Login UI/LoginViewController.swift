@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
     public var viewModel: LoginViewModelProtocol?
-    public var navigationCoordinator: Coordinator?
+    public var navigationCoordinator: LoginCoordinator?
     
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!

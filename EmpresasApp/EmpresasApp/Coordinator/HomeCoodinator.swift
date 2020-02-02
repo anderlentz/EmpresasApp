@@ -8,7 +8,13 @@
 
 import UIKit
 
-class HomeCoordinator {
+enum HomeCoordinatorTransition {
+    case showEnterpriseDetails(Enterprise)
+}
+
+class HomeCoordinator: Coordinator {
+    typealias T = HomeCoordinatorTransition
+    
     var navigationController: UINavigationController?
         
     init(navigationController: UINavigationController?) {
@@ -24,10 +30,19 @@ class HomeCoordinator {
                                                                                  client: URLSessionEnterpriseHTTPCLient(),
                                                                                  authState: authState))
         let viewController = HomeUIComposer.loginComposedWith(viewModel: viewModel)
-        
+        viewController.navigationCoordinator = self
         navigationController?.viewControllers.remove(at: 0)
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.viewControllers.insert(viewController, at: 0)
+    }
+    
+    func performTransition(transition: T) {
+        print("performTrantions")
+        switch transition {
+        case .showEnterpriseDetails(let enterprise):
+            let enterpriseCoordinator = EnterpriseDetailsCoordinator(navigationController: navigationController, enterprise: enterprise)
+            enterpriseCoordinator.start()
+        }
     }
     
 }
