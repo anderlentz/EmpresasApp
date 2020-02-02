@@ -30,30 +30,6 @@ class RemoteEnterpriseService: EnterpriseService {
         self.requestURL.allHTTPHeaderFields = makeHeader()
     }
     
-    func getAllEnterprises(completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
-        client.get(from: requestURL) { result in
-            switch result {
-            case .failure:
-                completion(.failure(.connectivity))
-            case .success(let (data,response)):
-                switch response.statusCode {
-                case 401:
-                    completion(.failure(.unauthorized))
-                case 200:
-                    do {
-                        //let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                        let enterprises = try EnterpriseMapper.map(data: data)
-                        completion(.success(enterprises))
-                    } catch {
-                        completion(.failure(.invalidData))
-                    }
-                default:
-                    completion(.failure(.generic))
-                }
-            }
-        }
-    }
-    
     func getEnterprises(containingName: String,
                         completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
         
