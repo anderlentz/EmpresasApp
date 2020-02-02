@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
             if enterprises.count == 0 {
                 DispatchQueue.main.async {
                     self?.tableView.backgroundView = self?.noEnterprisesBackgroundView
+                    self?.tableView.reloadData()
                 }
             } else {
                 DispatchQueue.main.async {
