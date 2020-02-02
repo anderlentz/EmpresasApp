@@ -48,6 +48,10 @@ class HomeViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - Helpers
     private func setupNavigationLayout() {
         

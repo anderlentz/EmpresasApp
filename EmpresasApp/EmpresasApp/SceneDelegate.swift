@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let viewController = UINavigationController()
         viewController.setNavigationBarHidden(true, animated: false)
-        
+        viewController.navigationBar.barStyle = .black
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
