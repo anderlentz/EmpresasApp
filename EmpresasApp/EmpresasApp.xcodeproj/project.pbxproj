@@ -264,7 +264,6 @@
 				A7A3BD3C23E5EB6B0056F352 /* Enterprise API */,
 				A7EEBAC523E2285300673B1C /* Authentication API */,
 				A7B19AEE23E1EACB0001FA34 /* Models */,
-				A7B19AC423E1DDC40001FA34 /* Main.storyboard */,
 				A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */,
 				A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */,
 				A7B19AC723E1DDC80001FA34 /* Assets.xcassets */,
@@ -321,6 +320,7 @@
 			children = (
 				A753F30323E372F200266A3B /* Home.storyboard */,
 				A7A3BD5E23E688790056F352 /* EnterpriseDetails.storyboard */,
+				A7B19AC423E1DDC40001FA34 /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
