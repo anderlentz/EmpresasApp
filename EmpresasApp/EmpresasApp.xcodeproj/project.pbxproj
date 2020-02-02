@@ -130,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				A7A3BD3723E4D5320056F352 /* Composers */,
-				A753F30323E372F200266A3B /* Home.storyboard */,
 				A753F30523E3736300266A3B /* HomeViewController.swift */,
 				A7A3BD3A23E4D68F0056F352 /* HomeViewModel.swift */,
 				A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */,
@@ -223,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				A7A3BD5923E6881B0056F352 /* Composers */,
-				A7A3BD5E23E688790056F352 /* EnterpriseDetails.storyboard */,
 				A7A3BD6023E68CA10056F352 /* EnterpriseViewController.swift */,
 			);
 			path = "Detail UI";
@@ -258,6 +256,7 @@
 		A7B19ABD23E1DDC40001FA34 /* EmpresasApp */ = {
 			isa = PBXGroup;
 			children = (
+				A7E6251223E69584006089E7 /* Storyboards */,
 				A7A3BD2C23E4ACAE0056F352 /* Coordinator */,
 				A79C11FC23E325AB005F55A7 /* Login UI */,
 				A753F30223E372DC00266A3B /* Home UI */,
@@ -315,6 +314,15 @@
 				A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "Authentication Tests";
+			sourceTree = "<group>";
+		};
+		A7E6251223E69584006089E7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A753F30323E372F200266A3B /* Home.storyboard */,
+				A7A3BD5E23E688790056F352 /* EnterpriseDetails.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		A7EEBAC523E2285300673B1C /* Authentication API */ = {
