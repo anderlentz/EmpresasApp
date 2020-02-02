@@ -128,6 +128,28 @@ class LoginViewModelTests: XCTestCase {
         
     }
     
+    func test_doLogin_withValidEmailAndIncorrectPasswordsProducesWellFormattedErrorMessages() {
+        let sut = makeSUT()
+        var expectedErrorMessages = [String]()
+
+        let exp = expectation(description: "Wait for error login message")
+        exp.expectedFulfillmentCount = 2
+        sut.onLoginValidationError = { errorMessage in
+            expectedErrorMessages.append(errorMessage)
+            exp.fulfill()
+        }
+        
+        sut.doLogin(email: validEmail(), password: " ")
+        sut.doLogin(email: validEmail(), password: "")
+
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(expectedErrorMessages[0],LoginViewModel.ErrorMessage.onPasswordWithWhitespace.rawValue)
+        XCTAssertEqual(expectedErrorMessages[1],LoginViewModel.ErrorMessage.onEmptyPassword.rawValue)
+
+
+
+    }
     
     
     
