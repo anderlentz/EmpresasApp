@@ -112,6 +112,7 @@
                     <navigationItem key="navigationItem" id="9qQ-by-n7g"/>
                     <connections>
                         <outlet property="initialBackgroundView" destination="gNs-RA-Ddv" id="4YG-5W-gwq"/>
+                        <outlet property="noEnterprisesBackgroundView" destination="NKs-T1-G3P" id="b4O-Uy-9s7"/>
                         <outlet property="tableView" destination="ZiW-Mz-EKA" id="lr5-u8-fhu"/>
                     </connections>
                 </viewController>
@@ -133,6 +134,27 @@
                         <constraint firstItem="V4f-AJ-5ez" firstAttribute="centerY" secondItem="gNs-RA-Ddv" secondAttribute="centerY" id="YNJ-K4-p95"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="U8T-Ma-wMO"/>
+                </view>
+                <view contentMode="scaleToFill" id="NKs-T1-G3P">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQh-iD-iie">
+                            <rect key="frame" x="0.0" y="89" width="240" height="61"/>
+                            <string key="text">Nenhuma empresa foi encontrada 
+para a busca realizada.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.67450980392156867" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="background"/>
+                    <constraints>
+                        <constraint firstItem="xQh-iD-iie" firstAttribute="top" secondItem="NKs-T1-G3P" secondAttribute="top" multiplier="0.17" constant="89" id="FvL-c9-Inw"/>
+                        <constraint firstItem="xQh-iD-iie" firstAttribute="leading" secondItem="NKs-T1-G3P" secondAttribute="leading" id="Thp-B5-7pN"/>
+                        <constraint firstAttribute="trailing" secondItem="xQh-iD-iie" secondAttribute="trailing" id="pi8-rL-4Z0"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Z2A-u3-7yx"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="692.75362318840587" y="-170.08928571428569"/>

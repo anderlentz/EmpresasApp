@@ -14,16 +14,12 @@ class HomeViewController: UIViewController {
     public var navigationCoordinator: HomeCoordinator?
     let searchController = UISearchController(searchResultsController: nil)
     var viewModel: HomeViewModel?
-    private var enterprises: [Enterprise]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    private var enterprises: [Enterprise]?
+    
     // MARK: - IBOutles
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var initialBackgroundView: UIView!
+    @IBOutlet var noEnterprisesBackgroundView: UIView!
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -37,8 +33,18 @@ class HomeViewController: UIViewController {
         
         viewModel?.onEnterprisesLoad = { [weak self] enterprises in
             self?.enterprises = enterprises
+            
+            if enterprises.count == 0 {
+                DispatchQueue.main.async {
+                    self?.tableView.backgroundView = self?.noEnterprisesBackgroundView
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.tableView.backgroundView?.isHidden = true
+                    self?.tableView.reloadData()
+                }
+            }
         }
-        
     }
     
     // MARK: - Helpers
