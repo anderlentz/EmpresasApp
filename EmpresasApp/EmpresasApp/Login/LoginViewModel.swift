@@ -98,11 +98,11 @@ final class LoginViewModel: LoginViewModelProtocol {
     private func sendErrorsMessage (errors: (emailError: String?, passwordError: String?)){
         switch errors {
         case (let .some(emailError), let .some(passwordError)):
-            onLoginValidationError?(" - \(emailError)\n - \(passwordError)")
+            onLoginValidationError?("\(emailError)\n \(passwordError)")
         case (_, let .some(passwordError)):
-            onLoginValidationError?("- \(passwordError)")
+            onLoginValidationError?("\(passwordError)")
         case (let .some(emailError), _):
-            onLoginValidationError?("- \(emailError)")
+            onLoginValidationError?("\(emailError)")
         default:
             break
         }

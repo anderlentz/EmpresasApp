@@ -94,6 +94,40 @@ class LoginViewModelTests: XCTestCase {
         
     }
     
+    func test_doLogin_withValidPasswordAndIncorrectEmailsProducesFormattedErrorMessages() {
+        let sut = makeSUT()
+        var expectedErrorMessages = [String]()
+        
+        let exp = expectation(description: "Wait for error login message")
+        exp.expectedFulfillmentCount = 8
+        sut.onLoginValidationError = { errorMessage in
+            expectedErrorMessages.append(errorMessage)
+            exp.fulfill()
+        }
+        
+        sut.doLogin(email: "a.com", password: validPassword())
+        sut.doLogin(email: "a@test", password: validPassword())
+        sut.doLogin(email: "a@test.", password: validPassword())
+        sut.doLogin(email: "@test.", password: validPassword())
+        sut.doLogin(email: "com", password: validPassword())
+        sut.doLogin(email: "a.", password: validPassword())
+        sut.doLogin(email: "", password: validPassword())
+        sut.doLogin(email: " ", password: validPassword())
+        
+        
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(expectedErrorMessages[0],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[1],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[2],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[3],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[4],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[5],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[6],LoginViewModel.ErrorMessage.onEmptyEmail.rawValue)
+        XCTAssertEqual(expectedErrorMessages[7],LoginViewModel.ErrorMessage.onInvalidEmail.rawValue)
+        
+    }
+    
     
     
     
@@ -119,10 +153,10 @@ class LoginViewModelTests: XCTestCase {
     }
     
     func makeFormattedEmptyPasswordErrorMessage() -> String {
-        return "- Password não pode ser vazio."
+        return "Password não pode ser vazio."
     }
     
     func makeFormattedWhiteSpacePasswordErrorMessage() -> String {
-        return "- Password não pode conter espaços."
+        return "Password não pode conter espaços."
     }
 }
