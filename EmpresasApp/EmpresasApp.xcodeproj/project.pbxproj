@@ -137,6 +137,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		A773B14F23E74BE1007E61D6 /* Home Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Home Tests";
+			sourceTree = "<group>";
+		};
 		A79C11FC23E325AB005F55A7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +284,7 @@
 			children = (
 				A7A3BD2723E470C70056F352 /* Helpers */,
 				A7A3BD2123E456A40056F352 /* LoginVC Tests */,
+				A773B14F23E74BE1007E61D6 /* Home Tests */,
 				A7B19AF923E1F2DF0001FA34 /* Authentication Tests */,
 				A7A3BD3F23E5F4470056F352 /* Enterprise API Tests */,
 				A7B19AD723E1DDC80001FA34 /* Info.plist */,

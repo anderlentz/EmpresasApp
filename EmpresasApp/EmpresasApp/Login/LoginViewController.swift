@@ -51,6 +51,10 @@ class LoginViewController: UIViewController {
                 self?.navigationCoordinator?.performTransition(transition: .showHomeView)
             }
         }
+        
+        viewModel?.onLoginValidationError = { errorMessage in
+            print(errorMessage)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
