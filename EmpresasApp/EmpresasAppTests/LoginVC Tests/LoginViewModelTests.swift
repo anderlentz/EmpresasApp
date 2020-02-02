@@ -43,7 +43,7 @@ class LoginViewModelTests: XCTestCase {
         
     }
     
-    func test_doLogin_withEmptyPasswordAndCorrectPasswordMustReturnLoginValidationErrorMessage() {
+    func test_doLogin_withEmptyPasswordAndValidEmailMustReturnLoginValidationErrorMessage() {
         let sut = makeSUT()
         var expectedErrorMessage: String?
         
@@ -61,6 +61,8 @@ class LoginViewModelTests: XCTestCase {
     }
     
     
+    
+    
     // MARK: - Helpers
     func makeSUT() -> LoginViewModel {
         let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
@@ -73,5 +75,9 @@ class LoginViewModelTests: XCTestCase {
     
     func validPassword() -> String {
         return "12341234"
+    }
+    
+    func passwordWithWhiteSpace() -> String {
+        return " 1212 1"
     }
 }
