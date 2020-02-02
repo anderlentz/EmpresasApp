@@ -33,7 +33,6 @@ final class HomeViewModel {
             // Wrap our request in a work item
             let requestWorkItem = DispatchWorkItem { [weak self] in
                 self?.enterpriseService.getEnterprises(containingName: enterpriseName) { [weak self] result in
-                    //print(result)
                     switch result {
                     case .success(let enterprises):
                         self?.onEnterprisesLoad?(enterprises)

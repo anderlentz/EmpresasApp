@@ -36,10 +36,10 @@ final class LoginViewModel: LoginViewModelProtocol {
     
     func doLogin(email: String, password: String) {
         onLogginStateChange?(true)
-        
         let errors = validate(email: email, password: password)
         
         if errors == (nil,nil) {
+            onLogginStateChange?(true)
             authenticationService.authenticate(email: email,password: password) { [weak self] result in
                 switch result {
                 case .success(let investor):
@@ -50,8 +50,8 @@ final class LoginViewModel: LoginViewModelProtocol {
                 self?.onLogginStateChange?(false)
             }
         } else {
-            self.onLogginStateChange?(false)
             sendErrorsMessage(errors: errors)
+            onLogginStateChange?(false)
         }
     }
     

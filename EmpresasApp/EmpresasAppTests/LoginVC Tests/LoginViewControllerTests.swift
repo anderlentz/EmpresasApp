@@ -31,21 +31,26 @@ class LoginViewControllerTests: XCTestCase {
         XCTAssertEqual(viewModel.isLogging, false)
     }
     
-    func test_userInitiateLogin_showsLogginIndicator() {
+    func test_userInitiateLogin_expectStartAndStopLogginIndicator() {
         let sut = LoginViewController()
         let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
         let viewModel = LoginViewModel(authenticationService: remoteAuthService)
         sut.viewModel = viewModel
         
+        var expectedIndicatorStatus = [Bool]()
         let exp = expectation(description: "Waits for initiate login")
+        exp.expectedFulfillmentCount = 2
+        
         viewModel.onLogginStateChange = {isLogging in
-            XCTAssertEqual(isLogging, true)
+            expectedIndicatorStatus.append(isLogging)
             exp.fulfill()
         }
         
         sut.simulateUserInitiateLogin()
         
         wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(expectedIndicatorStatus, [true,false])
         
     }
     

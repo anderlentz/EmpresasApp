@@ -27,10 +27,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func loginAction(_ sender: UIButton) {
-        //navigationCoordinator?.performTransition(transition: .showHomeView)
-       }
-    
     // MARK: - Overriden methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,17 +61,15 @@ class LoginViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
          self.view.endEditing(true)
     }
-    
-    // MARKK: - Login method
-    private func login() {
         
-        if let email = emailTextField.text, let password = emailTextField.text {
+    // MARK: - Helpers
+    
+    private func login() {
+        if let email = emailTextField.text,
+            let password = emailTextField.text {
             viewModel?.doLogin(email: email, password: password)
         }
-        
     }
-    
-    // MARK: - Helpers
     
     private func addOnLeft(of textField: UITextField,anImage img: UIImage) {
         let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
