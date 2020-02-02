@@ -99,7 +99,6 @@
 		A7B19ACC23E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AD123E1DDC80001FA34 /* EmpresasAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmpresasAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B19AD723E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7B19AE223E1DDC80001FA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B19AEF23E1EAEC0001FA34 /* Investor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investor.swift; sourceTree = "<group>"; };
 		A7B19AF323E1ED000001FA34 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		A7B19AF623E1ED4D0001FA34 /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
@@ -243,7 +242,6 @@
 			children = (
 				A7B19ABD23E1DDC40001FA34 /* EmpresasApp */,
 				A7B19AD423E1DDC80001FA34 /* EmpresasAppTests */,
-				A7B19ADF23E1DDC80001FA34 /* EmpresasAppUITests */,
 				A7B19ABC23E1DDC40001FA34 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -287,14 +285,6 @@
 				A7B19AD723E1DDC80001FA34 /* Info.plist */,
 			);
 			path = EmpresasAppTests;
-			sourceTree = "<group>";
-		};
-		A7B19ADF23E1DDC80001FA34 /* EmpresasAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				A7B19AE223E1DDC80001FA34 /* Info.plist */,
-			);
-			path = EmpresasAppUITests;
 			sourceTree = "<group>";
 		};
 		A7B19AEE23E1EACB0001FA34 /* Models */ = {
