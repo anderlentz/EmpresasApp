@@ -20,28 +20,23 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         XCTAssertEqual(sut.requestURL.httpMethod, "GET")
     }
     
-    func test_getAllEnterprise_performGETrequestToEndpointURL() {
+    func test_getAllEnterprise_performGETrequestToEndpointURLWithQueryNameParam() {
         
-        var requestURL = URLRequest(url: makeEndpointURL())
-        requestURL.httpMethod = "GET"
+        let queryName = "queryEnterpriseName"
+        let endpointURLWithQuery = makeEndpointURLWithNameQuery(name: queryName,endpointURL: makeEndpointURL())
         let (sut,client) = makeSUT(endpointURL: makeEndpointURL())
         
-        sut.getAllEnterprises(){ _ in }
+        sut.getEnterprises(containingName: queryName) { _ in }
         
-        XCTAssertEqual(client.urlRequest?.url, makeEndpointURL())
+        XCTAssertEqual(client.urlRequest?.url, endpointURLWithQuery)
         XCTAssertEqual(client.urlRequest?.httpMethod, "GET")
     }
     
     func test_getAllEnterprises_requestWithAllRequideAuthenticationKeysIntoHTTPResquestHeader() {
         
-        var requestURL = URLRequest(url: makeEndpointURL())
-        requestURL.httpMethod = "GET"
-        requestURL.allHTTPHeaderFields = ["access-token":"",
-                                          "client":"",
-                                          "uid":""]
         let (sut,client) = makeSUT(endpointURL: makeEndpointURL())
        
-        sut.getAllEnterprises(){ _ in }
+        sut.getEnterprises(containingName: "empresa"){ _ in }
                 
         XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "access-token"),"Must have an access-token property at header")
         XCTAssertNotNil(client.urlRequest?.value(forHTTPHeaderField: "client"),"Must have a client property at header")
@@ -49,22 +44,22 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         
     }
     
-    func test_getAllEnterprises_requestWithAuthStateValuesAtAuthenticationKeysIntoHTTPRequestHeader() {
+    func test_getEnterprises_containingNameRequestWithAuthStateValuesAtAuthenticationKeysIntoHTTPRequestHeader() {
         let authenticateState = makeAuthState()
         let (sut,client) = makeSUT(endpointURL: makeEndpointURL(), authState: authenticateState)
         
-        sut.getAllEnterprises(){ _ in }
+        sut.getEnterprises(containingName: "empresa"){ _ in }
         
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "access-token"), authenticateState.accessToken)
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "client"), authenticateState.client)
         XCTAssertEqual(client.urlRequest?.value(forHTTPHeaderField: "uid"), authenticateState.uid)
     }
     
-    func test_getAllEnterprises_deliversErrorOnConnectivityError() {
+    func test_getEnterprises_containingNameDeliversErrorOnConnectivityError() {
         let (sut, client) = makeSUT(endpointURL: makeEndpointURL())
         var capturedResult: Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>?
         
-        sut.getAllEnterprises() { result in
+        sut.getEnterprises(containingName: "empresa"){ result in
             capturedResult = result
         }
         
@@ -78,7 +73,7 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         let (sut, client) = makeSUT(endpointURL: makeEndpointURL())
         var capturedResult: Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>?
         
-        sut.getAllEnterprises() { result in
+        sut.getEnterprises(containingName: "empresa"){ result in
             capturedResult = result
         }
         
@@ -91,7 +86,7 @@ class RemoteEnterpriseServiceTests: XCTestCase {
         let (sut, client) = makeSUT(endpointURL: makeEndpointURL())
         var capturedResult: Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>?
         
-        sut.getAllEnterprises() { result in
+        sut.getEnterprises(containingName: "empresa"){ result in
             capturedResult = result
         }
         client.complete(withStatusCode: 200,data: makeValidEnterprisesJSONData())
@@ -148,6 +143,14 @@ class RemoteEnterpriseServiceTests: XCTestCase {
     
     private func makeEnterpriseArryFromValidJSONData() -> [Enterprise]{
         return try! EnterpriseMapper.map(data: makeValidEnterprisesJSONData())
+    }
+    
+    private func makeEndpointURLWithNameQuery(name: String,endpointURL: URL) -> URL? {
+        var url = URLComponents(url: endpointURL, resolvingAgainstBaseURL: true)!
+        url.queryItems = [
+            URLQueryItem(name: "name", value: name)
+        ]
+        return url.url
     }
 }
 
