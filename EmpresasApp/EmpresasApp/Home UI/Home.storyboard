@@ -34,7 +34,7 @@
                                                             <rect key="frame" x="12" y="10" width="98.5" height="79"/>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="UBR-R7-vR8">
-                                                            <rect key="frame" x="118.5" y="11.5" width="227.5" height="75"/>
+                                                            <rect key="frame" x="118.5" y="11.5" width="260.5" height="75"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empresa1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTL-ug-inw">
                                                                     <rect key="frame" x="0.0" y="0.0" width="84.5" height="26"/>
@@ -67,7 +67,7 @@
                                                         <constraint firstItem="KQv-Ek-OHa" firstAttribute="width" secondItem="PlM-Wb-qq2" secondAttribute="width" multiplier="0.25" id="61P-CH-tBA"/>
                                                         <constraint firstItem="KQv-Ek-OHa" firstAttribute="height" secondItem="PlM-Wb-qq2" secondAttribute="height" multiplier="0.8" id="JxJ-qp-MW5"/>
                                                         <constraint firstItem="KQv-Ek-OHa" firstAttribute="centerY" secondItem="PlM-Wb-qq2" secondAttribute="centerY" id="LCp-YE-8Fk"/>
-                                                        <constraint firstAttribute="trailing" secondItem="UBR-R7-vR8" secondAttribute="trailing" constant="48" id="MLh-n4-deu"/>
+                                                        <constraint firstAttribute="trailing" secondItem="UBR-R7-vR8" secondAttribute="trailing" constant="15" id="MLh-n4-deu"/>
                                                         <constraint firstItem="UBR-R7-vR8" firstAttribute="centerY" secondItem="PlM-Wb-qq2" secondAttribute="centerY" constant="-0.5" id="RP1-Jd-gvt"/>
                                                         <constraint firstItem="UBR-R7-vR8" firstAttribute="height" secondItem="KQv-Ek-OHa" secondAttribute="height" multiplier="0.95" id="Uv2-o6-UfP"/>
                                                         <constraint firstItem="KQv-Ek-OHa" firstAttribute="leading" secondItem="PlM-Wb-qq2" secondAttribute="leading" constant="12" id="kBQ-Bo-gNj"/>
@@ -109,14 +109,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O3I-Nj-Y2R"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9qQ-by-n7g">
-                        <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="EIY-GC-wGq">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="searchButtonAction:" destination="vdI-H9-hXj" id="PMt-aF-ors"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="9qQ-by-n7g"/>
                     <connections>
                         <outlet property="tableView" destination="ZiW-Mz-EKA" id="lr5-u8-fhu"/>
                         <segue destination="8ID-bc-nt1" kind="show" identifier="showEnterpriseSegue" id="7Y6-N2-JPr"/>
@@ -129,10 +122,10 @@
         <!--EnterpriseStoryboard-->
         <scene sceneID="GhV-Xj-dDT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BRI-Za-jEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Enterprise" referencedIdentifier="EnterpriseStoryboard" id="8ID-bc-nt1" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="3Rp-e3-1DG"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BRI-Za-jEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1528" y="-258"/>
         </scene>
@@ -157,7 +150,6 @@
     </scenes>
     <resources>
         <image name="imgE1Lista" width="90" height="69"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <namedColor name="background">
             <color red="0.92156862745098034" green="0.9137254901960784" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
