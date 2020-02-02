@@ -49,7 +49,15 @@ class LoginViewController: UIViewController {
         }
         
         viewModel?.onLoginValidationError = { [weak self] errorMessage in
-            self?.showErrosAlert(message: errorMessage)
+            DispatchQueue.main.async {
+                self?.showErrosAlert(title: "Credenciais inválidas",message: errorMessage)
+            }
+        }
+        
+        viewModel?.onAuthenticationError = { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                self?.showErrosAlert(title: "Falha na autenticação",message: errorMessage)
+            }
         }
     }
     
@@ -87,8 +95,8 @@ class LoginViewController: UIViewController {
         textField.layer.addSublayer(bottomLine)
     }
     
-    private func showErrosAlert(message: String) {
-        let alert = UIAlertController(title: "Credenciais inválidas", message: message, preferredStyle: .alert)
+    private func showErrosAlert(title: String,message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
         self.present(alert, animated: true, completion: nil)
     }
