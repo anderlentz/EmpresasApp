@@ -24,8 +24,9 @@ class HomeViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationLayout()
+        
         setupSearchController()
+        setupNavigationLayout()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -48,10 +49,12 @@ class HomeViewController: UIViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.changeClearIconColor()
+        }
     }
-    
+ 
     // MARK: - Helpers
     private func setupNavigationLayout() {
         
@@ -93,8 +96,6 @@ class HomeViewController: UIViewController {
         
         // Set Cancel button color to white
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white], for: .normal)
-        
-        changeClearIconColor()
     }
     
     private func changeClearIconColor() {
