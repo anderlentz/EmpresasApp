@@ -83,6 +83,9 @@ class HomeViewController: UIViewController {
         // Cursor color to brown grey
         searchController.searchBar.searchTextField.tintColor = UIColor(named: "brownGrey")
         
+        // Keep text at searchBar
+        searchController.obscuresBackgroundDuringPresentation = false
+        
         // Set Cancel button color to white
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white], for: .normal)
         
