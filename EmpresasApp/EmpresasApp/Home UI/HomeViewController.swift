@@ -121,10 +121,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: "showEnterpriseSegue", sender: nil)
-        print("Clicou")
         if let enterprise = enterprises?[indexPath.row] {
-            print("at: \(enterprise)")
             navigationCoordinator?.performTransition(transition: HomeCoordinatorTransition.showEnterpriseDetails(enterprise))
         }
     }

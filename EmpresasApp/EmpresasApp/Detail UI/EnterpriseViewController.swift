@@ -18,10 +18,22 @@ class EnterpriseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.title = enterprise?.enterpriseName
-        
+        setupNavigationLayout()
+                
         if let description = enterprise?.enterprisDescription {
             enterpriseDescriptionLabel.text = description
         }
+    }
+    
+    private func setupNavigationLayout() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(named:"darkishPink")
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
+        navigationItem.title = enterprise?.enterpriseName
     }
 }

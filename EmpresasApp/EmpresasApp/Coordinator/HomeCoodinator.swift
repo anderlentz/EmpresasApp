@@ -37,7 +37,6 @@ class HomeCoordinator: Coordinator {
     }
     
     func performTransition(transition: T) {
-        print("performTrantions")
         switch transition {
         case .showEnterpriseDetails(let enterprise):
             let enterpriseCoordinator = EnterpriseDetailsCoordinator(navigationController: navigationController, enterprise: enterprise)
