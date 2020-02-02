@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class AuthenticationManager {
+    static let shared = AuthenticationManager()
+    
+    var authState: AuthState?
+    
+    init(){}
+}

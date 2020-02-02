@@ -102,6 +102,9 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
     
 }
 

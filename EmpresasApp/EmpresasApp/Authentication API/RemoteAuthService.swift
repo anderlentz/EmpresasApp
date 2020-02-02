@@ -68,10 +68,10 @@ public class RemoteAuthService: AuthenticationService {
                 case 403:
                    completion(.failure(.forbidden))
                 case 200:
-                    print(response.allHeaderFields)
                     
                     do {
                         let investor = try InvestorMapper.map(data)
+                        AuthenticationManager.shared.authState = AuthState.extractAuthState(from: response)
                         completion(.success(investor))
                     } catch {
                         completion(.failure(.invalidData))

@@ -16,9 +16,9 @@ class HomeCoordinator {
     }
         
     func start() {
-        let endpointURL = URL(string: "https://empresas.ioasys.com.br/api/v1/enterprises?enterprises")!
+        let endpointURL = URL(string: "https://empresas.ioasys.com.br/api/v1/enterprises")!
         
-        let authState = AuthState(accessToken: "", client: "", uid: "")
+        let authState = AuthenticationManager.shared.authState!
         
         let viewModel = HomeViewModel(enterpriseService: RemoteEnterpriseService(endpointURL: endpointURL,
                                                                                  client: URLSessionEnterpriseHTTPCLient(),

@@ -9,8 +9,8 @@
 import Foundation
 
 class RemoteEnterpriseService: EnterpriseService {
-   
-    let authState: AuthState
+    
+    let authState: AuthState?
     let client: EnterpriseHTTPClient
     var requestURL: URLRequest
     
@@ -23,14 +23,46 @@ class RemoteEnterpriseService: EnterpriseService {
         case generic
     }
     
-    init(endpointURL: URL,client: EnterpriseHTTPClient, authState: AuthState) {
+    init(endpointURL: URL,client: EnterpriseHTTPClient, authState: AuthState?) {
         self.requestURL = URLRequest(url: endpointURL)
         self.client = client
         self.authState = authState
+        self.requestURL.allHTTPHeaderFields = makeHeader()
     }
     
     func getAllEnterprises(completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
-        requestURL.allHTTPHeaderFields = makeHeader()
+        client.get(from: requestURL) { result in
+            switch result {
+            case .failure:
+                completion(.failure(.connectivity))
+            case .success(let (data,response)):
+                switch response.statusCode {
+                case 401:
+                    completion(.failure(.unauthorized))
+                case 200:
+                    do {
+                        //let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        let enterprises = try EnterpriseMapper.map(data: data)
+                        completion(.success(enterprises))
+                    } catch {
+                        completion(.failure(.invalidData))
+                    }
+                default:
+                    completion(.failure(.generic))
+                }
+            }
+        }
+    }
+    
+    func getEnterprises(containingName: String,
+                        completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
+        
+        var url = URLComponents(url: requestURL.url!, resolvingAgainstBaseURL: true)!
+        url.queryItems = [
+            URLQueryItem(name: "name", value: containingName)
+        ]
+        requestURL.url = url.url
+ 
         client.get(from: requestURL) { result in
             switch result {
             case .failure:
@@ -56,9 +88,9 @@ class RemoteEnterpriseService: EnterpriseService {
     // MARK: - Helpers
     private func makeHeader() -> [String: String] {
         
-        if let accessToken = authState.accessToken,
-            let client = authState.client,
-            let uid = authState.uid {
+        if let accessToken = authState?.accessToken,
+            let client = authState?.client,
+            let uid = authState?.uid {
             return ["access-token": accessToken,
                     "client": client,
                     "uid": uid]

@@ -10,4 +10,6 @@ import Foundation
 
 protocol EnterpriseService {
     func getAllEnterprises(completion: @escaping (Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>) -> Void)
+    func getEnterprises(containingName: String,
+                        completion: @escaping (Result<[Enterprise],RemoteEnterpriseService.EnterpriseServiceError>) -> Void)
 }

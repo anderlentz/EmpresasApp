@@ -14,4 +14,12 @@ final class HomeViewModel {
     init(enterpriseService: EnterpriseService) {
         self.enterpriseService = enterpriseService
     }
+    
+    func getAllEnterprises(enterpriseName: String) {
+        enterpriseService.getEnterprises(containingName: enterpriseName) { result in
+        }
+//        enterpriseService.getAllEnterprises { (result) in
+//            print(result)
+//        }
+    }
 }
