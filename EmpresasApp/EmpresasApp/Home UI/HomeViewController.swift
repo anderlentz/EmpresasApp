@@ -22,19 +22,8 @@ class HomeViewController: UIViewController {
     }
     // MARK: - IBOutles
     @IBOutlet weak var tableView: UITableView!
-    
-    // MARK: - IBActions
-    @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
-        
-        
-//        DispatchQueue.main.async { [weak self] in
-//            guard let strongSelf = self else { return }
-//            strongSelf.present(strongSelf.searchController, animated: true, completion: nil)
-//        }
-    }
-    
-    
-    
+
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationLayout()
