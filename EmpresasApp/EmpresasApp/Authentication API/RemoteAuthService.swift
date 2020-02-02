@@ -16,6 +16,15 @@ public struct AuthState {
     let accessToken: String?
     let client: String?
     let uid: String?
+    
+    static func extractAuthState(from httpURLResponse: HTTPURLResponse) -> AuthState {
+        
+        let accessToken = httpURLResponse.value(forHTTPHeaderField: "access-token")
+        let client = httpURLResponse.value(forHTTPHeaderField: "client")
+        let uid = httpURLResponse.value(forHTTPHeaderField: "uid")
+        
+        return AuthState(accessToken: accessToken, client: client, uid: uid)
+    }
 }
 
 public class RemoteAuthService: AuthenticationService {
@@ -75,15 +84,6 @@ public class RemoteAuthService: AuthenticationService {
                 completion(.failure(.connectivity))
             }
         }
-    }
-    
-    func extractAuthState(from httpURLResponse: HTTPURLResponse) -> AuthState {
-        
-        let accessToken = httpURLResponse.value(forHTTPHeaderField: "access-token")
-        let client = httpURLResponse.value(forHTTPHeaderField: "client")
-        let uid = httpURLResponse.value(forHTTPHeaderField: "uid")
-        
-        return AuthState(accessToken: accessToken, client: client, uid: uid)
     }
     
     private func setupHeaders(email: String, password: String) {

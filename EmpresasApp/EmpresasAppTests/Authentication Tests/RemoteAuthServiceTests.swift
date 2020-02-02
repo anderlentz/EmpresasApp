@@ -131,14 +131,13 @@ class RemoteAuthServiceTests: XCTestCase {
     }
     
     func test_authorizationState_deliversAuthStateWithAccessTokenClientAndUIDAfterSuccessAuthorizationURLResponse() {
-        let (sut,_) = makeSUT()
         let accessToken = "fqnQtzqRNfDlDdo05IWfpQ"
         let client = "9RMMRW0AGQlY2LSlMom5IQ"
         let uid = "testeapple@ioasys.com.br"
         let successHTTPURLResponse = HTTPURLResponse(url: URL(string: "https://any-url.com")!, statusCode: 200, httpVersion: nil, headerFields: makeSuccessHttpHeader())!
                 
         
-        let authState = sut.extractAuthState(from: successHTTPURLResponse)
+        let authState = AuthState.extractAuthState(from: successHTTPURLResponse)
         
         XCTAssertEqual(authState.accessToken, accessToken)
         XCTAssertEqual(authState.client, client)
