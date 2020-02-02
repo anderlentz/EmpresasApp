@@ -75,13 +75,6 @@ class LoginViewControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
-//    private func makeSUT() -> LoginViewController {
-//
-//        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
-//        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
-//        return LoginUIComposer.loginComposedWith(viewModel: viewModel, authenticationService: remoteAuthService)
-//
-//    }
     
     class HTTPClientSpyWithError: HTTPClient {
         
@@ -92,11 +85,7 @@ class LoginViewControllerTests: XCTestCase {
             let errorResult: Result<(Data,HTTPURLResponse), Error> = .failure(NSError(domain:"Test",code:0))
             completion(errorResult)
         }
-        
-//        func complete(whith error: Error) {
-//            let result: Result<(Data,HTTPURLResponse), Error> = .failure(error)
-//            message(result)
-//        }
+
     }
     
 }
