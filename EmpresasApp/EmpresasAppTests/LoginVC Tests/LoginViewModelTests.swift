@@ -60,6 +60,23 @@ class LoginViewModelTests: XCTestCase {
         
     }
     
+    func test_doLogin_withValidEmailAndEmptyPasswordProducesFormattedErrorMessage() {
+        let sut = makeSUT()
+        var expectedErrorMessage: String?
+        
+        let exp = expectation(description: "Wait for error login message")
+        sut.onLoginValidationError = { errorMessage in
+            expectedErrorMessage = errorMessage
+            exp.fulfill()
+        }
+        
+        sut.doLogin(email: validEmail(), password: emptyPassword())
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(expectedErrorMessage,makeFormattedEmptyPasswordErrorMessage())
+        
+    }
+    
     
     
     
@@ -79,5 +96,12 @@ class LoginViewModelTests: XCTestCase {
     
     func passwordWithWhiteSpace() -> String {
         return " 1212 1"
+    }
+    func emptyPassword() -> String {
+        return ""
+    }
+    
+    func makeFormattedEmptyPasswordErrorMessage() -> String {
+        return "- Password não pode ser vazio."
     }
 }
