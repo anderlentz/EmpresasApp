@@ -256,14 +256,13 @@
 		A7B19ABD23E1DDC40001FA34 /* EmpresasApp */ = {
 			isa = PBXGroup;
 			children = (
-				A7E6251223E69584006089E7 /* Storyboards */,
 				A7A3BD2C23E4ACAE0056F352 /* Coordinator */,
 				A79C11FC23E325AB005F55A7 /* Login UI */,
 				A753F30223E372DC00266A3B /* Home UI */,
 				A7A3BD5823E686FF0056F352 /* Detail UI */,
-				A7A3BD3C23E5EB6B0056F352 /* Enterprise API */,
-				A7EEBAC523E2285300673B1C /* Authentication API */,
 				A7B19AEE23E1EACB0001FA34 /* Models */,
+				A7E6251323E69668006089E7 /* APIs */,
+				A7E6251223E69584006089E7 /* Storyboards */,
 				A7B19ABE23E1DDC40001FA34 /* AppDelegate.swift */,
 				A7B19AC023E1DDC40001FA34 /* SceneDelegate.swift */,
 				A7B19AC723E1DDC80001FA34 /* Assets.xcassets */,
@@ -323,6 +322,15 @@
 				A7B19AC423E1DDC40001FA34 /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		A7E6251323E69668006089E7 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				A7A3BD3C23E5EB6B0056F352 /* Enterprise API */,
+				A7EEBAC523E2285300673B1C /* Authentication API */,
+			);
+			path = APIs;
 			sourceTree = "<group>";
 		};
 		A7EEBAC523E2285300673B1C /* Authentication API */ = {
