@@ -52,8 +52,8 @@ class LoginViewController: UIViewController {
             }
         }
         
-        viewModel?.onLoginValidationError = { errorMessage in
-            print(errorMessage)
+        viewModel?.onLoginValidationError = { [weak self] errorMessage in
+            self?.showErrosAlert(message: errorMessage)
         }
     }
     
@@ -91,6 +91,12 @@ class LoginViewController: UIViewController {
         bottomLine.backgroundColor = UIColor(named: "CharcoalGrey")?.cgColor
         textField.borderStyle = UITextField.BorderStyle.none
         textField.layer.addSublayer(bottomLine)
+    }
+    
+    private func showErrosAlert(message: String) {
+        let alert = UIAlertController(title: "Credenciais inválidas", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func setupTextFieldLayout() {
