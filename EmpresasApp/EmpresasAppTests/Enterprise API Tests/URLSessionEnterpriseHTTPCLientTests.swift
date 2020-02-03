@@ -7,8 +7,9 @@
 //
 
 import XCTest
+@testable import EmpresasApp
 
-class URLSessionEnterpriseHTTPCLient: XCTest {
+class URLSessionEnterpriseHTTPCLientTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -20,5 +21,34 @@ class URLSessionEnterpriseHTTPCLient: XCTest {
         URLProtocolStub.stopInterceptingRequests()
     }
     
+    func test_get_performsGETFromURLRequest() {
+        let exp = expectation(description: "Wait for request")
+        
+        let urlRequest = URLRequest(url: anyEndpointURL())
+        
+        URLProtocolStub.observeRquests { [weak self] request in
+            XCTAssertEqual(request.url, self?.anyEndpointURL())
+            XCTAssertEqual(request.httpMethod, "GET")
+            exp.fulfill()
+        }
+        
+        makeSUT().get(from: urlRequest) { _ in }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
+    // MARK: - Helpers
+    private func makeSUT() -> URLSessionEnterpriseHTTPCLient {
+        return URLSessionEnterpriseHTTPCLient()
+    }
+    
+    private func anyEndpointURL() -> URL {
+        return URL(string: "http://any-url.com")!
+    }
+    
+    private func makeURLRequest() -> URLRequest {
+        let urlRequest = URLRequest(url: anyEndpointURL())
+        return urlRequest
+    }
     
 }
