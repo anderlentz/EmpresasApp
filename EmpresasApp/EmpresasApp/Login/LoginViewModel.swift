@@ -109,9 +109,3 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
 }
-
-extension String {
-    var isEmptyOrWhitespace : Bool {
-        return self.trimmingCharacters(in: .whitespaces).isEmpty
-    }
-}
