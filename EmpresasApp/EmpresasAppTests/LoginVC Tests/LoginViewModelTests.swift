@@ -147,9 +147,25 @@ class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(expectedErrorMessages[0],LoginViewModel.ErrorMessage.onPasswordWithWhitespace.rawValue)
         XCTAssertEqual(expectedErrorMessages[1],LoginViewModel.ErrorMessage.onEmptyPassword.rawValue)
 
-
-
     }
+    
+    func test_doLogin_failsOnAuthenticationUnauthorizedError() {
+        let remoteAuthService = RemoteAuthServiceSpy()
+        let sut = LoginViewModel(authenticationService: remoteAuthService)
+        var receivedAuthenticationError: String?
+        
+        let exp = expectation(description: "Wait for completion")
+        sut.doLogin(email: validEmail(), password: validPassword())
+        sut.onAuthenticationError = {error in
+            receivedAuthenticationError = error
+            exp.fulfill()
+        }
+        remoteAuthService.complete(whith: .unauthorized)
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(receivedAuthenticationError,LoginViewModel.ErrorMessage.onAuthenticationFailure.rawValue)
+    }
+    
     
     
     
@@ -158,6 +174,26 @@ class LoginViewModelTests: XCTestCase {
         let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
         return LoginViewModel(authenticationService: remoteAuthService)
     }
+    
+    private func resultMessageErrorFor(error: RemoteAuthService.AuthenticationError) {
+        let remoteAuthService = RemoteAuthServiceSpy()
+        let sut = LoginViewModel(authenticationService: remoteAuthService)
+        var receivedAuthenticationError: String?
+        
+        sut.doLogin(email: validEmail(), password: validPassword())
+        
+        sut.onAuthenticationError = {error in
+            receivedAuthenticationError = error
+            print("BLABLABLA: \(error)")
+        }
+        
+        remoteAuthService.complete(whith: .unauthorized)
+        
+        //wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(receivedAuthenticationError,LoginViewModel.ErrorMessage.onAuthenticationFailure.rawValue)
+        
+    }
+    
     
     func validEmail() -> String {
         return "test@test.com"
@@ -181,4 +217,30 @@ class LoginViewModelTests: XCTestCase {
     func makeFormattedWhiteSpacePasswordErrorMessage() -> String {
         return "Password não pode conter espaços."
     }
+    
+    static func makeFakeInvestor() -> Investor {
+        return Investor(id: 0, investorName: "teste", email: "test@test.com", city: "", country: "", balance: 0.0, photo: "", portfolio: Portfolio(enterprisesNumber: 0, enterprises: []), portfolioValue: 0.0, firstAccess: false, superAngel: false)
+    }
+    
+    private class RemoteAuthServiceSpy: AuthenticationService {
+        
+        var message: ((Result<Investor, RemoteAuthService.AuthenticationError>) -> Void) = { _ in}
+        
+        func complete(whith error: RemoteAuthService.AuthenticationError) {
+            let result: (Result<Investor, RemoteAuthService.AuthenticationError>) = .failure(error)
+            message(result)
+        }
+        
+        func completeWithSuccessfulAuthentication(){
+            let result: (Result<Investor, RemoteAuthService.AuthenticationError>) = .success(makeFakeInvestor())
+            message(result)
+        }
+        
+        func authenticate(email: String, password: String, completion: @escaping (Result<Investor, RemoteAuthService.AuthenticationError>) -> Void) {
+            message = completion
+        }
+      
+    }
 }
+
+
