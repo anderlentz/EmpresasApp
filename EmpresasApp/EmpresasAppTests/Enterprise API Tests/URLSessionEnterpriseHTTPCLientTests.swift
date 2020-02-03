@@ -38,12 +38,25 @@ class URLSessionEnterpriseHTTPCLientTests: XCTestCase {
     }
     
     func test_getUrlRequest_failsOnRequestError() {
-        let requestError = NSError(domain: "ANY ERROR", code: 1)
+        let requestError = anyError()
         
         let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)
         
         XCTAssertEqual(receivedError as NSError?, requestError)
            
+    }
+    
+    func test_get_failsOnAllInvalidCases() {
+        
+        XCTAssertNotNil(resultErrorFor(data: nil, response: nil, error: nil))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: nonHTTPURLResponse(), error: nil))
+        XCTAssertNotNil(resultErrorFor(data: anyData(), response: nil, error: nil))
+        XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHTTPURLResponse(), error: anyError()))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: nonHTTPURLResponse(), error: anyError()))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: anyHTTPURLResponse(), error: anyError()))
+        XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHTTPURLResponse(), error: anyError()))
+        XCTAssertNotNil(resultErrorFor(data: anyData(), response: anyHTTPURLResponse(), error: anyError()))
+        XCTAssertNotNil(resultErrorFor(data: anyData(), response: nonHTTPURLResponse(), error: nil))
     }
     
     func test_getFromURLResquest_succeedsOnHTTPURLResponseWithData() {
@@ -92,6 +105,10 @@ class URLSessionEnterpriseHTTPCLientTests: XCTestCase {
     
     private func anyData() -> Data {
         return Data()
+    }
+    
+    private func anyError() -> NSError {
+        return NSError(domain: "ANY ERROR", code: 1)
     }
     
     private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?,
