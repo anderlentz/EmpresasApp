@@ -166,6 +166,23 @@ class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(receivedAuthenticationError,LoginViewModel.ErrorMessage.onAuthenticationFailure.rawValue)
     }
     
+    func test_doLogin_receiveLoggedInvestorWhenLoginWithSucess() {
+        let remoteAuthService = RemoteAuthServiceSpy()
+        let sut = LoginViewModel(authenticationService: remoteAuthService)
+        var receivedLoggedInvestor: Investor?
+        
+        let exp = expectation(description: "Wait for completion")
+        sut.doLogin(email: validEmail(), password: validPassword())
+        sut.onInvestorLogin = { investor in
+            receivedLoggedInvestor = investor
+            exp.fulfill()
+        }
+        
+        remoteAuthService.completeWithSuccessfulAuthentication()
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(receivedLoggedInvestor, LoginViewModelTests.makeFakeInvestor())
+    }
     
     
     
