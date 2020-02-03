@@ -28,7 +28,7 @@ final class HomeViewModel {
     func getAllEnterprises(enterpriseName: String) {
         
         pendingRequestWorkItem?.cancel()
-        if enterpriseName.count >= 3 {
+        if enterpriseName.count >= 1 {
             
             // Wrap our request in a work item
             let requestWorkItem = DispatchWorkItem { [weak self] in
@@ -44,7 +44,7 @@ final class HomeViewModel {
 
             // Save the new work item and execute it after 300 ms
             pendingRequestWorkItem = requestWorkItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300),
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
                                       execute: requestWorkItem)
         }
     }
