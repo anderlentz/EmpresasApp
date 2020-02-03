@@ -38,36 +38,80 @@ class URLSessionEnterpriseHTTPCLientTests: XCTestCase {
     }
     
     func test_getUrlRequest_failsOnRequestError() {
-        let error = NSError(domain: "ANY ERROR", code: 1)
-        URLProtocolStub.stub(data: nil, response: nil, error: error)
+        let requestError = NSError(domain: "ANY ERROR", code: 1)
+        
+        let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)
+        
+        XCTAssertEqual(receivedError as NSError?, requestError)
+           
+    }
+    
+    func test_getFromURLResquest_succeedsOnHTTPURLResponseWithData() {
+        let data = anyData()
+        let response = anyHTTPURLResponse()
+        URLProtocolStub.stub(data: data, response: response, error: nil)
         
         let exp = expectation(description: "Wait for completion")
         
-        makeSUT().get(from: makeURLRequest()) { result in
+        makeSUT().get(from: anyURLRequest()) { result in
             switch result {
-            case let .failure(receivedError as NSError):
-                XCTAssertEqual(receivedError, error)
+            case let .success((receivedData, receivedResponse)):
+                XCTAssertEqual(receivedData, data)
+                XCTAssertEqual(receivedResponse.url, response.url)
+                XCTAssertEqual(receivedResponse.statusCode, response.statusCode)
             default:
-                XCTFail("Expected failure with error \(error), got \(result) instead")
+                XCTFail("Expected success, got \(result)")
             }
             exp.fulfill()
         }
-        
         wait(for: [exp], timeout: 1.0)
     }
+
     
     // MARK: - Helpers
     private func makeSUT() -> URLSessionEnterpriseHTTPCLient {
         return URLSessionEnterpriseHTTPCLient()
     }
     
+    private func nonHTTPURLResponse() -> URLResponse {
+        return URLResponse(url: anyEndpointURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+    }
+    
+    private func anyHTTPURLResponse() -> HTTPURLResponse {
+        return HTTPURLResponse(url: anyEndpointURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!
+    }
+    
     private func anyEndpointURL() -> URL {
         return URL(string: "http://any-url.com")!
     }
     
-    private func makeURLRequest() -> URLRequest {
+    private func anyURLRequest() -> URLRequest {
         let urlRequest = URLRequest(url: anyEndpointURL())
         return urlRequest
     }
     
+    private func anyData() -> Data {
+        return Data()
+    }
+    
+    private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?,
+                                file: StaticString = #file, line: UInt = #line) -> Error? {
+        URLProtocolStub.stub(data: data, response: response, error: error)
+        
+        let exp = expectation(description: "Wait for completion")
+        
+        var receivedError: Error?
+        makeSUT().get(from: anyURLRequest()) { result in
+            switch result {
+            case let .failure(error):
+                receivedError = error
+            default:
+                XCTFail("Expected failure with error, got \(result) instead",file: file,line: line)
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+        return receivedError
+    }
 }
