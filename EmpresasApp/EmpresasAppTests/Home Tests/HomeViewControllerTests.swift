@@ -48,22 +48,34 @@ class HomeViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedEnterprisesViews(), 1)
     }
     
-    func test_onEnterprisesLoad_withEmptyResultShoudShowNoEnterprisesBackgroundView() {
+    func test_onEnterprisesLoad_withEmptyResultShoudReceiveOnEmptyEnterpriseCallback() {
         let (sut,viewModel) = makeSUT()
-        var isEmptyResult = false
         sut.loadViewIfNeeded()
         
         let exp = expectation(description: "Wait for empty load callback")
         sut.viewModel?.onEmptyEnterprisesLoad = {
-            isEmptyResult = true
             exp.fulfill()
         }
         
         viewModel.completesGetAllEnterprisesWithEmptyResult()
         
         wait(for: [exp], timeout: 1.0)
-        XCTAssert(isEmptyResult)
-  
+        
+    }
+    
+    func test_showEmptyEnterprisesBackgroundResult_setsTableviewBackgroundToEmptyResultLayout() {
+        let (sut,_) = makeSUT()
+        sut.loadViewIfNeeded()
+
+        let exp = expectation(description: "Waits set background view at main thread")
+        DispatchQueue.main.async {
+            sut.simulateEmptyEnterprisesSearch()
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(sut.tableView.backgroundView?.restorationIdentifier, "noEnterprisesBackground")
+
     }
     
     private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
@@ -101,6 +113,11 @@ class HomeViewControllerTests: XCTestCase {
 }
 
 private extension HomeViewController {
+    
+    private var enterprisesSection: Int {
+        return 0
+    }
+    
     func simulateSuccefullEnterpriseSearch(){
         viewModel?.getAllEnterprises(enterpriseName: "teste")
     }
@@ -108,8 +125,10 @@ private extension HomeViewController {
     func numberOfRenderedEnterprisesViews() -> Int {
         return tableView.numberOfRows(inSection: enterprisesSection)
     }
-    
-    private var enterprisesSection: Int {
-        return 0
+
+    func simulateEmptyEnterprisesSearch() {
+        showEmptyEnterprisesBackgroundResult()
+        print("saiu")
     }
+    
 }

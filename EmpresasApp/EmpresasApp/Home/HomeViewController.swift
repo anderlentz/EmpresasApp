@@ -29,6 +29,8 @@ class HomeViewController: UIViewController {
         setupSearchController()
         setupNavigationLayout()
         
+        noEnterprisesBackgroundView.tag = 233
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundView = initialBackgroundView
@@ -44,9 +46,8 @@ class HomeViewController: UIViewController {
         }
         
         viewModel?.onEmptyEnterprisesLoad = {
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.backgroundView = self?.noEnterprisesBackgroundView
-                self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.showEmptyEnterprisesBackgroundResult()
             }
         }
     }
@@ -58,6 +59,12 @@ class HomeViewController: UIViewController {
     }
  
     // MARK: - Helpers
+    
+    func showEmptyEnterprisesBackgroundResult() {
+        self.tableView.backgroundView = self.noEnterprisesBackgroundView
+        self.tableView.reloadData()
+    }
+    
     private func setupNavigationLayout() {
         
         // Color and appearence

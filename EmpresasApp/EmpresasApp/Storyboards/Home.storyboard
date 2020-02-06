@@ -135,7 +135,7 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="U8T-Ma-wMO"/>
                 </view>
-                <view contentMode="scaleToFill" id="NKs-T1-G3P">
+                <view contentMode="scaleToFill" restorationIdentifier="noEnterprisesBackground" id="NKs-T1-G3P">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
