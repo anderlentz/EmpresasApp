@@ -54,18 +54,48 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(receivedCount, 2)
     }
     
+    func test_getAllEnterprises_onEnterprisesLoadOnSuccess() {
+        let enterpriseService = EnterpriseServiceSpy()
+        let sut = HomeViewModel(enterpriseService: enterpriseService)
+        var receivedEnterprises: [Enterprise]?
+        
+        let exp = expectation(description: "Wait receive enterprise")
+        sut.getAllEnterprises(enterpriseName: "Test")
+        sut.onEnterprisesLoad = { enterprises in
+            receivedEnterprises = enterprises
+           
+            exp.fulfill()
+        }
+        
+        enterpriseService.completeGetEnterprisesWithSuccess()
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(receivedEnterprises, [HomeViewModelTests.makeEnterprise()])
+    }
+    
+    static private func makeEnterprise() -> Enterprise {
+        return Enterprise(id: 0, emailEnterprise: nil, facebook: nil, twitter: nil, linkedin: nil, phone: nil, ownEnterprise: false, enterpriseName: "Test", photo: nil, enterprisDescription: "Test", city: "City", country: "Country", value: 0, sharePrice: 1, enterpriseType: EnterpriseType(id: 0, enterpriseTypeName: "Enterprise"))
+    }
     
     private class EnterpriseServiceSpy: EnterpriseService {
         
         var wasCalled = false
         var callingCount = 0
-
         var onGetEnterprisesCalled: (Int) -> Void = {_ in}
+        
+        var onCompleteGetEnterprises: ((Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) = { _ in}
         
         func getEnterprises(containingName: String, completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
             wasCalled = true
             callingCount += 1
             onGetEnterprisesCalled(callingCount)
+            completion(.success([HomeViewModelTests.makeEnterprise()]))
+            print("getEnterprises \(completion)")
+        }
+        
+        func completeGetEnterprisesWithSuccess() {
+            onCompleteGetEnterprises(.success([HomeViewModelTests.makeEnterprise()]))
+            print("Sucesso")
         }
     }
 }

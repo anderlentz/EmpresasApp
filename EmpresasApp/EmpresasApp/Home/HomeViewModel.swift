@@ -29,13 +29,14 @@ final class HomeViewModel {
         
         pendingRequestWorkItem?.cancel()
         if enterpriseName.count >= 1 {
-            print("passou")
             // Wrap our request in a work item
             let requestWorkItem = DispatchWorkItem { [weak self] in
             
                 self?.enterpriseService.getEnterprises(containingName: enterpriseName) { [weak self] result in
+                    print(result)
                     switch result {
                     case .success(let enterprises):
+                        print("Veio com sucesso \(enterprises)")
                         self?.onEnterprisesLoad?(enterprises)
                     case .failure(let error):
                         print("Inform view that an error has occuried, \(error)")
