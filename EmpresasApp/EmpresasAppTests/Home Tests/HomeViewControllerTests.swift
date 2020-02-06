@@ -43,7 +43,27 @@ class HomeViewControllerTests: XCTestCase {
         
         viewModel.completesGetAllEnterprisesWithSuccess(enterprises: [HomeViewControllerTests.makeEnterprise()])
         
+        
+        
         XCTAssertEqual(sut.numberOfRenderedEnterprisesViews(), 1)
+    }
+    
+    func test_onEnterprisesLoad_withEmptyResultShoudShowNoEnterprisesBackgroundView() {
+        let (sut,viewModel) = makeSUT()
+        var isEmptyResult = false
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: "Wait for empty load callback")
+        sut.viewModel?.onEmptyEnterprisesLoad = {
+            isEmptyResult = true
+            exp.fulfill()
+        }
+        
+        viewModel.completesGetAllEnterprisesWithEmptyResult()
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssert(isEmptyResult)
+  
     }
     
     private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
@@ -52,9 +72,9 @@ class HomeViewControllerTests: XCTestCase {
     }
     
     private class HomeViewModelSpy: HomeViewModelProtocol {
-        
+       
+        var onEmptyEnterprisesLoad: (() -> Void)?
         var wasGetAllEnterprisesCalled = false
-        
         var onEnterprisesLoad: Observer<[Enterprise]>?
         var onErrorLoad: Observer<String>?
         var onChange: Observer<HomeViewModel>?
@@ -66,6 +86,10 @@ class HomeViewControllerTests: XCTestCase {
         
         func completesGetAllEnterprisesWithSuccess(enterprises: [Enterprise]) {
             onEnterprisesLoad?(enterprises)
+        }
+        
+        func completesGetAllEnterprisesWithEmptyResult() {
+            onEmptyEnterprisesLoad?()
         }
     }
     

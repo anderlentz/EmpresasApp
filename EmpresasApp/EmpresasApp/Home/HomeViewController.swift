@@ -24,7 +24,8 @@ class HomeViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
+        noEnterprisesBackgroundView.accessibilityIdentifier = ""
         setupSearchController()
         setupNavigationLayout()
         
@@ -34,17 +35,18 @@ class HomeViewController: UIViewController {
                 
         viewModel?.onEnterprisesLoad = { [weak self] enterprises in
             self?.enterprises = enterprises
+            print("Enterprises")
             
-            if enterprises.count == 0 {
-                DispatchQueue.main.async {
-                    self?.tableView.backgroundView = self?.noEnterprisesBackgroundView
-                    self?.tableView.reloadData()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.tableView.backgroundView?.isHidden = true
-                    self?.tableView.reloadData()
-                }
+            DispatchQueue.main.async {
+                self?.tableView.backgroundView?.isHidden = true
+                self?.tableView.reloadData()
+            }
+        }
+        
+        viewModel?.onEmptyEnterprisesLoad = {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.backgroundView = self?.noEnterprisesBackgroundView
+                self?.tableView.reloadData()
             }
         }
     }

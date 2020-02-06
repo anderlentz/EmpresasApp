@@ -11,16 +11,18 @@ import Foundation
 protocol HomeViewModelProtocol {
     typealias Observer<T> = (T) -> Void
     
-    
+    var onEmptyEnterprisesLoad: (() -> Void)? {get set}
     var onEnterprisesLoad: Observer<[Enterprise]>? {get set}
     var onErrorLoad: Observer<String>?  {get set}
     var onChange: Observer<HomeViewModel>?  {get set}
+    
     
     func getAllEnterprises(enterpriseName: String) 
 }
 
 final class HomeViewModel: HomeViewModelProtocol {
     
+    var onEmptyEnterprisesLoad: (() -> Void)?
     var onEnterprisesLoad: Observer<[Enterprise]>?
     var onErrorLoad: Observer<String>?
     var onChange: Observer<HomeViewModel>?
@@ -44,7 +46,12 @@ final class HomeViewModel: HomeViewModelProtocol {
                 self?.enterpriseService.getEnterprises(containingName: enterpriseName) { [weak self] result in
                     switch result {
                     case .success(let enterprises):
-                        self?.onEnterprisesLoad?(enterprises)
+                        if enterprises.count == 0 {
+                            self?.onEmptyEnterprisesLoad?()
+                        }
+                        else {
+                            self?.onEnterprisesLoad?(enterprises)
+                        }
                     case .failure(let error):
                         self?.onErrorLoad?("Algo deu errado, tente novamente.")
                         print("Inform view that an error has occuried, \(error)")
