@@ -29,9 +29,10 @@ final class HomeViewModel {
         
         pendingRequestWorkItem?.cancel()
         if enterpriseName.count >= 1 {
-            
+            print("passou")
             // Wrap our request in a work item
             let requestWorkItem = DispatchWorkItem { [weak self] in
+            
                 self?.enterpriseService.getEnterprises(containingName: enterpriseName) { [weak self] result in
                     switch result {
                     case .success(let enterprises):
