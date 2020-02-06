@@ -13,6 +13,7 @@
 		A773B15123E7772A007E61D6 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773B15023E7772A007E61D6 /* LoginViewModelTests.swift */; };
 		A773B15323E79985007E61D6 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773B15223E79985007E61D6 /* URLProtocolStub.swift */; };
 		A773B15523E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773B15423E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift */; };
+		A78656FB23EB959600CABFAA /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78656FA23EB959600CABFAA /* HomeViewModelTests.swift */; };
 		A79C11FE23E3262F005F55A7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C11FD23E3262F005F55A7 /* LoginViewController.swift */; };
 		A7A3BD1723E3AB240056F352 /* EnterpriseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */; };
 		A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */; };
@@ -69,6 +70,7 @@
 		A773B15023E7772A007E61D6 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		A773B15223E79985007E61D6 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		A773B15423E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionEnterpriseHTTPCLientTests.swift; sourceTree = "<group>"; };
+		A78656FA23EB959600CABFAA /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		A79C11FD23E3262F005F55A7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseTableViewCell.swift; sourceTree = "<group>"; };
 		A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		A773B14F23E74BE1007E61D6 /* Home Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A78656FA23EB959600CABFAA /* HomeViewModelTests.swift */,
 			);
 			path = "Home Tests";
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				A7A3BD2323E456CE0056F352 /* LoginViewControllerTests.swift in Sources */,
 				A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */,
 				A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */,
+				A78656FB23EB959600CABFAA /* HomeViewModelTests.swift in Sources */,
 				A7A3BD4123E5F4D50056F352 /* RemoteEnterpriseServiceTests.swift in Sources */,
 				A773B15523E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift in Sources */,
 				A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */,
