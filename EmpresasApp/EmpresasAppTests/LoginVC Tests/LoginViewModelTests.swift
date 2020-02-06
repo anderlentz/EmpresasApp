@@ -201,7 +201,6 @@ class LoginViewModelTests: XCTestCase {
         
         sut.onAuthenticationError = {error in
             receivedAuthenticationError = error
-            print("BLABLABLA: \(error)")
         }
         
         remoteAuthService.complete(whith: .unauthorized)

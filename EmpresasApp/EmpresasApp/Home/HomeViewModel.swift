@@ -14,6 +14,7 @@ final class HomeViewModel {
     
     
     var onEnterprisesLoad: Observer<[Enterprise]>?
+    var onErrorLoad: Observer<String>?
     var onChange: Observer<HomeViewModel>?
     
     private let enterpriseService: EnterpriseService
@@ -36,9 +37,9 @@ final class HomeViewModel {
                     print(result)
                     switch result {
                     case .success(let enterprises):
-                        print("Veio com sucesso \(enterprises)")
                         self?.onEnterprisesLoad?(enterprises)
                     case .failure(let error):
+                        self?.onErrorLoad?("Algo deu errado, tente novamente.")
                         print("Inform view that an error has occuried, \(error)")
                     }
                 }

@@ -63,14 +63,37 @@ class HomeViewModelTests: XCTestCase {
         sut.getAllEnterprises(enterpriseName: "Test")
         sut.onEnterprisesLoad = { enterprises in
             receivedEnterprises = enterprises
-           
+            print("Enterprises")
+            exp.fulfill()
+        }
+    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.300, execute: {
+            enterpriseService.completeGetEnterprisesWithSuccess()
+        })
+                
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(receivedEnterprises, [HomeViewModelTests.makeEnterprise()])
+    }
+    
+    func test_getAllEnterprises_ShoudFailureOnError() {
+        let enterpriseService = EnterpriseServiceSpy()
+        let sut = HomeViewModel(enterpriseService: enterpriseService)
+        var expectedErrorMessage = ""
+        
+        let exp = expectation(description: "Wait receive enterprise")
+        sut.getAllEnterprises(enterpriseName: "Test")
+        sut.onErrorLoad = { errorMessage in
+            expectedErrorMessage = errorMessage
             exp.fulfill()
         }
         
-        enterpriseService.completeGetEnterprisesWithSuccess()
-        wait(for: [exp], timeout: 1.0)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.300, execute: {
+            enterpriseService.completeGetEnterprisesWithError(error: .badRequest)
+        })
         
-        XCTAssertEqual(receivedEnterprises, [HomeViewModelTests.makeEnterprise()])
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(expectedErrorMessage,"Algo deu errado, tente novamente.")
     }
     
     static private func makeEnterprise() -> Enterprise {
@@ -85,17 +108,22 @@ class HomeViewModelTests: XCTestCase {
         
         var onCompleteGetEnterprises: ((Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) = { _ in}
         
+        
+        func completeGetEnterprisesWithSuccess() {
+            onCompleteGetEnterprises(.success([HomeViewModelTests.makeEnterprise()]))
+          
+        }
+        
+        func completeGetEnterprisesWithError(error: RemoteEnterpriseService.EnterpriseServiceError) {
+            onCompleteGetEnterprises(.failure(error))
+        }
+        
         func getEnterprises(containingName: String, completion: @escaping (Result<[Enterprise], RemoteEnterpriseService.EnterpriseServiceError>) -> Void) {
             wasCalled = true
             callingCount += 1
             onGetEnterprisesCalled(callingCount)
-            completion(.success([HomeViewModelTests.makeEnterprise()]))
-            print("getEnterprises \(completion)")
-        }
-        
-        func completeGetEnterprisesWithSuccess() {
-            onCompleteGetEnterprises(.success([HomeViewModelTests.makeEnterprise()]))
-            print("Sucesso")
+            
+            onCompleteGetEnterprises = completion
         }
     }
 }
