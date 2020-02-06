@@ -31,17 +31,19 @@ class HomeViewControllerTests: XCTestCase {
             receivedEnterprises = enterprises
             exp.fulfill()
         }
-        viewModel.completesGetAllEnterprisesWithSuccess()
+        viewModel.completesGetAllEnterprisesWithSuccess(enterprises: [HomeViewControllerTests.makeEnterprise()])
         
         wait(for: [exp], timeout: 1.0)
         XCTAssertEqual(receivedEnterprises, [HomeViewControllerTests.makeEnterprise()])
-        
-        
-        
     }
     
     func test_onEnterprisesLoad_rendersLoadedEnterprises() {
+        let (sut,viewModel) = makeSUT()
+        sut.loadViewIfNeeded()
         
+        viewModel.completesGetAllEnterprisesWithSuccess(enterprises: [HomeViewControllerTests.makeEnterprise()])
+        
+        XCTAssertEqual(sut.numberOfRenderedEnterprisesViews(), 1)
     }
     
     private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
@@ -62,8 +64,8 @@ class HomeViewControllerTests: XCTestCase {
             
         }
         
-        func completesGetAllEnterprisesWithSuccess() {
-            onEnterprisesLoad?([HomeViewControllerTests.makeEnterprise()])
+        func completesGetAllEnterprisesWithSuccess(enterprises: [Enterprise]) {
+            onEnterprisesLoad?(enterprises)
         }
     }
     
@@ -77,6 +79,13 @@ class HomeViewControllerTests: XCTestCase {
 private extension HomeViewController {
     func simulateSuccefullEnterpriseSearch(){
         viewModel?.getAllEnterprises(enterpriseName: "teste")
-        
+    }
+    
+    func numberOfRenderedEnterprisesViews() -> Int {
+        return tableView.numberOfRows(inSection: enterprisesSection)
+    }
+    
+    private var enterprisesSection: Int {
+        return 0
     }
 }
