@@ -1,0 +1,4 @@
+os: osx 
+osx_image: xcode11.2
+laguage: swift
+script: xcodebuild clean build test -project EmpresasApp/EmpresasApp.xcodeproj -scheme "EmpresasApp" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,OS=13.2.2,name=iPhone 8" ONLY_ACTIVE_ARCH=NO
