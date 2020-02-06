@@ -8,10 +8,18 @@
 
 import Foundation
 
-final class HomeViewModel {
-    
+protocol HomeViewModelProtocol {
     typealias Observer<T> = (T) -> Void
     
+    
+    var onEnterprisesLoad: Observer<[Enterprise]>? {get set}
+    var onErrorLoad: Observer<String>?  {get set}
+    var onChange: Observer<HomeViewModel>?  {get set}
+    
+    func getAllEnterprises(enterpriseName: String) 
+}
+
+final class HomeViewModel: HomeViewModelProtocol {
     
     var onEnterprisesLoad: Observer<[Enterprise]>?
     var onErrorLoad: Observer<String>?
@@ -34,7 +42,6 @@ final class HomeViewModel {
             let requestWorkItem = DispatchWorkItem { [weak self] in
             
                 self?.enterpriseService.getEnterprises(containingName: enterpriseName) { [weak self] result in
-                    print(result)
                     switch result {
                     case .success(let enterprises):
                         self?.onEnterprisesLoad?(enterprises)

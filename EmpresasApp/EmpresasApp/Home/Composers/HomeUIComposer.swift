@@ -9,7 +9,7 @@
 import UIKit
 
 public final class HomeUIComposer {
-    static func loginComposedWith(viewModel: HomeViewModel) -> HomeViewController {
+    static func loginComposedWith(viewModel: HomeViewModelProtocol) -> HomeViewController {
                 
         let bundle = Bundle(for: HomeViewController.self)
         let storyboard = UIStoryboard(name: "Home",bundle: bundle)

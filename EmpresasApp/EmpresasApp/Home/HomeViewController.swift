@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     public var navigationCoordinator: HomeCoordinator?
     let searchController = UISearchController(searchResultsController: nil)
-    var viewModel: HomeViewModel?
+    var viewModel: HomeViewModelProtocol?
     private var enterprises: [Enterprise]?
     
     // MARK: - IBOutles
@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundView = initialBackgroundView
-        
+                
         viewModel?.onEnterprisesLoad = { [weak self] enterprises in
             self?.enterprises = enterprises
             

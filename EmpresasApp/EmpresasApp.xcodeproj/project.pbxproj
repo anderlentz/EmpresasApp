@@ -14,6 +14,7 @@
 		A773B15323E79985007E61D6 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773B15223E79985007E61D6 /* URLProtocolStub.swift */; };
 		A773B15523E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773B15423E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift */; };
 		A78656FB23EB959600CABFAA /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78656FA23EB959600CABFAA /* HomeViewModelTests.swift */; };
+		A78656FD23EBBA7800CABFAA /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78656FC23EBBA7800CABFAA /* HomeViewControllerTests.swift */; };
 		A79C11FE23E3262F005F55A7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C11FD23E3262F005F55A7 /* LoginViewController.swift */; };
 		A7A3BD1723E3AB240056F352 /* EnterpriseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */; };
 		A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */; };
@@ -48,6 +49,7 @@
 		A7B19AF023E1EAEC0001FA34 /* Investor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AEF23E1EAEC0001FA34 /* Investor.swift */; };
 		A7B19AF423E1ED000001FA34 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AF323E1ED000001FA34 /* Portfolio.swift */; };
 		A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */; };
+		A7EB98B223EC6DA80039F38A /* EnterpriseServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB98B123EC6DA80039F38A /* EnterpriseServiceSpy.swift */; };
 		A7EEBAC723E2289700673B1C /* RemoteAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */; };
 		A7EEBACB23E2650D00673B1C /* validJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A7EEBACA23E2650D00673B1C /* validJSON.json */; };
 		A7EEBACD23E2796900673B1C /* Enterprise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEBACC23E2796900673B1C /* Enterprise.swift */; };
@@ -71,6 +73,7 @@
 		A773B15223E79985007E61D6 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		A773B15423E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionEnterpriseHTTPCLientTests.swift; sourceTree = "<group>"; };
 		A78656FA23EB959600CABFAA /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		A78656FC23EBBA7800CABFAA /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		A79C11FD23E3262F005F55A7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A7A3BD1623E3AB240056F352 /* EnterpriseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseTableViewCell.swift; sourceTree = "<group>"; };
 		A7A3BD1F23E3DE820056F352 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 		A7B19AEF23E1EAEC0001FA34 /* Investor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investor.swift; sourceTree = "<group>"; };
 		A7B19AF323E1ED000001FA34 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		A7B19AFA23E1F3150001FA34 /* RemoteAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthServiceTests.swift; sourceTree = "<group>"; };
+		A7EB98B123EC6DA80039F38A /* EnterpriseServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseServiceSpy.swift; sourceTree = "<group>"; };
 		A7EEBAC623E2289700673B1C /* RemoteAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthService.swift; sourceTree = "<group>"; };
 		A7EEBACA23E2650D00673B1C /* validJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = validJSON.json; sourceTree = "<group>"; };
 		A7EEBACC23E2796900673B1C /* Enterprise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enterprise.swift; sourceTree = "<group>"; };
@@ -146,7 +150,9 @@
 		A773B14F23E74BE1007E61D6 /* Home Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A7EB98B123EC6DA80039F38A /* EnterpriseServiceSpy.swift */,
 				A78656FA23EB959600CABFAA /* HomeViewModelTests.swift */,
+				A78656FC23EBBA7800CABFAA /* HomeViewControllerTests.swift */,
 			);
 			path = "Home Tests";
 			sourceTree = "<group>";
@@ -499,9 +505,11 @@
 				A7A3BD2323E456CE0056F352 /* LoginViewControllerTests.swift in Sources */,
 				A7A3BD2023E3DE820056F352 /* URLSessionHTTPClientTests.swift in Sources */,
 				A7B19AFB23E1F3150001FA34 /* RemoteAuthServiceTests.swift in Sources */,
+				A78656FD23EBBA7800CABFAA /* HomeViewControllerTests.swift in Sources */,
 				A78656FB23EB959600CABFAA /* HomeViewModelTests.swift in Sources */,
 				A7A3BD4123E5F4D50056F352 /* RemoteEnterpriseServiceTests.swift in Sources */,
 				A773B15523E79A3E007E61D6 /* URLSessionEnterpriseHTTPCLientTests.swift in Sources */,
+				A7EB98B223EC6DA80039F38A /* EnterpriseServiceSpy.swift in Sources */,
 				A7A3BD2923E470DB0056F352 /* HTTPClientSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
