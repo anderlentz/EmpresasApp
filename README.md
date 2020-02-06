@@ -4,11 +4,6 @@
 
 Estes documento README tem como objetivo fornecer as informações necessárias para realização do projeto Empresas.
 
-### O QUE FAZER ? ###
-
-* Você deve fazer um fork deste repositório, criar o código e ao finalizar, enviar o link do seu repositório para a nossa equipe. Lembre-se, NÃO é necessário criar um Pull Request para isso.
-* Nós iremos avaliar e retornar por email o resultado do seu teste.
-
 ### ESCOPO DO PROJETO ###
 
 * Deve ser criado um aplicativo iOS utilizando Objective C ou Swift com as seguintes especificações:
@@ -20,13 +15,7 @@ Estes documento README tem como objetivo fornecer as informações necessárias 
 
 ### Informações Importantes ###
 
-* Layout e recortes disponíveis no Zeplin (http://zeplin.io)
-teste_ios
-15ioasys86
-
 * Integração disponível a partir de uma collection para Postman (https://www.getpostman.com/apps) disponível neste repositório.
-
-* Independente de onde conseguiu chegar no teste é importante disponibilizar seu fonte para analisarmos.
 
 ### Dados para Teste ###
 
@@ -35,6 +24,3 @@ teste_ios
 * Usuário de Teste: testeapple@ioasys.com.br
 * Senha de Teste : 12341234
 
-### Dicas ###
-
-* Temos um framework muito completo que pode te ajudar em tudo: https://github.com/JotaMelo/iOSHelpers-Swift ou https://github.com/JotaMelo/iOSHelpers
