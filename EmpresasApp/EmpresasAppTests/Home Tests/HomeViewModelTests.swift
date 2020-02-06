@@ -88,12 +88,36 @@ class HomeViewModelTests: XCTestCase {
             exp.fulfill()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.300, execute: {
-            enterpriseService.completeGetEnterprisesWithError(error: .badRequest)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.300, execute: { [weak enterpriseService] in
+            enterpriseService?.completeGetEnterprisesWithError(error: .badRequest)
         })
         
         wait(for: [exp], timeout: 1.0)
         XCTAssertEqual(expectedErrorMessage,"Algo deu errado, tente novamente.")
+    }
+    
+    func test_getAllEnterprises_withEmptyEnterprisesShouldCallOnEmptyEnterprisesLoad() {
+        
+        let enterpriseService = EnterpriseServiceSpy()
+        let sut = HomeViewModel(enterpriseService: enterpriseService)
+        var isOnEmptyEnterprisesLoadCalled = false
+        
+        let exp = expectation(description: "Wait to onEmptyEnterprisesLoad get called")
+        
+        sut.getAllEnterprises(enterpriseName: "any-enterprise-test")
+        sut.onEmptyEnterprisesLoad = {
+            isOnEmptyEnterprisesLoadCalled = true
+            exp.fulfill()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.300, execute: { [weak enterpriseService] in
+            enterpriseService?.completeGetEnterprisesWithEmptyEnterprises()
+
+       })
+        
+        enterpriseService.completeGetEnterprisesWithEmptyEnterprises()
+        wait(for: [exp], timeout: 1.0)
+        XCTAssert(isOnEmptyEnterprisesLoadCalled)
     }
     
     private func makeEnterprise() -> Enterprise {

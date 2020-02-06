@@ -23,6 +23,11 @@ class EnterpriseServiceSpy: EnterpriseService {
       
     }
     
+    func completeGetEnterprisesWithEmptyEnterprises() {
+        onCompleteGetEnterprises(.success([]))
+      
+    }
+    
     func completeGetEnterprisesWithError(error: RemoteEnterpriseService.EnterpriseServiceError) {
         onCompleteGetEnterprises(.failure(error))
     }
