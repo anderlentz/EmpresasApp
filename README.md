@@ -1,5 +1,7 @@
 ![N|Solid](logo_ioasys.png)
 
+[![Build Status](https://travis-ci.org/anderlentz/appempresas.svg?branch=master)](https://travis-ci.org/anderlentz/appempresas)
+
 # README #
 
 Estes documento README tem como objetivo fornecer as informações necessárias para realização do projeto Empresas.
