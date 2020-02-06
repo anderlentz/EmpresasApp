@@ -13,9 +13,7 @@ class HomeViewControllerTests: XCTestCase {
     
     func test_viewDidLoad_dontLoadEnterprises() {
         
-        //let enterpriseService = EnterpriseServiceSpy()
-        let viewModel = HomeViewModelSpy()
-        let sut = HomeUIComposer.loginComposedWith(viewModel: viewModel)
+        let (sut,viewModel) = makeSUT()
         
         sut.loadViewIfNeeded()
         
@@ -24,8 +22,7 @@ class HomeViewControllerTests: XCTestCase {
     }
     
     func test_searchEnterprises_callOnEnterprisesLoad() {
-        let viewModel = HomeViewModelSpy()
-        let sut = HomeUIComposer.loginComposedWith(viewModel: viewModel)
+        let (sut,viewModel) = makeSUT()
         var receivedEnterprises: [Enterprise]?
         sut.loadViewIfNeeded()
         
@@ -39,6 +36,17 @@ class HomeViewControllerTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         XCTAssertEqual(receivedEnterprises, [HomeViewControllerTests.makeEnterprise()])
         
+        
+        
+    }
+    
+    func test_onEnterprisesLoad_rendersLoadedEnterprises() {
+        
+    }
+    
+    private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
+        let viewModel = HomeViewModelSpy()
+        return (HomeUIComposer.loginComposedWith(viewModel: viewModel),viewModel)
     }
     
     private class HomeViewModelSpy: HomeViewModelProtocol {
@@ -62,6 +70,8 @@ class HomeViewControllerTests: XCTestCase {
     static private func makeEnterprise() -> Enterprise {
         return Enterprise(id: 0, emailEnterprise: nil, facebook: nil, twitter: nil, linkedin: nil, phone: nil, ownEnterprise: false, enterpriseName: "Test", photo: nil, enterprisDescription: "Test", city: "City", country: "Country", value: 0, sharePrice: 1, enterpriseType: EnterpriseType(id: 0, enterpriseTypeName: "Enterprise"))
     }
+    
+    
 }
 
 private extension HomeViewController {
