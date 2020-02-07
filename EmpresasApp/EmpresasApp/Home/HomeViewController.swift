@@ -37,8 +37,6 @@ class HomeViewController: UIViewController {
                 
         viewModel?.onEnterprisesLoad = { [weak self] enterprises in
             self?.enterprises = enterprises
-            print("Enterprises")
-            
             DispatchQueue.main.async {
                 self?.tableView.backgroundView?.isHidden = true
                 self?.tableView.reloadData()
@@ -46,8 +44,8 @@ class HomeViewController: UIViewController {
         }
         
         viewModel?.onEmptyEnterprisesLoad = {
-            DispatchQueue.main.async {
-                self.showEmptyEnterprisesBackgroundResult()
+            DispatchQueue.main.async { [weak self] in
+                self?.showEmptyEnterprisesBackgroundResult()
             }
         }
     }
@@ -125,11 +123,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         viewModel?.getAllEnterprises(enterpriseName: searchText)
-    
     }
-    
 }
 
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
@@ -138,6 +133,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "enterpriseCell", for: indexPath)
             as! EnterpriseTableViewCell
         cell.enterpriseName.text = enterprises?[indexPath.row].enterpriseName

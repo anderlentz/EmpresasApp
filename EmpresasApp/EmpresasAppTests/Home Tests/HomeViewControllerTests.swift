@@ -18,7 +18,7 @@ class HomeViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         XCTAssertFalse(viewModel.wasGetAllEnterprisesCalled)
-    
+        
     }
     
     func test_searchEnterprises_callOnEnterprisesLoad() {
@@ -39,13 +39,20 @@ class HomeViewControllerTests: XCTestCase {
     
     func test_onEnterprisesLoad_rendersLoadedEnterprises() {
         let (sut,viewModel) = makeSUT()
+        let enterprise = HomeViewControllerTests.makeEnterprise()
         sut.loadViewIfNeeded()
         
-        viewModel.completesGetAllEnterprisesWithSuccess(enterprises: [HomeViewControllerTests.makeEnterprise()])
+        viewModel.completesGetAllEnterprisesWithSuccess(enterprises: [enterprise])
         
-        
-        
+        let view = sut.enterpriseView(at: 0)
+        guard let cell = view as? EnterpriseTableViewCell else {
+            return XCTFail("Expected \(EnterpriseTableViewCell.self)")
+        }
+
         XCTAssertEqual(sut.numberOfRenderedEnterprisesViews(), 1)
+        XCTAssertEqual(cell.enterpriseName.text, enterprise.enterpriseName)
+        XCTAssertEqual(cell.countryLabel.text, enterprise.country)
+        XCTAssertEqual(cell.businessLabel.text, enterprise.enterpriseType.enterpriseTypeName)
     }
     
     func test_onEnterprisesLoad_withEmptyResultShoudReceiveOnEmptyEnterpriseCallback() {
@@ -66,7 +73,7 @@ class HomeViewControllerTests: XCTestCase {
     func test_showEmptyEnterprisesBackgroundResult_setsTableviewBackgroundToEmptyResultLayout() {
         let (sut,_) = makeSUT()
         sut.loadViewIfNeeded()
-
+        
         let exp = expectation(description: "Waits set background view at main thread")
         DispatchQueue.main.async {
             sut.simulateEmptyEnterprisesSearch()
@@ -75,8 +82,9 @@ class HomeViewControllerTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
         XCTAssertEqual(sut.tableView.backgroundView?.restorationIdentifier, "noEnterprisesBackground")
-
+        
     }
+    
     
     private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
         let viewModel = HomeViewModelSpy()
@@ -84,7 +92,7 @@ class HomeViewControllerTests: XCTestCase {
     }
     
     private class HomeViewModelSpy: HomeViewModelProtocol {
-       
+        
         var onEmptyEnterprisesLoad: (() -> Void)?
         var wasGetAllEnterprisesCalled = false
         var onEnterprisesLoad: Observer<[Enterprise]>?
@@ -93,7 +101,6 @@ class HomeViewControllerTests: XCTestCase {
         
         func getAllEnterprises(enterpriseName: String) {
             wasGetAllEnterprisesCalled = true
-            
         }
         
         func completesGetAllEnterprisesWithSuccess(enterprises: [Enterprise]) {
@@ -108,8 +115,6 @@ class HomeViewControllerTests: XCTestCase {
     static private func makeEnterprise() -> Enterprise {
         return Enterprise(id: 0, emailEnterprise: nil, facebook: nil, twitter: nil, linkedin: nil, phone: nil, ownEnterprise: false, enterpriseName: "Test", photo: nil, enterprisDescription: "Test", city: "City", country: "Country", value: 0, sharePrice: 1, enterpriseType: EnterpriseType(id: 0, enterpriseTypeName: "Enterprise"))
     }
-    
-    
 }
 
 private extension HomeViewController {
@@ -118,17 +123,21 @@ private extension HomeViewController {
         return 0
     }
     
+    func numberOfRenderedEnterprisesViews() -> Int {
+        return tableView.numberOfRows(inSection: enterprisesSection)
+    }
+    
+    func enterpriseView(at row: Int) -> UITableViewCell? {
+        let dataSource = tableView.dataSource
+        let index = IndexPath(item: row, section: enterprisesSection)
+        return dataSource?.tableView(tableView, cellForRowAt: index)
+    }
+    
     func simulateSuccefullEnterpriseSearch(){
         viewModel?.getAllEnterprises(enterpriseName: "teste")
     }
     
-    func numberOfRenderedEnterprisesViews() -> Int {
-        return tableView.numberOfRows(inSection: enterprisesSection)
-    }
-
     func simulateEmptyEnterprisesSearch() {
         showEmptyEnterprisesBackgroundResult()
-        print("saiu")
     }
-    
 }
