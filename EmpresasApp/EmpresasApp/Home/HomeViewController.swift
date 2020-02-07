@@ -28,9 +28,7 @@ class HomeViewController: UIViewController {
         noEnterprisesBackgroundView.accessibilityIdentifier = ""
         setupSearchController()
         setupNavigationLayout()
-        
-        noEnterprisesBackgroundView.tag = 233
-        
+                
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundView = initialBackgroundView
