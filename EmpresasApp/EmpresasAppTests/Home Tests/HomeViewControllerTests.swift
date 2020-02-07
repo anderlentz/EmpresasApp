@@ -85,6 +85,25 @@ class HomeViewControllerTests: XCTestCase {
         
     }
     
+    func test_searchBar_textDidChangePerformsSearchWithSameString() {
+        
+        let (sut,viewModel) = makeSUT()
+        var receivedEnterpriseName = ""
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: "Wait receiving enterprise name")
+        
+        viewModel.onSearchEnterpriseName = { enterpriseName in
+            receivedEnterpriseName = enterpriseName
+            exp.fulfill()
+        }
+        
+        sut.simulateUserTypeEnterpriseNameOnSearchBar(enterpriseName: "enterprise-test")
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(receivedEnterpriseName, "enterprise-test")
+    }
+    
     
     private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
         let viewModel = HomeViewModelSpy()
@@ -98,9 +117,11 @@ class HomeViewControllerTests: XCTestCase {
         var onEnterprisesLoad: Observer<[Enterprise]>?
         var onErrorLoad: Observer<String>?
         var onChange: Observer<HomeViewModel>?
+        var onSearchEnterpriseName: Observer<String>?
         
         func getAllEnterprises(enterpriseName: String) {
             wasGetAllEnterprisesCalled = true
+            onSearchEnterpriseName?(enterpriseName)
         }
         
         func completesGetAllEnterprisesWithSuccess(enterprises: [Enterprise]) {
@@ -110,6 +131,7 @@ class HomeViewControllerTests: XCTestCase {
         func completesGetAllEnterprisesWithEmptyResult() {
             onEmptyEnterprisesLoad?()
         }
+        
     }
     
     static private func makeEnterprise() -> Enterprise {
@@ -139,5 +161,10 @@ private extension HomeViewController {
     
     func simulateEmptyEnterprisesSearch() {
         showEmptyEnterprisesBackgroundResult()
+    }
+    
+    func simulateUserTypeEnterpriseNameOnSearchBar(enterpriseName: String) {
+        let searchBar = searchController.searchBar
+        self.searchBar(searchBar, textDidChange: enterpriseName)
     }
 }
