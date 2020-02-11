@@ -9,14 +9,16 @@
 import UIKit
 
 public final class EnterpriseComposer {
-    static func enterpriseComposedWith(enterprise: Enterprise) -> EnterpriseViewController {
+    static func enterpriseComposedWith(enterprise: Enterprise, coordinator: EnterpriseDetailsCoordinator) -> EnterpriseViewController {
                 
         let bundle = Bundle(for: HomeViewController.self)
         let storyboard = UIStoryboard(name: "EnterpriseDetails",bundle: bundle)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "EnterpriseViewController") as! EnterpriseViewController
+        let viewController = storyboard.instantiateViewController(identifier: "EnterpriseViewController") { coder in
+            return EnterpriseViewController(coder: coder, enterprise: enterprise)
+        }
         
-        //viewController.viewModel = viewModel
-        
+        viewController.coordinator = coordinator
+
         return viewController
     }
 }

@@ -25,8 +25,7 @@ class EnterpriseDetailsCoordinator: Coordinator {
     }
     
     func start() {
-        let enterpriseDetailsVC = EnterpriseComposer.enterpriseComposedWith(enterprise: enterprise)
-        enterpriseDetailsVC.enterprise = enterprise
+        let enterpriseDetailsVC = EnterpriseComposer.enterpriseComposedWith(enterprise: enterprise,coordinator: self)
         navigationController?.pushViewController(enterpriseDetailsVC, animated: true)
     }
     
