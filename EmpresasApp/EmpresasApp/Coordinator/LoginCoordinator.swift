@@ -23,9 +23,9 @@ class LoginCoordinator: Coordinator {
         
         let viewModel = LoginViewModel(authenticationService: RemoteAuthService(endpointURL: URL(string: "https://empresas.ioasys.com.br/api/v1/users/auth/sign_in")!, client: URLSessionHTTPClient()))
         
-        let loginViewController = LoginUIComposer.loginComposedWith(viewModel: viewModel)
+        let loginViewController = LoginUIComposer.loginComposedWith(viewModel: viewModel,coodinator: self)
         
-        loginViewController.navigationCoordinator = self
+//        loginViewController.navigationCoordinator = self
         loginViewController.modalPresentationStyle = .fullScreen
         
         navigationController?.show(loginViewController, sender: nil)

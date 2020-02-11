@@ -9,15 +9,16 @@
 import UIKit
 
 public final class LoginUIComposer {
-    static func loginComposedWith(viewModel: LoginViewModel) -> LoginViewController {
+    static func loginComposedWith(viewModel: LoginViewModel,coodinator: LoginCoordinator) -> LoginViewController {
         
         let bundle = Bundle(for: LoginViewController.self)
         let storyboard = UIStoryboard(name: "Main",bundle: bundle)
         let loginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         
-        let loginVC = loginViewController
-        loginVC.viewModel = viewModel
+        loginViewController.viewModel = viewModel
+        loginViewController.navigationCoordinator = coodinator
         
-        return loginVC
+        
+        return loginViewController
     }
 }

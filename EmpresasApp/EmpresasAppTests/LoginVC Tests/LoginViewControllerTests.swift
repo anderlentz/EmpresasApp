@@ -12,19 +12,15 @@ import XCTest
 class LoginViewControllerTests: XCTestCase {
     
     func test_init_doesNotAtemptToLogin() {
-        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
-        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
-        
-        _ = LoginUIComposer.loginComposedWith(viewModel: viewModel)
+       
+        let (_,viewModel) = makeSUT()
         
         XCTAssertEqual(viewModel.isLogging, false)
     }
     
     func test_viewDidLoad_doesNotAttemptToLogin() {
-        let sut = LoginViewController()
-        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
-        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
-        sut.viewModel = viewModel
+        
+        let (sut,viewModel) = makeSUT()
         
         sut.loadViewIfNeeded()
 
@@ -32,11 +28,9 @@ class LoginViewControllerTests: XCTestCase {
     }
     
     func test_userInitiateLogin_expectStartAndStopLogginIndicator() {
-        let sut = LoginViewController()
-        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
-        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
-        sut.viewModel = viewModel
-        
+
+        let (sut,viewModel) = makeSUT()
+       
         var expectedIndicatorStatus = [Bool]()
         let exp = expectation(description: "Waits for initiate login")
         exp.expectedFulfillmentCount = 2
@@ -55,10 +49,8 @@ class LoginViewControllerTests: XCTestCase {
     }
     
     func test_userInitiateLogin_startsToLoggingAndStopLoggingAffterHTTPClientError() {
-        let sut = LoginViewController()
-        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpyWithError())
-        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
-        sut.viewModel = viewModel
+        let (sut,viewModel) = makeSUT()
+       
         var receivedLoginStatus: [Bool] = [Bool]()
         
         let exp = expectation(description: "Waits for initiate login and terminate on an http client error")
@@ -75,6 +67,14 @@ class LoginViewControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
+
+    private func makeSUT() -> (sut: LoginViewController,viewModel: LoginViewModel) {
+        let remoteAuthService = RemoteAuthService(endpointURL: HTTPClientSpy.endpointURL, client: HTTPClientSpy())
+        let viewModel = LoginViewModel(authenticationService: remoteAuthService)
+        let vc = LoginUIComposer.loginComposedWith(viewModel: viewModel, coodinator: LoginCoordinatorSpy(navigationController: nil))
+        return (vc,viewModel)
+        
+    }
     
     class HTTPClientSpyWithError: HTTPClient {
         
@@ -88,6 +88,9 @@ class LoginViewControllerTests: XCTestCase {
 
     }
     
+    private class LoginCoordinatorSpy: LoginCoordinator {
+        
+    }
 }
 
 private extension LoginViewController {
