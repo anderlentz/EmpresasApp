@@ -29,9 +29,8 @@ class HomeCoordinator: Coordinator {
         let viewModel = HomeViewModel(enterpriseService: RemoteEnterpriseService(endpointURL: endpointURL,
                                                                                  client: URLSessionEnterpriseHTTPCLient(),
                                                                                  authState: authState))
-        let viewController = HomeUIComposer.loginComposedWith(viewModel: viewModel)
-        viewController.navigationCoordinator = self
-        navigationController?.viewControllers.remove(at: 0)
+        let viewController = HomeUIComposer.loginComposedWith(viewModel: viewModel, coordinator: self)
+         navigationController?.viewControllers.remove(at: 0)
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.viewControllers.insert(viewController, at: 0)
     }

@@ -107,7 +107,9 @@ class HomeViewControllerTests: XCTestCase {
     
     private func makeSUT() -> (sut:HomeViewController,viewModel: HomeViewModelSpy) {
         let viewModel = HomeViewModelSpy()
-        return (HomeUIComposer.loginComposedWith(viewModel: viewModel),viewModel)
+        let coordinator = HomeCoordinatorSpy(navigationController: nil)
+        let homeViewController = HomeUIComposer.loginComposedWith(viewModel: viewModel,coordinator: coordinator)
+        return (homeViewController,viewModel)
     }
     
     private class HomeViewModelSpy: HomeViewModelProtocol {
@@ -136,6 +138,10 @@ class HomeViewControllerTests: XCTestCase {
     
     static private func makeEnterprise() -> Enterprise {
         return Enterprise(id: 0, emailEnterprise: nil, facebook: nil, twitter: nil, linkedin: nil, phone: nil, ownEnterprise: false, enterpriseName: "Test", photo: nil, enterprisDescription: "Test", city: "City", country: "Country", value: 0, sharePrice: 1, enterpriseType: EnterpriseType(id: 0, enterpriseTypeName: "Enterprise"))
+    }
+    
+    private class HomeCoordinatorSpy: HomeCoordinator {
+        
     }
 }
 
