@@ -71,14 +71,7 @@ class LoginViewController: UIViewController {
     }
         
     // MARK: - Helpers
-    
-    private func login() {
-        if let email = emailTextField.text,
-            let password = emailTextField.text {
-            viewModel?.doLogin(email: email, password: password)
-        }
-    }
-    
+        
     private func addOnLeft(of textField: UITextField,anImage img: UIImage) {
         let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
         imageView.image = img
