@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+ The LoginUIComposer is responsable for instantiating  a LoginViewController and set the viewModel and the navCoordinator
+ dependencies
+ */
 public final class LoginUIComposer {
     static func loginComposedWith(viewModel: LoginViewModel,coodinator: LoginCoordinator) -> LoginViewController {
         

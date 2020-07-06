@@ -11,6 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
+    // Exposed as public so that we can inject these dependencies on LoginUIComposer
     public var viewModel: LoginViewModelProtocol?
     public var navigationCoordinator: LoginCoordinator?
     

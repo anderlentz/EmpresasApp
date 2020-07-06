@@ -9,6 +9,8 @@
 import Foundation
 
 protocol LoginViewModelProtocol {
+    
+    // Closure with a generic type
     typealias Observer<T> = (T) -> Void
     
     var onAuthenticationError: Observer<String>? { get set }
@@ -22,6 +24,7 @@ protocol LoginViewModelProtocol {
 
 final class LoginViewModel: LoginViewModelProtocol {
 
+    // Closures that make the binding with view - Login VC
     var onLogginStateChange: Observer<Bool>?
     var onInvestorLogin: Observer<Investor>?
     var onChange: Observer<LoginViewModel>?
@@ -29,6 +32,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     var onAuthenticationError: Observer<String>?
     
     private let authenticationService: AuthenticationService
+    
     private(set) var isLogging: Bool = false {
         didSet {onChange?(self)}
     }
@@ -42,6 +46,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         
     }
     
+    // Authentication service is passed as a constructor dependency using protocol signature
     init (authenticationService: AuthenticationService) {
         self.authenticationService = authenticationService
     }
